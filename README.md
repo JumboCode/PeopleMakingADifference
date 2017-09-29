@@ -1,3 +1,0 @@
-# PeopleMakingADifference
-
-#hey
