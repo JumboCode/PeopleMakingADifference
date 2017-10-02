@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "pmd web server ",
   "main": "index.js",
+  "dependencies": {
+    "express": "latest"
+  }
   "scripts": {
     "test": "node index.js"
   },
