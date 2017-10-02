@@ -4,7 +4,7 @@ var express = require("express");
 // Inits
 var app = express();
 
-app.get(function(request, response){
+app.get("/", function(request, response){
         response.send("hello");
 })
 
