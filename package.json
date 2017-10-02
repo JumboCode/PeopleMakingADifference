@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "express": "latest"
-  }
+  },
   "scripts": {
     "test": "node index.js"
   },
