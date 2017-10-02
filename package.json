@@ -1,0 +1,19 @@
+{
+  "name": "peoplemakingadifference",
+  "version": "0.0.1",
+  "description": "pmd web server ",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumbocodefall2017/PeopleMakingADifference.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jumbocodefall2017/PeopleMakingADifference/issues"
+  },
+  "homepage": "https://github.com/jumbocodefall2017/PeopleMakingADifference#readme"
+}
