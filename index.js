@@ -9,3 +9,5 @@ app.get("/", function(request, response){
 })
 
 app.listen(5000);
+
+console.log("Listening on localhost:5000")
