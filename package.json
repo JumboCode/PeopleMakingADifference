@@ -1,22 +1,32 @@
 {
-  "name": "peoplemakingadifference",
-  "version": "0.0.1",
-  "description": "pmd web server ",
-  "main": "index.js",
-  "dependencies": {
-    "express": "latest"
+  "name": "node-js-getting-started",
+  "version": "0.2.6",
+  "description": "A sample Node.js app using Express 4",
+  "engines": {
+    "node": "6.11.1"
   },
+  "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "ejs": "2.5.6",
+    "express": "4.15.2",
+    "mongodb": "^2.2.31"
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jumbocodefall2017/PeopleMakingADifference.git"
+    "url": "https://github.com/heroku/node-js-getting-started"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jumbocodefall2017/PeopleMakingADifference/issues"
-  },
-  "homepage": "https://github.com/jumbocodefall2017/PeopleMakingADifference#readme"
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
 }
