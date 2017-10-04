@@ -7,12 +7,21 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-	testName: string;
+	personName: any;
+	personAssignment: string;
 
   constructor(public navCtrl: NavController) {
-  	fetch("https://jsonplaceholder.typicode.com/users")
-  	.then(lol => lol.json())
-  	.then(json => this.testName = json[Math.floor(Math.random()*json.length)].name);
+	let that = this;
+  	fetch("http://pmd-server.herokuapp.com")
+  	.then(function(blob){
+		blob.json()
+		.then(function(json){
+			let selectedRandom = Math.floor(Math.random() * json.length);
+			that.personName = json[selectedRandom].name;
+			that.personAssignment = json[selectedRandom].assignment;
+		});
+		
+	});
   }
 
 }
