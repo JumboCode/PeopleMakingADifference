@@ -4,3 +4,4 @@
 4. UX/Design and Secretary: Lexi Walker
 5. Backend: Meet Patel
 6. Backend: Phoebe Yang
+7. Continuous Integration: Kate Zheng
