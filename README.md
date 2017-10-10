@@ -1,4 +1,4 @@
-[Meeting minutes and attendance](https://docs.google.com/document/d/1N00NRzfpxZeS0YZdeWgylskesGnfoaIyY7nKHNsEuiQ/edit?ts=59dc25a2) 
+*[Meeting minutes and attendance](https://docs.google.com/document/d/1N00NRzfpxZeS0YZdeWgylskesGnfoaIyY7nKHNsEuiQ/edit?ts=59dc25a2)* 
 
 1. Project Lead: John Gallagher
 2. Mobile Lead: Joseph Higgins
