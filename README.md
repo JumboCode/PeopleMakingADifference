@@ -6,3 +6,4 @@
 6. Backend: Phoebe Yang
 7. Continuous Integration: Kate Zheng
 8. Frontend: Julia Hedrick
+9. Frontend: Michael Dunkelman
