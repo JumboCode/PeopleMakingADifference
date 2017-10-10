@@ -3,3 +3,4 @@
 3. UX/Design: Anna Kasagawa
 4. UX/Design and Secretary: Lexi Walker
 5. Backend: Meet Patel
+6. Backend: Phoebe Yang
