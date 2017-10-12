@@ -1,14 +1,13 @@
 {
-  "name": "node-js-getting-started",
+  "name": "pmd-server",
   "version": "0.2.6",
-  "description": "A sample Node.js app using Express 4",
+  "description": "test server with sample data",
   "engines": {
     "node": "6.11.1"
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "node test.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "ejs": "2.5.6",
@@ -21,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://git.heroku.com/pmd-server.git"
   },
   "keywords": [
     "node",

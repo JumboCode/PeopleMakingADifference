@@ -17,7 +17,7 @@ app.get("/", function(req, res){
 		result = db.collection('volunteers').find().toArray(function(err, items){
 			console.log(items);
 			res.send(items);
-		});
+		})
 		db.close();
 	});
 });
