@@ -10,9 +10,11 @@ export class HomePage {
 	testName: string;
 
   constructor(public navCtrl: NavController) {
-  	fetch("https://jsonplaceholder.typicode.com/users")
-  	.then(lol => lol.json())
-  	.then(json => this.testName = json[Math.floor(Math.random()*json.length)].name);
+  	fetch("http://pmd-server.herokuapp.com/")
+  	.then(function(json) {
+		this.testName = json[Math.floor(Math.random()*json.length)].name;
+		this.testAssign = json[Math.floor(Math.random()*json.length)].assignment;
+	});
   }
 
 }
