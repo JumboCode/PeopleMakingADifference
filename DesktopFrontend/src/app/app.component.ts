@@ -10,7 +10,7 @@ import { Http, Response } from '@angular/http';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  items: any;
+  volunteers: any;
 
   constructor(private http: Http) { }
 
@@ -20,9 +20,12 @@ export class AppComponent implements OnInit {
 
   // Gets the items into this.items by reading through the file
   loadItems() {
-  	this.items = this.http.get("../data/items.json")
-  				 .map(res => res.json())
-  				 .do(data => console.log(data));
+  	this.http.get("http://pmd-server.herokuapp.com/")
+ 	.map(res => res.json())
+	.subscribe(json => {
+		this.volunteers = json;
+		console.log(json);	
+	});	
   }
 }
 
