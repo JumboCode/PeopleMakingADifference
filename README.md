@@ -26,5 +26,5 @@ npm install
 npm start
 
 3. components:
-        - index.js: server handle get requests
-        - app.js: write to mongodb database
+    - index.js: server handle get requests
+    - app.js: write to mongodb database
