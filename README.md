@@ -1,8 +1,8 @@
-#People Making A Difference - JumboCode Fall 2017
+# People Making A Difference - JumboCode Fall 2017
 
-##App Description
+## App Description
 
-##Group Members:
+## Group Members:
 *[Meeting minutes and attendance](https://docs.google.com/document/d/1N00NRzfpxZeS0YZdeWgylskesGnfoaIyY7nKHNsEuiQ/edit?ts=59dc25a2)*
 
 1. **Project Lead:** John Gallagher
@@ -18,7 +18,7 @@
 11. **Developer:** Bhushan Suwal
 12. **Developer:** Kevin Bae
 
-##Run Instructions:
+## Run Instructions:
 1. install packages:
 npm install
 
