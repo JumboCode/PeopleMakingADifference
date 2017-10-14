@@ -5,7 +5,7 @@
 ## Group Members:
 *[Meeting minutes and attendance](https://docs.google.com/document/d/1N00NRzfpxZeS0YZdeWgylskesGnfoaIyY7nKHNsEuiQ/edit?ts=59dc25a2)*
 
-1. **Project Lead:** John Gallagher
+1. **Project Lead:** [John Gallagher](http://www.johnjamesgallagher.com/)
 2. **Mobile Lead:** Joseph Higgins
 3. **UX/Design/Developer:** Anna Kasagawa
 4. **UX/Design/Secretary/Developer:** Lexi Walker
@@ -20,10 +20,10 @@
 
 ## Run Instructions:
 1. install packages:
-npm install
+    - npm install
 
 2. run server locally:
-npm start
+    - npm start
 
 3. components:
     - index.js: server handle get requests
