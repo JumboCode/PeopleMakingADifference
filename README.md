@@ -4,6 +4,7 @@
 
 ## Group Members:
 *[Meeting minutes and attendance](https://docs.google.com/document/d/1N00NRzfpxZeS0YZdeWgylskesGnfoaIyY7nKHNsEuiQ/edit?ts=59dc25a2)*
+
 *[Workboard](https://trello.com/b/IyjLEkna/jumbocode-2017-pmd)*
 
 1. **Project Lead:** [John Gallagher](http://www.johnjamesgallagher.com/)
