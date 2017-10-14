@@ -1,6 +1,6 @@
 # People Making A Difference - JumboCode Fall 2017
 
-## App Description
+## App Description:
 
 ## Group Members:
 *[Meeting minutes and attendance](https://docs.google.com/document/d/1N00NRzfpxZeS0YZdeWgylskesGnfoaIyY7nKHNsEuiQ/edit?ts=59dc25a2)*
@@ -26,5 +26,5 @@ npm install
 npm start
 
 3. components:
- - index.js: server handle get requests
- - app.js: write to mongodb database
+        - index.js: server handle get requests
+        - app.js: write to mongodb database
