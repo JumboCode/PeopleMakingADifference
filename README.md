@@ -10,7 +10,7 @@ This app facilitates the check-in and check-out process for volunteers and notif
 *[Workboard](https://trello.com/b/IyjLEkna/jumbocode-2017-pmd)*
 
 1. **Project Lead:** [John Gallagher](http://www.johnjamesgallagher.com/)
-2. **Mobile Lead:** Joseph Higgins
+2. **Mobile Lead:** [Joseph Higgins](https://adma.re/)
 3. **UX/Design/Developer:** Anna Kasagawa
 4. **UX/Design/Secretary/Developer:** Lexi Walker
 5. **Developer:** Meet Patel
