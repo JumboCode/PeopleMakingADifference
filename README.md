@@ -14,7 +14,7 @@ This app facilitates the check-in and check-out process for volunteers and notif
 3. **UX/Design/Developer:** [Anna Kasagawa](http://kasagawa.github.io)
 4. **UX/Design/Secretary/Developer:** [Lexi Walker](https://github.com/lexi-walker)
 5. **Developer:** [Meet Patel](https://github.com/Meetia)
-6. **Developer:** Phoebe Yang
+6. **Developer:** [Phoebe Yang](https://yyang08.github.io)
 7. **Continuous Integration/Developer:** Kate Zheng
 8. **Developer:** Julia Hedrick
 9. **Developer:** [Michael Dunkelman](https://github.com/mdunkelman)
