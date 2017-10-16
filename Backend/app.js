@@ -2,7 +2,7 @@ var mongodb = require('mongodb');
 var uri = process.env.MONGODB_URI;
 test = require('assert');
 
-// var url = 'mongodb://localhost:27017/pmd';
+//var uri = 'mongodb://localhost:27017/pmd';
 
 var seedData = [
 	{
