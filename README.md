@@ -12,7 +12,7 @@ This app facilitates the check-in and check-out process for volunteers and notif
 1. **Project Lead:** [John Gallagher](http://www.johnjamesgallagher.com/)
 2. **Mobile Lead:** [Joseph Higgins](https://adma.re/)
 3. **UX/Design/Developer:** [Anna Kasagawa](http://kasagawa.github.io)
-4. **UX/Design/Secretary/Developer:** Lexi Walker
+4. **UX/Design/Secretary/Developer:** [Lexi Walker](https://github.com/awalke08)
 5. **Developer:** [Meet Patel](https://github.com/Meetia)
 6. **Developer:** Phoebe Yang
 7. **Continuous Integration/Developer:** Kate Zheng
