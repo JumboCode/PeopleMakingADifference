@@ -13,7 +13,7 @@ This app facilitates the check-in and check-out process for volunteers and notif
 2. **Mobile Lead:** [Joseph Higgins](https://adma.re/)
 3. **UX/Design/Developer:** Anna Kasagawa
 4. **UX/Design/Secretary/Developer:** Lexi Walker
-5. **Developer:** Meet Patel
+5. **Developer:** [Meet Patel](https://github.com/Meetia)
 6. **Developer:** Phoebe Yang
 7. **Continuous Integration/Developer:** Kate Zheng
 8. **Developer:** Julia Hedrick
