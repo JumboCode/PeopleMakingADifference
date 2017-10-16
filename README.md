@@ -20,7 +20,7 @@ This app facilitates the check-in and check-out process for volunteers and notif
 9. **Developer:** [Michael Dunkelman](https://github.com/mdunkelman)
 10. **Documentation/Developer:** [Josh Lee](http://joshleetufts.com/)
 11. **Developer:** Bhushan Suwal
-12. **Developer:** Kevin Bae
+12. **Developer:** [Kevin Bae](https://github.com/kevinbae15)
 
 ## Run Instructions:
 1. install packages:
