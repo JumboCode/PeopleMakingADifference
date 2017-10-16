@@ -17,7 +17,7 @@ This app facilitates the check-in and check-out process for volunteers and notif
 6. **Developer:** Phoebe Yang
 7. **Continuous Integration/Developer:** Kate Zheng
 8. **Developer:** Julia Hedrick
-9. **Developer:** Michael Dunkelman (https://github.com/mdunkelman)
+9. **Developer:** [Michael Dunkelman](https://github.com/mdunkelman)
 10. **Documentation/Developer:** [Josh Lee](http://joshleetufts.com/)
 11. **Developer:** Bhushan Suwal
 12. **Developer:** Kevin Bae
