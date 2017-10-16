@@ -12,7 +12,10 @@ export class MainPage {
   personAssignment: string;
 
   constructor(public navCtrl: NavController) {
+    // the api we hit that runs remotely - the "real" one
     let apiEndpoint = "http://pmd-server.herokuapp.com";
+
+    // check if we're trying to run locally
     if(config['DEV_MODE'] === true){
       apiEndpoint = "http://localhost:5000";
     }
@@ -32,7 +35,7 @@ export class MainPage {
   		this.personName = json[selectedRandom].name;
   		this.personAssignment = json[selectedRandom].assignment;
     })
-
+    // handle HTTP errors
     .catch((err) => {
       this.personName = "ERROR";
       this.personAssignment = "ERROR";
