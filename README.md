@@ -15,12 +15,12 @@ This app facilitates the check-in and check-out process for volunteers and notif
 4. **UX/Design/Secretary/Developer:** [Lexi Walker](https://github.com/lexi-walker)
 5. **Developer:** [Meet Patel](https://github.com/Meetia)
 6. **Developer:** [Phoebe Yang](https://yyang08.github.io)
-7. **Continuous Integration/Developer:** Kate Zheng
-8. **Developer:** Julia Hedrick
+7. **Continuous Integration/Developer:** [Kate Zheng](https://github.com/katepx2015)
+8. **Developer:** Julia Hedrick (https://github.com/juliahedrick) 
 9. **Developer:** [Michael Dunkelman](https://github.com/mdunkelman)
 10. **Documentation/Developer:** [Josh Lee](http://joshleetufts.com/)
-11. **Developer:** Bhushan Suwal
-12. **Developer:** Kevin Bae
+11. **Developer:** [Bhushan Suwal](https://github.com/bsuwal)
+12. **Developer:** [Kevin Bae](https://github.com/kevinbae15)
 
 ## Run Instructions:
 1. install packages:
