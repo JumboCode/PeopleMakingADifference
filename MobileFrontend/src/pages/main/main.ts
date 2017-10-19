@@ -20,6 +20,14 @@ export class MainPage {
     this.getManifest()
   }
 
+  onIDInput(id: number){
+    // since this is called from keyup, we might get null 
+    // if the user backspaced the input away
+    if(id > 0){
+      this.personId = id;
+    }
+  }
+
   getManifest() {
     // the api we hit that runs remotely - the "real" one
     let apiEndpoint = "http://pmd-server.herokuapp.com/";
@@ -37,18 +45,20 @@ export class MainPage {
     .then((blob) => blob.json())
 
     .then((json) => {
-      // pick an index randomly between 0 and the array length - 1
-      let selectedRandom = Math.floor(Math.random() * json.length);
-
-      // set the values that are bound in the template
-  		this.personName = json[selectedRandom].name;
-  		this.personAssignment = json[selectedRandom].assignment;
+      if(json.length > 0){
+        // set the values that are bound in the template
+        this.personName = json[0].name;
+        this.personAssignment = json[0].assignment;
+      } else {
+        throw new Error(`JSON response from ${apiEndpoint} formatted incorrectly, expecting at least one result.`);
+      }
     })
     // handle HTTP errors
     .catch((err) => {
       this.personName = "ERROR";
       this.personAssignment = "ERROR";
       console.error(err);
+      console.error("Try turning on CORS or switching DEV_MODE");
     })
 
   }
