@@ -27,5 +27,10 @@ export class AppComponent implements OnInit {
 		console.log(json);	
 	});	
   }
+  postVolunteer() {
+  	this.http.post("http://pmd-server.herokuapp.com/", "203")
+	.subscribe()
+  }
+
 }
 

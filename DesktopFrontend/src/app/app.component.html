@@ -4,5 +4,9 @@
 	<li *ngFor="let volunteer of volunteers">
 		{{ volunteer.name }} is doing {{ volunteer.assignment }}
 	</li>
+
+	<form ng-submit="postLocation()" ng-controller="myController">
+		<input type="text" name="input" ng-keyup="event.keyCode == 13 > postLocation() : null">
+	</form>
 </ul>
 
