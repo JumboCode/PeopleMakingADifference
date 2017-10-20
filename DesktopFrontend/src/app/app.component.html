@@ -4,9 +4,20 @@
 	<li *ngFor="let volunteer of volunteers">
 		{{ volunteer.name }} is doing {{ volunteer.assignment }}
 	</li>
-
-	<form ng-submit="postLocation()" ng-controller="myController">
-		<input type="text" name="input" ng-keyup="event.keyCode == 13 > postLocation() : null">
-	</form>
 </ul>
+
+<p> Type in the volunteer ID </p>
+
+<input #box 
+  (keyup.enter)="update(box.value)"
+  (blur)="update(box.value)">	
+
+<p> Type in the volunteer Assignment </p>
+
+<input type="text" name="input_A" #input_A (keyup)="$event.keyCode == 13 ? postAssignment(box.value, input_A.value) : null">	
+
+<p> Type in the volunteer Location </p>
+
+<input type="text" name="input" #input (keyup)="$event.keyCode == 13 ? postLocation(box.value, input.value) : null">	
+
 
