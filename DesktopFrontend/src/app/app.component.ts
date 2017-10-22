@@ -11,11 +11,12 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   volunteers: any;
+  value = '';
 
   constructor(private http: Http) { }
 
   ngOnInit() {
-  	this.loadItems();
+  	this.loadItems();	
   }
 
   // Gets the items into this.items by reading through the file
@@ -27,5 +28,20 @@ export class AppComponent implements OnInit {
 		console.log(json);	
 	});	
   }
-}
 
+  postAssignment(user_id, input_assignment) {
+  this.http.post("http://pmd-server.herokuapp.com/", { id : user_id, assignment : input_assignment })
+	.subscribe()
+  }
+
+  postLocation(user_id, input_location) {
+  this.http.post("http://pmd-server.herokuapp.com/", { id : user_id, location : input_location })
+	.subscribe()
+  }
+
+  update(value: string) {
+	this.value = value
+  }
+
+
+}
