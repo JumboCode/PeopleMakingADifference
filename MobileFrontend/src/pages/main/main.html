@@ -1,8 +1,19 @@
 <ion-content padding>
- <p>
+  <ion-item>
+    <ion-label>Type in the user ID:</ion-label>
+    <ion-input 
+      type="number"
+      value="2"
+      #id_input 
+      (keyup)="onIDInput(id_input.value)"
+    >
+    </ion-input> 
+  </ion-item>
+  <p>
 	Hello, {{personName}}!
   </p>
   <p>
 	Your assignment is {{personAssignment}}.
   </p>
+  <button ion-button (click)="onRefreshClick()"> Refresh </button>
 </ion-content>

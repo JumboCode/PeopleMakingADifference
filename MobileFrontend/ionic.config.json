@@ -2,5 +2,6 @@
   "name": "pmd_mobile",
   "app_id": "",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {},
+  "DEV_MODE": false
 }
