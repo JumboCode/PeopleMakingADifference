@@ -26,6 +26,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get("/", function(req, res){
+    console.log("getting all vols")
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     mongodb.MongoClient.connect(uri, function(err, db){
@@ -39,6 +40,7 @@ app.get("/", function(req, res){
 });
 
 app.get("/:uid", function(req, res){
+        console.log("getting vol by UID")
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         mongodb.MongoClient.connect(uri, function(err, db){
@@ -56,9 +58,12 @@ app.get("/:uid", function(req, res){
 });
 
 // The parameters must be uid and location
-app.post("/update_location/", function(req, res){
+app.post("/update_location", function(req, res){
+        console.log("updating location")
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 	mongodb.MongoClient.connect(uri, function(err, db){
 		if (err) throw err;
 		// if document with argument id exists then update, otherwise return UID not found
@@ -81,9 +86,14 @@ app.post("/update_location/", function(req, res){
 
 
 // The parameters must be uid and assignment
-app.post("/update_assignment/", function(req, res){
+app.post("/update_assignment", function(req, res){
+        console.log("updating assignment")
+        console.log(req.body.uid)
+        console.log(req.body.assignment)
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 	mongodb.MongoClient.connect(uri, function(err, db){
 		if (err) throw err;
 		// if document with argument id exists then update, otherwise return UID not found

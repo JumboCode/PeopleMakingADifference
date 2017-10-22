@@ -30,12 +30,12 @@ export class AppComponent implements OnInit {
   }
 
   postAssignment(user_id, input_assignment) {
-  this.http.post("http://localhost:5000/", { id : user_id, assignment : input_assignment })
+  this.http.post("http://localhost:5000/update_assignment", { uid : user_id, assignment : input_assignment })
 	.subscribe()
   }
 
   postLocation(user_id, input_location) {
-  this.http.post("http://localhost:5000/", { id : user_id, location : input_location })
+  this.http.post("http://localhost:5000/update_assignment", { uid : user_id, location : input_location })
 	.subscribe()
   }
 
