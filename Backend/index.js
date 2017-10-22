@@ -51,6 +51,7 @@ app.get("/:uid", function(req, res){
 	});
 });
 
+// The parameters must be uid and location
 app.post("/update_location/", function(req, res){
 	mongodb.MongoClient.connect(uri, function(err, db){
 		if (err) throw err;
@@ -64,6 +65,29 @@ app.post("/update_location/", function(req, res){
 		   	 				}
 		  			})
 					res.send("Successfully updated location");
+				} 
+			else {
+					res.send("Error: UID Not Found!");
+				}
+		});
+	});
+});
+
+
+// The parameters must be uid and assignment
+app.post("/update_assignment/", function(req, res){
+	mongodb.MongoClient.connect(uri, function(err, db){
+		if (err) throw err;
+		// if document with argument id exists then update, otherwise return UID not found
+		existence_check = db.collection('volunteers').find({"id" : parseInt(req.body.uid)}).toArray(function(err, items){
+			if (items.length > 0){
+				db.collection('volunteers').update({id:parseInt(req.body.uid)}, 
+					{ 
+		    			$set: {
+		    					"assignment": req.body.assignment
+		   	 				}
+		  			})
+					res.send("Successfully updated assignment");
 				} 
 			else {
 					res.send("Error: UID Not Found!");
