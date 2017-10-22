@@ -1,29 +1,33 @@
 var mongodb = require('mongodb');
-var uri = process.env.MONGODB_URI;
+//var uri = process.env.MONGODB_URI;
+var uri = 'mongodb://localhost:27017/pmd';
 test = require('assert');
 
-//var uri = 'mongodb://localhost:27017/pmd';
 
 var seedData = [
 	{
 		id: 1,
 		name: 'Tony Stark',
-		assignment: 'Build Ironman suit to escape cave'
+		assignment: 'Build Ironman suit to escape cave',
+                location: 'Stark Tower'
 	},
 	{
 		id: 2,
 		name: 'Darth Vader',
-		assignment: 'Use the Force (For evil)'
+		assignment: 'Use the Force (For evil)',
+                location: 'The Death Star'
 	},
     {
     	id: 3,
     	name: 'Claire Underwood',
-    	assignment: 'Scheme'
+    	assignment: 'Scheme',
+        location: "Washington"
     },
     {
     	id: 4,
     	name: 'Buffy the Vampire Slayer',
-    	assignment: 'Slay vampires'
+    	assignment: 'Slay vampires',
+        location: "Hellmouth"
     }
  ];
 

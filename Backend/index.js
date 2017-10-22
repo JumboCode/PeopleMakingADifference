@@ -26,13 +26,11 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get("/", function(req, res){
-    console.log("getting all vols")
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     mongodb.MongoClient.connect(uri, function(err, db){
 		if (err) throw err;
 		result = db.collection('volunteers').find().toArray(function(err, items){
-			console.log(items);
 			res.send(items);
 		});
 		db.close();
@@ -40,12 +38,10 @@ app.get("/", function(req, res){
 });
 
 app.get("/:uid", function(req, res){
-        console.log("getting vol by UID")
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         mongodb.MongoClient.connect(uri, function(err, db){
 		if (err) throw err;
-		console.log(req.params);
 		result = db.collection('volunteers').find({id:parseInt(req.params.uid)}).toArray(function(err, items){
 			if (items.length > 0){
 				res.send(items);
@@ -59,7 +55,7 @@ app.get("/:uid", function(req, res){
 
 // The parameters must be uid and location
 app.post("/update_location", function(req, res){
-        console.log("updating location")
+        console.log("location updated")
         res.header('Access-Control-Allow-Origin', req.headers.origin);
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -87,9 +83,7 @@ app.post("/update_location", function(req, res){
 
 // The parameters must be uid and assignment
 app.post("/update_assignment", function(req, res){
-        console.log("updating assignment")
-        console.log(req.body.uid)
-        console.log(req.body.assignment)
+        console.log("assignment updated")
         res.header('Access-Control-Allow-Origin', req.headers.origin);
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
