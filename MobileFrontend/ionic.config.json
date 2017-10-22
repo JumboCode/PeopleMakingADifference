@@ -3,5 +3,5 @@
   "app_id": "",
   "type": "ionic-angular",
   "integrations": {},
-  "DEV_MODE": false
+  "DEV_MODE": true
 }
