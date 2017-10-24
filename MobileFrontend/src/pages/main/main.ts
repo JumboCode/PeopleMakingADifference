@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import * as config from '../../../ionic.config.json';
 
@@ -6,26 +6,20 @@ import * as config from '../../../ionic.config.json';
   selector: 'page-main',
   templateUrl: 'main.html'
 })
-export class MainPage {
+export class MainPage implements OnInit {
 
   personId: number = 2; //set to specific id temporarily
   personName: string;
   personAssignment: string;
 
-  constructor(public navCtrl: NavController) {
-    this.getManifest()
+  constructor(public navCtrl: NavController) {}
+
+  ngOnInit(): void {
+    this.getManifest();
   }
 
   onRefreshClick() {
     this.getManifest()
-  }
-
-  onIDInput(id: number){
-    // since this is called from keyup, we might get null 
-    // if the user backspaced the input away
-    if(id > 0){
-      this.personId = id;
-    }
   }
 
   getManifest() {
