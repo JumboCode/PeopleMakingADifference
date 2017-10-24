@@ -1,0 +1,17 @@
+<ion-content padding>
+  <ion-item>
+    <ion-label>Type in the user ID:</ion-label>
+    <ion-input 
+      type="number"
+      [(ngModel)]="personId"
+    >
+    </ion-input> 
+  </ion-item>
+  <p>
+	Hello, {{personName}}!
+  </p>
+  <p>
+	Your assignment is {{personAssignment}}.
+  </p>
+  <button ion-button (click)="onRefreshClick()"> Refresh </button>
+</ion-content>
