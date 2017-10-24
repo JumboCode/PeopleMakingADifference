@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { MainPage } from '../main/main';
 
 @Component({
   selector: 'page-idpage',
@@ -28,8 +29,11 @@ export class IDPage implements OnInit {
     .then((blob) => blob.json())
 
     .then((json) => {
-      // do something
-      // navigate HERE
+      
+      //push another page onto the history stack
+      //causing the nav controller to animate the new page in
+      this.navCtrl.push(MainPage);
+
       console.log("valid id");
     })
     // handle HTTP errors
