@@ -6,12 +6,9 @@
       [(ngModel)]="personId"
     >
     </ion-input> 
+    
   </ion-item>
-  <p>
-	Hello, {{personName}}!
-  </p>
-  <p>
-	Your assignment is {{personAssignment}}.
-  </p>
-  <button ion-button (click)="onRefreshClick()"> Refresh </button>
+  <p>{{errorMessage}}</p>
+  <button ion-button (click)="onSubmitClick()">Submit</button>
+
 </ion-content>
