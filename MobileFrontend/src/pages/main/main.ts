@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import * as config from '../../../ionic.config.json';
+import { ConfigService } from '../../app/config.service';
+import { User, UserService } from '../../app/user.service';
 
 @Component({
   selector: 'page-main',
@@ -8,11 +9,13 @@ import * as config from '../../../ionic.config.json';
 })
 export class MainPage implements OnInit {
 
-  personId: number = 2; //set to specific id temporarily
+  personId: number;
   personName: string;
   personAssignment: string;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public configSerivce: ConfigService, userService: UserService) {
+    this.personId = userService.getUser().id;
+  }
 
   ngOnInit(): void {
     this.getManifest();
@@ -24,12 +27,7 @@ export class MainPage implements OnInit {
 
   getManifest() {
     // the api we hit that runs remotely - the "real" one
-    let apiEndpoint = "http://pmd-server.herokuapp.com/";
-
-    // check if we're trying to run locally
-    if(config['DEV_MODE'] === true){
-      apiEndpoint = "http://localhost:5000/";
-    }
+    let apiEndpoint = this.configSerivce.getEndpointUrl();
 
     // make the HTTPRequest
     // see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
