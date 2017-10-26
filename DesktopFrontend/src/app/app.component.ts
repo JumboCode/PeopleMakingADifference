@@ -10,8 +10,35 @@ import { Http, Response } from '@angular/http';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  volunteers: any;
+  volunteers: any = [
+  {
+    id: 1,
+    name: 'Tony Stark',
+    assignment: 'Build Ironman suit to escape cave',
+        location: 'Stark Tower'
+  },
+  {
+    id: 2,
+    name: 'Darth Vader',
+    assignment: 'Use the Force (For evil)',
+                location: 'The Death Star'
+  },
+    {
+      id: 3,
+      name: 'Claire Underwood',
+      assignment: 'Scheme',
+        location: "Washington"
+    },
+    {
+      id: 4,
+      name: 'Buffy the Vampire Slayer',
+      assignment: 'Slay vampires',
+        location: "Hellmouth"
+    }
+ ];
+
   value = '';
+  edit : boolean[] = [];
 
   constructor(private http: Http) { }
 
@@ -25,6 +52,11 @@ export class AppComponent implements OnInit {
  	.map(res => res.json())
 	.subscribe(json => {
 		this.volunteers = json;
+
+    // set up editing button
+    for (var i = 0; i < this.volunteers.length; ++i) {
+      this.edit.push(false); 
+    }
 		console.log(json);
 	});
   }
@@ -43,5 +75,14 @@ export class AppComponent implements OnInit {
 	this.value = value
   }
 
+  enableEditing(i: number) {
+    this.edit[i] = true;
+  }
+
+  updateVolunteer(i: number) {
+    this.edit[i] = false;
+    //post new assignment
+    //post new location
+  }
 
 }
