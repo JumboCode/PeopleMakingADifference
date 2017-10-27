@@ -108,6 +108,36 @@ app.post("/update_assignment", function(req, res){
 	});
 });
 
+// The parameter must be name 'message'
+app.post("/update_message", function(req, res){
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	mongodb.MongoClient.connect(uri, function(err, db){
+		if (err) throw err;
+		// if collection already exists then update the message, else create a collection 
+		// and insert the message
+		existence_check = db.collection('message').find().toArray(function(err, items){
+			if (items.length > 0){
+				// the insert command will create a collection if it doesnt exist
+				db.collection('message').insert({id:0}, {'message':req.body.message})
+				res.send("Successfully created collection and updated message");
+			}
+			else {
+				db.collection('message').update({id:0}, 
+					{
+		    			$set: {
+		    					'message':req.body.message
+		   	 				}
+		  			})
+				res.send("Successfully updated message");
+			}
+		});
+	});
+});
+
+
 
 
 app.listen(app.get('port'), function() {
