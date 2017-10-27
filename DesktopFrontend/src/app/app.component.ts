@@ -10,32 +10,7 @@ import { Http, Response } from '@angular/http';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  volunteers: any = [
-  {
-    id: 1,
-    name: 'Tony Stark',
-    assignment: 'Build Ironman suit to escape cave',
-        location: 'Stark Tower'
-  },
-  {
-    id: 2,
-    name: 'Darth Vader',
-    assignment: 'Use the Force (For evil)',
-                location: 'The Death Star'
-  },
-    {
-      id: 3,
-      name: 'Claire Underwood',
-      assignment: 'Scheme',
-        location: "Washington"
-    },
-    {
-      id: 4,
-      name: 'Buffy the Vampire Slayer',
-      assignment: 'Slay vampires',
-        location: "Hellmouth"
-    }
- ];
+  volunteers: any = [];
 
   value = '';
   edit : boolean[] = [];
