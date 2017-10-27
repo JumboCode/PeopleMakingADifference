@@ -6,20 +6,20 @@
         <button (click)=enableEditing(i)>Edit</button>
        
         <label for="vName">Name: </label>   
-        <input #box
+        <input #vname
           name="vName" 
-          (keyup.enter)="update(box.value)"
-          (blur)="update(box.value)"
+          (keyup.enter)="update(vname.value)"
+          (blur)="update(vname.value)"
           [disabled]=!edit[i]
           value='{{ volunteers[i].name }}'>
 
         <label for="vAssign">Assignment: </label>   
-        <input type="text" name="vAssign" #input_A (keyup)="$event.keyCode == 13 ? postAssignment(box.value, input_A.value) : null"
+        <input type="text" name="vAssign" #vassign (keyup)="$event.keyCode == 13 ? postAssignment(vname.value, vassign.value) : null"
         [disabled]=!edit[i]
         value='{{ volunteers[i].assignment }}'>    
 
         <label for="vLoc">Location: </label>   
-        <input type="text" name="vLoc" #input (keyup)="$event.keyCode == 13 ? postLocation(box.value, input.value) : null"
+        <input type="text" name="vLoc" #vloc (keyup)="$event.keyCode == 13 ? postLocation(vname.value, vloc.value) : null"
         [disabled]=!edit[i]
         value='{{ volunteers[i].location }}'>    
 
