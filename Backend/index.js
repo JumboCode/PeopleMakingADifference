@@ -121,7 +121,7 @@ app.post("/update_message", function(req, res){
 		existence_check = db.collection('message').find().toArray(function(err, items){
 			if (items.length > 0){
 				// the insert command will create a collection if it doesnt exist
-				db.collection('message').insert({id:0}, {'message':req.body.message})
+				db.collection('message').insert({id:0}, {'message':req.body.message});
 				res.send("Successfully created collection and updated message");
 			}
 			else {
@@ -130,7 +130,7 @@ app.post("/update_message", function(req, res){
 		    			$set: {
 		    					'message':req.body.message
 		   	 				}
-		  			})
+		  			});
 				res.send("Successfully updated message");
 			}
 		});
