@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ConfigService } from '../../app/config.service';
-import { User, UserService } from '../../app/user.service';
+import { UserService } from '../../app/user.service';
 
 @Component({
   selector: 'page-main',
@@ -12,9 +12,11 @@ export class MainPage implements OnInit {
   personId: number;
   personName: string;
   personAssignment: string;
+  announcementMessage: string;
 
   constructor(public navCtrl: NavController, public configSerivce: ConfigService, userService: UserService) {
     this.personId = userService.getUser().id;
+    this.announcementMessage = "😃 Placeholder for the general message! 😎";
   }
 
   ngOnInit(): void {
