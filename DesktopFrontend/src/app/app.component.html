@@ -20,4 +20,6 @@
 
 <input type="text" name="input" #input (keyup)="$event.keyCode == 13 ? postLocation(box.value, input.value) : null">	
 
+<p> Message Box </p>
+<input type="text" name="message" #message (keyup)="$event.keyCode == 13 ? postLocation( message.value) : null">
 
