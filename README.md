@@ -48,6 +48,8 @@ List of installation guidelines and instructions to run the different parts of t
 * Install [Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up) and [node package manager](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm).
 
 ### Running the Back End
+* Go to the directory '/backend'
+* run "npm install" to get all the necessary dependencies
 * "npm start" to run the server locally
 
 # Front End Desktop
@@ -57,7 +59,8 @@ List of installation guidelines and instructions to run the different parts of t
 * Ensure that [Angular version 4](https://angular.io/guide/quickstart) or higher is installed
 
 ### Running the Front End Desktop
-
+* Go to the directory '/DesktopFrontend'
+* run "npm install" to get all the necessary dependencies
 * "Ng serve" to run the server locally.
 * localhost:4200 to view the front end on a browser.
 
@@ -69,6 +72,7 @@ List of installation guidelines and instructions to run the different parts of t
 - (sudo) npm install -g ionic cordova
 
 ### Running the Front End Mobile
-
+* Go to the directory '/MobileFrontend'
+* run "npm install" to get all the necessary dependencies
 * "Ionic serve" to run the server locally.
 * localhost:8100 to view the front end mobile on a browser.
