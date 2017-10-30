@@ -29,9 +29,12 @@ This app facilitates the check-in and check-out process for volunteers and notif
 2. run server locally:
 - npm start
 
-3. components:
-- index.js: server handle get requests
-- app.js: write to mongodb database
+## Overview of the Project
+
+The project consists of three parts: the backend, frontend desktop and frontend mobile.
+The backend is built on Node.js and Express, with MongoDB service runnning.
+The frontend desktop is built on Angular.
+The frontend mobile is built on Ionic.
 
 # Instruction Guideline
 
