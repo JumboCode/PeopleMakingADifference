@@ -48,7 +48,12 @@ List of installation guidelines and instructions to run the different parts of t
 
 ### Install Guidelines
 
-* Install [Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up) and [node package manager](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm).
+* Install [node package manager](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm).
+* Install [MongoDB](https://www.mongodb.com/download-center?jmp=homepage#community) and set the right access by typing in:
+$ mkdir -p /data/db
+$ chmod 777 /data/db
+This will ensure that you have a database that you can read, write and execute by [changing mode](https://www.computerhope.com/unix/uchmod.htm)
+Run "mongod" to turn on the mongoDB and ensure that it is turned on while developing.
 
 ### Running the Back End
 * Go to the directory '/backend'
