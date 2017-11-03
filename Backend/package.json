@@ -16,6 +16,7 @@
     "mongodb": "^2.2.31"
   },
   "devDependencies": {
+    "eslint": "^4.9.0",
     "request": "^2.81.0",
     "tape": "^4.7.0"
   },
