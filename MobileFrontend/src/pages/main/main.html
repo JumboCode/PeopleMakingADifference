@@ -1,8 +1,14 @@
 <ion-content padding>
- <p>
+  <p>
 	Hello, {{personName}}!
   </p>
   <p>
 	Your assignment is {{personAssignment}}.
   </p>
+  <ion-card>
+    <ion-card-content>
+      {{announcementMessage}}
+    </ion-card-content>
+  </ion-card>
+  <button ion-button (click)="onRefreshClick()"> Refresh </button>
 </ion-content>

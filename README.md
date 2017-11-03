@@ -16,7 +16,7 @@ This app facilitates the check-in and check-out process for volunteers and notif
 5. **Developer:** [Meet Patel](https://github.com/Meetia)
 6. **Developer:** [Phoebe Yang](https://yyang08.github.io)
 7. **Continuous Integration/Developer:** [Kate Zheng](https://github.com/katepx2015)
-8. **Developer:** Julia Hedrick (https://github.com/juliahedrick) 
+8. **Developer:** [Julia Hedrick](https://github.com/juliahedrick) 
 9. **Developer:** [Michael Dunkelman](https://github.com/mdunkelman)
 10. **Documentation/Developer:** [Josh Lee](http://joshleetufts.com/)
 11. **Developer:** [Bhushan Suwal](https://github.com/bsuwal)
@@ -29,13 +29,16 @@ This app facilitates the check-in and check-out process for volunteers and notif
 2. run server locally:
 - npm start
 
-3. components:
-- index.js: server handle get requests
-- app.js: write to mongodb database
+## Overview of the Project
+
+The project consists of three parts: the backend, frontend desktop and frontend mobile.
+The backend is built on Node.js and Express, with MongoDB service runnning.
+The frontend desktop is built on Angular.
+The frontend mobile is built on Ionic.
 
 # Instruction Guideline
 
-List of installation guidelines and instructions to run the different parts of the PMD project. 
+List of installation guidelines and instructions to run the different parts of the PMD project.
 
 * [Back End](#back-end)
 * [Front End Desktop](#front-end-desktop)
@@ -43,32 +46,43 @@ List of installation guidelines and instructions to run the different parts of t
 
 # Back End
 
-### Install Guidelines 
+### Install Guidelines
 
-* Install [Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up) and [node package manager](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm).
+* Install [node package manager](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm).
+* Install [MongoDB](https://www.mongodb.com/download-center?jmp=homepage#community) and set the right access by typing in:
+> $ mkdir -p /data/db
 
-### Running the Back End 
+> $ chmod 777 /data/db
+
+This will ensure that you have a database that you can read, write and execute by [changing mode](https://www.computerhope.com/unix/uchmod.htm)
+Run "mongod" to turn on the mongoDB and ensure that it is turned on while developing.
+
+### Running the Back End
+* Go to the directory '/backend'
+* run "npm install" to get all the necessary dependencies
 * "npm start" to run the server locally
 
 # Front End Desktop
 
-### Install Guidelines 
+### Install Guidelines
 
 * Ensure that [Angular version 4](https://angular.io/guide/quickstart) or higher is installed
 
 ### Running the Front End Desktop
-
+* Go to the directory '/DesktopFrontend'
+* run "npm install" to get all the necessary dependencies
 * "Ng serve" to run the server locally.
 * localhost:4200 to view the front end on a browser.
 
 # Front End Mobile
 
-### Install Guidelines 
+### Install Guidelines
 
 * Install [ionic](https://ionicframework.com/docs/intro/installation/) using the following command on the command line.
-- (sudo) npm install -g ionic cordova 
+- (sudo) npm install -g ionic cordova
 
 ### Running the Front End Mobile
-
+* Go to the directory '/MobileFrontend'
+* run "npm install" to get all the necessary dependencies
 * "Ionic serve" to run the server locally.
 * localhost:8100 to view the front end mobile on a browser.

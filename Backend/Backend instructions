@@ -1,0 +1,35 @@
+Backend instructions/notes
+Bhushan & Kevin Oct 21 2017
+
+V important:
+	We didn't know how to import the database locally.
+	So we just changed the prodcution database directly during testing.
+	To do that, you need to have a MONGODB_URI variable in your bash script.
+	To get that going, if you are using Sublime, type this into your terminal:
+		subl ~/.bash_profile
+
+	This should open your bash profile.
+	Add this snippet to your script:
+		MONGODB_URI="mongodb://pmd:pmd-server@ds161584.mlab.com:61584/heroku_kh1dfbl4"
+		export MONGODB_URI
+
+	Save the file, then run the script:
+		source ~/.bash_profile
+
+	Your environment variable should be all set and you can now connect to the production
+	database!
+
+Our database is set up using the mlab add-on on heroku
+	heroku login:
+		username: yu.yang@tufts.edu
+		password: pmd-server
+
+Not necesary but if you want to connect to your production database through your
+terminal like mongod:
+	Type this line to your terminal:
+		mongo ds161584.mlab.com:61584/heroku_kh1dfbl4 -u pmd -p pmd-server
+	commands like "show dbs" doesn't work unless you pay for mlab smh
+
+
+
+
