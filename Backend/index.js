@@ -108,6 +108,23 @@ app.post("/update_assignment", function(req, res){
 	});
 });
 
+
+app.get("/get_message", function(req, res){
+
+  // if message exists return message otherwise return error string
+		existence_check = db.collection('message').find().toArray(function(err, items){
+			if (items.length > 0) {
+				db.collection('message').find({"id" : 0}).toArray(function(err, items){
+					message = items.message;
+					res.send(String(message));
+				})
+			}
+			else {
+				res.send("Error: No message in database.");
+
+
+}
+      
 // The parameter must be name 'message'
 app.post("/update_message", function(req, res){
         res.header('Access-Control-Allow-Origin', req.headers.origin);
@@ -115,7 +132,8 @@ app.post("/update_message", function(req, res){
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 	mongodb.MongoClient.connect(uri, function(err, db){
-		if (err) throw err;
+		if (err) throw err;)}
+
 		// if collection already exists then update the message, else create a collection 
 		// and insert the message
 		existence_check = db.collection('message').find().toArray(function(err, items){
@@ -136,8 +154,6 @@ app.post("/update_message", function(req, res){
 		});
 	});
 });
-
-
 
 
 app.listen(app.get('port'), function() {

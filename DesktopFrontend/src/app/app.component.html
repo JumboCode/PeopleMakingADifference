@@ -1,5 +1,7 @@
 <h1> The names and assignments of the volunteers are: </h1>
 
+<input type="text" name="input" #input (keyup)="$event.keyCode == 13 ? postLocation(box.value, input.value) : null">	
+
 <ul>    
     <li *ngFor="let volunteer of volunteers; let i = index">
        
@@ -21,7 +23,9 @@
         <label for="vLoc">Location: </label>   
         <input type="text" name="vLoc" #vloc (keyup)="$event.keyCode == 13 ? postLocation(vname.value, vloc.value) : null"
         [disabled]=!edit[i]
-        value='{{ volunteers[i].location }}'>    
-
+        value='{{ volunteers[i].location }}'> 
+      
+      <p> Message Box </p>
+      <input type="text" name="message" #message (keyup)="$event.keyCode == 13 ? postLocation( message.value) : null">
     </li>
 </ul>
