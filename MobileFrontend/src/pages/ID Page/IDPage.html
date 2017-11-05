@@ -1,0 +1,14 @@
+<ion-content padding>
+  <ion-item>
+    <ion-label>Type in the user ID:</ion-label>
+    <ion-input 
+      type="number"
+      [(ngModel)]="personId"
+    >
+    </ion-input> 
+    
+  </ion-item>
+  <p>{{errorMessage}}</p>
+  <button ion-button (click)="onSubmitClick()">Submit</button>
+
+</ion-content>
