@@ -117,7 +117,7 @@ app.get("/get_message", function(req, res){
 				db.collection('message').find({"id" : 0}).toArray(function(err, items){
 					message = items.message;
 					res.send(String(message));
-				})
+				});
 			}
 			else {
 				res.send("Error: No message in database.");
