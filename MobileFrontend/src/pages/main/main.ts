@@ -16,7 +16,7 @@ export class MainPage implements OnInit {
 
   constructor(public navCtrl: NavController, public configSerivce: ConfigService, userService: UserService) {
     this.personId = userService.getUser().id;
-    this.announcementMessage = "😃 Placeholder for the general message! 😎";
+    this.announcementMessage = "This is a message to all volunteers, please have the most fun and thank you for volunteering! \ud83d\ude03"
   }
 
   ngOnInit(): void {
@@ -43,6 +43,7 @@ export class MainPage implements OnInit {
         // set the values that are bound in the template
         this.personName = json[0].name;
         this.personAssignment = json[0].assignment;
+        this.personLocation = json[0].location
       } else {
         throw new Error(`JSON response from ${apiEndpoint} formatted incorrectly, expecting at least one result.`);
       }
@@ -56,7 +57,4 @@ export class MainPage implements OnInit {
     })
 
   }
-
-
-
 }

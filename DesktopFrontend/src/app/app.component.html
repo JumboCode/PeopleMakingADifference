@@ -1,31 +1,24 @@
 <h1> The names and assignments of the volunteers are: </h1>
 
-<input type="text" name="input" #input (keyup)="$event.keyCode == 13 ? postLocation(box.value, input.value) : null">	
+<p> Send a message to all volunteers </p>
+<input type="text" name="message" #message (keyup)="$event.keyCode == 13 ? postMessage(message.value) : null">
 
-<ul>    
+
+<ul>
     <li *ngFor="let volunteer of volunteers; let i = index">
-       
+
+        <p> {{ volunteers[i].name }} </p>
+
+        <label for="vAssign">Assignment: </label>
+        <input type="text" name="vAssign" #vassign (keyup)="$event.keyCode == 13 ? postAssignment(i+1, vassign.value) : null"
+        [disabled]=!edit[i]
+        value='{{ volunteers[i].assignment }}'>
+
+        <label for="vLoc">Location: </label>
+        <input type="text" name="vLoc" #vloc (keyup)="$event.keyCode == 13 ? postLocation(i+1, vloc.value) : null"
+        [disabled]=!edit[i]
+        value='{{ volunteers[i].location }}'>
+
         <button (click)=enableEditing(i)>Edit</button>
-       
-        <label for="vName">Name: </label>   
-        <input #vname
-          name="vName" 
-          (keyup.enter)="update(vname.value)"
-          (blur)="update(vname.value)"
-          [disabled]=!edit[i]
-          value='{{ volunteers[i].name }}'>
-
-        <label for="vAssign">Assignment: </label>   
-        <input type="text" name="vAssign" #vassign (keyup)="$event.keyCode == 13 ? postAssignment(vname.value, vassign.value) : null"
-        [disabled]=!edit[i]
-        value='{{ volunteers[i].assignment }}'>    
-
-        <label for="vLoc">Location: </label>   
-        <input type="text" name="vLoc" #vloc (keyup)="$event.keyCode == 13 ? postLocation(vname.value, vloc.value) : null"
-        [disabled]=!edit[i]
-        value='{{ volunteers[i].location }}'> 
-      
-      <p> Message Box </p>
-      <input type="text" name="message" #message (keyup)="$event.keyCode == 13 ? postLocation( message.value) : null">
     </li>
 </ul>
