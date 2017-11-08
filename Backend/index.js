@@ -37,6 +37,99 @@ app.get("/", function(req, res){
 	});
 });
 
+
+app.get("/get_message", function(req, res){
+  // if message exists return message otherwise return error string
+  mongodb.MongoClient.connect(uri, function(err, db){
+  if (err) throw err;
+      existence_check = db.collection('message').find().toArray(function(err, items){
+          if (items.length > 0) {
+              message = items[items.length-1].message;
+              res.send(String(message));
+          }
+          else {
+              res.send("Error: No message in database.");
+          }
+      })
+  });
+});
+
+
+// The parameters must be uid and location
+app.post("/update_location", function(req, res){
+        console.log("location updated")
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	mongodb.MongoClient.connect(uri, function(err, db){
+        console.log("connected to db")
+		if (err) throw err;
+		// if document with argument id exists then update, otherwise return UID not found
+		existence_check = db.collection('volunteers').find({"id" : parseInt(req.body.uid)}).toArray(function(err, items){
+			if (items.length > 0){
+				db.collection('volunteers').update({id:parseInt(req.body.uid)},
+					{
+		    			$set: {
+		    					"location": req.body.location
+		   	 				}
+		  			})
+					res.send("Successfully updated location");
+				}
+			else {
+					res.send("Error: UID Not Found2!");
+				}
+		});
+	});
+});
+
+
+// The parameters must be uid and assignment
+app.post("/update_assignment", function(req, res){
+        console.log("assignment updated")
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	mongodb.MongoClient.connect(uri, function(err, db){
+        console.log("connected to db")
+        console.log(req.body.uid)
+		if (err) throw err;
+		// if document with argument id exists then update, otherwise return UID not found
+		existence_check = db.collection('volunteers').find({"id" : parseInt(req.body.uid)}).toArray(function(err, items){
+			if (items.length > 0){
+				db.collection('volunteers').update({id:parseInt(req.body.uid)},
+					{
+		    			$set: {
+		    					"assignment": req.body.assignment
+		   	 				}
+		  			})
+					res.send("Successfully updated assignment");
+				}
+			else {
+                    console.log("UID NOT FOUND")
+					res.send("Error: UID Not Found!");
+				}
+		});
+	});
+});
+
+
+// The parameter must be name 'message'
+app.post("/update_message", function(req, res){
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	mongodb.MongoClient.connect(uri, function(err, db){
+		if (err)
+            throw err;
+		db.collection('message').insert({'message':req.body.message});
+		res.send("Successfully created collection and updated message");
+		});
+});
+
+
 app.get("/:uid", function(req, res){
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -52,63 +145,6 @@ app.get("/:uid", function(req, res){
 		db.close();
 	});
 });
-
-// The parameters must be uid and location
-app.post("/update_location", function(req, res){
-        console.log("location updated")
-        res.header('Access-Control-Allow-Origin', req.headers.origin);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-	mongodb.MongoClient.connect(uri, function(err, db){
-		if (err) throw err;
-		// if document with argument id exists then update, otherwise return UID not found
-		existence_check = db.collection('volunteers').find({"id" : parseInt(req.body.uid)}).toArray(function(err, items){
-			if (items.length > 0){
-				db.collection('volunteers').update({id:parseInt(req.body.uid)},
-					{
-		    			$set: {
-		    					"location": req.body.location
-		   	 				}
-		  			})
-					res.send("Successfully updated location");
-				}
-			else {
-					res.send("Error: UID Not Found!");
-				}
-		});
-	});
-});
-
-
-// The parameters must be uid and assignment
-app.post("/update_assignment", function(req, res){
-        console.log("assignment updated")
-        res.header('Access-Control-Allow-Origin', req.headers.origin);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-	mongodb.MongoClient.connect(uri, function(err, db){
-		if (err) throw err;
-		// if document with argument id exists then update, otherwise return UID not found
-		existence_check = db.collection('volunteers').find({"id" : parseInt(req.body.uid)}).toArray(function(err, items){
-			if (items.length > 0){
-				db.collection('volunteers').update({id:parseInt(req.body.uid)},
-					{
-		    			$set: {
-		    					"assignment": req.body.assignment
-		   	 				}
-		  			})
-					res.send("Successfully updated assignment");
-				}
-			else {
-					res.send("Error: UID Not Found!");
-				}
-		});
-	});
-});
-
-
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

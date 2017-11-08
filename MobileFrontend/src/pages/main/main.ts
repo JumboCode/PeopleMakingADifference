@@ -12,24 +12,27 @@ export class MainPage implements OnInit {
   personId: number;
   personName: string;
   personAssignment: string;
+  personLocation: string;
   announcementMessage: string;
 
-  constructor(public navCtrl: NavController, public configSerivce: ConfigService, userService: UserService) {
+  constructor(public navCtrl: NavController, public configService: ConfigService, userService: UserService) {
     this.personId = userService.getUser().id;
-    this.announcementMessage = "😃 Placeholder for the general message! 😎";
+    this.announcementMessage = "This is a message to all volunteers, please have the most fun and thank you for volunteering! \ud83d\ude03"
   }
 
   ngOnInit(): void {
     this.getManifest();
+    this.getMessage();
   }
 
   onRefreshClick() {
-    this.getManifest()
+    this.getManifest();
+    this.getMessage();
   }
 
   getManifest() {
     // the api we hit that runs remotely - the "real" one
-    let apiEndpoint = this.configSerivce.getEndpointUrl();
+    let apiEndpoint = this.configService.getEndpointUrl();
 
     // make the HTTPRequest
     // see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
@@ -43,6 +46,7 @@ export class MainPage implements OnInit {
         // set the values that are bound in the template
         this.personName = json[0].name;
         this.personAssignment = json[0].assignment;
+        this.personLocation = json[0].location
       } else {
         throw new Error(`JSON response from ${apiEndpoint} formatted incorrectly, expecting at least one result.`);
       }
@@ -57,6 +61,11 @@ export class MainPage implements OnInit {
 
   }
 
+  getMessage() {
+    let apiEndpoint = this.configService.getEndpointUrl();
 
-
+    fetch(apiEndpoint + 'get_message')
+    .then((blob) => blob.text())
+    .then((message) => this.announcementMessage = message);
+  }
 }
