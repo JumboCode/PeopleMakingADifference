@@ -7,6 +7,7 @@ import { UserService } from './user.service';
 
 import { MainPage } from '../pages/main/main';
 import { IDPage } from '../pages/ID Page/IDPage';
+import { WelcomePage } from '../pages/welcome/welcome';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -15,7 +16,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     MainPage,
-    IDPage
+    IDPage,
+    WelcomePage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     MainPage,
-    IDPage
+    IDPage,
+    WelcomePage
   ],
   providers: [
     StatusBar,
