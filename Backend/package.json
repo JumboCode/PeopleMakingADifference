@@ -23,6 +23,7 @@
     "request-mocha": "^0.2.0"
   },
   "devDependencies": {
+    "eslint": "^4.9.0",
     "request": "^2.81.0",
     "tape": "^4.7.0"
   },
