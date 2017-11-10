@@ -1,12 +1,7 @@
 <h1> The names and assignments of the volunteers are: </h1>
 
-<p> Send a message to all volunteers </p>
-<input type="text" name="message" #message (keyup)="$event.keyCode == 13 ? postMessage(message.value) : null">
-
-
 <ul>
-    <li *ngFor="let volunteer of volunteers; let i = index">
-
+    <li *ngFor="let volunteer of volunteers; index as i">
         <p> {{ volunteers[i].name }} </p>
 
         <label for="vAssign">Assignment: </label>
@@ -22,3 +17,9 @@
         <button (click)=enableEditing(i)>Edit</button>
     </li>
 </ul>
+
+<p> Send a message to all volunteers </p>
+<input type="text" name="message" #message (keyup)="$event.keyCode == 13 ? postMessage(message.value) : null">
+
+
+
