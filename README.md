@@ -35,12 +35,12 @@ List of installation guidelines and instructions to run the different parts of t
 
 * [Database](#database) - This is a part of the backend in reality, but the install and run instructions are separate.
 * [Back End](#back-end)
-* [Front End Desktop](#desktop-front-end)
-* [Front End Mobile](#mobile-front-end)
+* [Desktop Front End](#desktop-front-end)
+* [Mobile Front End](#mobile-front-end)
 
 # Install Guidelines
 
-Before you do anything else:
+### Before you do anything else:
 * Install [node package manager](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm). This is important for installing both pieces of the frontend and the backend.
 
 ## Database
@@ -48,7 +48,7 @@ Before you do anything else:
   * Requirements: none, can be installed from within any directory
   * Commands: download [here](https://www.mongodb.com/download-center?jmp=homepage#community), Google the commands to set the right acess for your OS (it varies)
   
-   ### To Run:
+   ### To Run MongoDB:
   * Requirements: none, can be run from within any directory
   * Command: **mongod**
   
@@ -85,7 +85,7 @@ Before you do anything else:
  * Command: **ng serve**
    * To View: **localhost:4200** in browser
 
-## Front End Mobile
+## Mobile Front End
 
   ### To Install:
 * Requirements: Within directory '/MobileFrontend', npm [installed](#before-you-do-anything-else)
