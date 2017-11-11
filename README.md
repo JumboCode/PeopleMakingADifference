@@ -22,17 +22,10 @@ This app facilitates the check-in and check-out process for volunteers and notif
 11. **Developer:** [Bhushan Suwal](https://github.com/bsuwal)
 12. **Developer:** [Kevin Bae](https://github.com/kevinbae15)
 
-## Run Instructions:
-1. install packages:
-- npm install
-
-2. run server locally:
-- npm start
-
 ## Overview of the Project
 
-The project consists of three parts: the backend, frontend desktop and frontend mobile.
-The backend is built on Node.js and Express, with MongoDB service runnning.
+The project consists of three major parts: the backend (which utilizes the database), the desktop frontend, and the mobile frontend.
+The backend is built on Node.js and Express, with the MongoDB database service running.
 The frontend desktop is built on Angular.
 The frontend mobile is built on Ionic.
 
@@ -40,49 +33,64 @@ The frontend mobile is built on Ionic.
 
 List of installation guidelines and instructions to run the different parts of the PMD project.
 
+* [Database](#database) - This is a part of the backend in reality, but the install and run instructions are separate.
 * [Back End](#back-end)
-* [Front End Desktop](#front-end-desktop)
-* [Front End Mobile](#front-end-mobile)
+* [Front End Desktop](#desktop-front-end)
+* [Front End Mobile](#mobile-front-end)
 
-# Back End
+# Install Guidelines
 
-### Install Guidelines
+Before you do anything else:
+* Install [node package manager](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm). This is important for installing both pieces of the frontend and the backend.
 
-* Install [node package manager](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm).
-* Install [MongoDB](https://www.mongodb.com/download-center?jmp=homepage#community) and set the right access by typing in:
-> $ mkdir -p /data/db
+## Database
+   ### To Install:
+  * Requirements: none, can be installed from within any directory
+  * Commands: download [here](https://www.mongodb.com/download-center?jmp=homepage#community), Google the commands to set the right acess for your OS (it varies)
+  
+   ### To Run:
+  * Requirements: none, can be run from within any directory
+  * Command: **mongod**
+  
+   ### To Create Database:  
+ * Requirements: MongoDB must be running (see [above](#to-run-mongodb))
+ * Command: **mongo pmd** (where “pmd” is the name of the database to be created)
+  
+   ### To Seed the Local Database:
+ * Requirements: MongoDB must be running (see [above](#to-run-mongodb)), database named “pmd” must exist
+ * Command: **node app.js** (runs the file “app.js”)
+  
+   ### Dropping the Database:
+ * If anything is wrong with the database (ex. it's been seeded multiple times), then you should drop the database
+ * Command: *coming soon*
+  
+ ## Back End
 
-> $ chmod 777 /data/db
+   ### To Install:
+ * Requirements: within directory '/backend', npm [installed](#before-you-do-anything-else)
+ * Command: **npm install**
+  
+   ### To Run:
+ * Requirements: Back end install complete, currently within directory '/backend', MongoDB [running](#to-run-mongodb)
+ * Command: **node index.js**
+   * If running properly, should display “Node app is running on port 500”
 
-This will ensure that you have a database that you can read, write and execute by [changing mode](https://www.computerhope.com/unix/uchmod.htm)
-Run "mongod" to turn on the mongoDB and ensure that it is turned on while developing.
+## Desktop Front End
 
-### Running the Back End
-* Go to the directory '/backend'
-* run "npm install" to get all the necessary dependencies
-* "npm start" to run the server locally
+   ### To Install:
+ * Requirements: Within directory '/DesktopFrontend', npm [installed](#before-you-do-anything-else)
+ * Command: **npm install**
+   ### To Run:
+ * Requirements: Within directory '/DesktopFrontend', above install complete
+ * Command: **ng serve**
+   * To View: **localhost:4200** in browser
 
-# Front End Desktop
+## Front End Mobile
 
-### Install Guidelines
-
-* Ensure that [Angular version 4](https://angular.io/guide/quickstart) or higher is installed
-
-### Running the Front End Desktop
-* Go to the directory '/DesktopFrontend'
-* run "npm install" to get all the necessary dependencies
-* "Ng serve" to run the server locally.
-* localhost:4200 to view the front end on a browser.
-
-# Front End Mobile
-
-### Install Guidelines
-
-* Install [ionic](https://ionicframework.com/docs/intro/installation/) using the following command on the command line.
-- (sudo) npm install -g ionic cordova
-
-### Running the Front End Mobile
-* Go to the directory '/MobileFrontend'
-* run "npm install" to get all the necessary dependencies
-* "Ionic serve" to run the server locally.
-* localhost:8100 to view the front end mobile on a browser.
+  ### To Install:
+* Requirements: Within directory '/MobileFrontend', npm [installed](#before-you-do-anything-else)
+* Command: **npm install**
+  ### To Run:
+* Requirements: Within directory '/MobileFrontend', above install complete
+* Command: **ionic serve**
+  * To View: **localhost:8100** in browser
