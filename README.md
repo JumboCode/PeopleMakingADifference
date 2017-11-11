@@ -44,53 +44,53 @@ List of installation guidelines and instructions to run the different parts of t
 * Install [node package manager](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm). This is important for installing both pieces of the frontend and the backend.
 
 ## Database
-   ### To Install:
+  ### To Install:
   * Requirements: none, can be installed from within any directory
   * Commands: download [here](https://www.mongodb.com/download-center?jmp=homepage#community), Google the commands to set the right acess for your OS (it varies)
   
-   ### To Run MongoDB:
-  * Requirements: none, can be run from within any directory
-  * Command: **mongod**
+ ### To Run MongoDB:
+ * Requirements: none, can be run from within any directory
+ * Command: **mongod**
   
-   ### To Create Database:  
+ ### To Create Database:  
  * Requirements: MongoDB must be running (see [above](#to-run-mongodb))
  * Command: **mongo pmd** (where “pmd” is the name of the database to be created)
   
-   ### To Seed the Local Database:
+ ### To Seed the Local Database:
  * Requirements: MongoDB must be running (see [above](#to-run-mongodb)), database named “pmd” must exist
  * Command: **node app.js** (runs the file “app.js”)
   
-   ### Dropping the Database:
+ ### Dropping the Database:
  * If anything is wrong with the database (ex. it's been seeded multiple times), then you should drop the database
  * Command: *coming soon*
   
  ## Back End
 
-   ### To Install:
+ ### To Install:
  * Requirements: within directory '/backend', npm [installed](#before-you-do-anything-else)
  * Command: **npm install**
   
-   ### To Run:
+ ### To Run:
  * Requirements: Back end install complete, currently within directory '/backend', MongoDB [running](#to-run-mongodb)
  * Command: **node index.js**
    * If running properly, should display “Node app is running on port 500”
 
 ## Desktop Front End
 
-   ### To Install:
+ ### To Install:
  * Requirements: Within directory '/DesktopFrontend', npm [installed](#before-you-do-anything-else)
  * Command: **npm install**
-   ### To Run:
+ ### To Run:
  * Requirements: Within directory '/DesktopFrontend', above install complete
  * Command: **ng serve**
    * To View: **localhost:4200** in browser
 
 ## Mobile Front End
 
-  ### To Install:
-* Requirements: Within directory '/MobileFrontend', npm [installed](#before-you-do-anything-else)
-* Command: **npm install**
-  ### To Run:
-* Requirements: Within directory '/MobileFrontend', above install complete
-* Command: **ionic serve**
-  * To View: **localhost:8100** in browser
+ ### To Install:
+ * Requirements: Within directory '/MobileFrontend', npm [installed](#before-you-do-anything-else)
+ * Command: **npm install**
+ ### To Run:
+ * Requirements: Within directory '/MobileFrontend', above install complete
+ * Command: **ionic serve**
+   * To View: **localhost:8100** in browser
