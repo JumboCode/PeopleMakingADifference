@@ -97,11 +97,15 @@ $colors: (
 
 img.pmd-icon {
   max-width: 3em;
+  max-height: 2em;
 }
 
 .title .toolbar-title {
   color: white;
   overflow: visible;
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
 }
 
 .header .toolbar {
@@ -115,3 +119,8 @@ img.pmd-icon {
 page-welcome .content {
   background: #f4f3f3;
 }
+
+.title-icon, .title-text {
+  flex: 1 1 auto;
+}
+
