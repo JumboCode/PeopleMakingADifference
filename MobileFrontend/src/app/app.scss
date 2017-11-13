@@ -15,25 +15,31 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+$gradient-dark: #008776;
+$gradient-light: #00baac;
+$page-description-background: #74bdb4;
+$white: #ffffff;
+$text-color: rgba(74, 74, 74, 1);
+
 .toolbar .toolbar-background-md, .toolbar .toolbar-background-ios {
-  background: linear-gradient(to bottom, #008776 0%, #00baac 100%);
+  background: linear-gradient(to bottom, $gradient-dark 0%, $gradient-light 100%);
 }
 
 .toolbar.pageinfo .toolbar-background-md, .toolbar.pageinfo .toolbar-background-ios {
-  background: #74bdb4;
+  background: $page-description-background;
 }
 
-img.pmd-icon {
-  max-width: 3em;
+.pmd-icon {
   max-height: 2em;
+  max-width: 3em;
 }
 
 .title .toolbar-title {
-  color: white;
-  overflow: visible;
-  font-size: 1.5rem;
-  display: flex;
   align-items: center;
+  color: $white;
+  display: flex;
+  font-size: 1.5rem;
+  overflow: visible;
 }
 
 .header .toolbar {
@@ -41,25 +47,23 @@ img.pmd-icon {
 }
 
 .header .toolbar.welcome {
-  height: 12em; 
+  height: 12em;
 }
 
-.title-icon, .title-text {
+.title-icon, 
+.title-text {
   flex: 1 1 auto;
 }
 
 .title-icon {
-  margin: 0 0.25rem 0 0.25rem;
+  margin: 0 0.25rem;
 }
 
 .button {
   border-radius: 24px;
 }
 
-.content-md {
-  color: rgba(74, 74, 74, 1);
-}
-
+.content-md,
 .button-md {
-  color: rgba(74, 74, 74, 1);
+  color: $text-color;
 }
