@@ -9,7 +9,13 @@
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve",
+    "check": "gts check",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run check"
   },
   "dependencies": {
     "@angular/common": "4.4.3",
@@ -32,6 +38,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.0",
+    "gts": "^0.5.1",
     "typescript": "2.3.4"
   },
   "description": "An Ionic project"
