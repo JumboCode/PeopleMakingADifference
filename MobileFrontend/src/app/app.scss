@@ -21,11 +21,13 @@ $page-description-background: #74bdb4;
 $white: #ffffff;
 $text-color: rgba(74, 74, 74, 1);
 
-.toolbar .toolbar-background-md, .toolbar .toolbar-background-ios {
+.toolbar .toolbar-background-md, 
+.toolbar .toolbar-background-ios {
   background: linear-gradient(to bottom, $gradient-dark 0%, $gradient-light 100%);
 }
 
-.toolbar.pageinfo .toolbar-background-md, .toolbar.pageinfo .toolbar-background-ios {
+.toolbar.pageinfo .toolbar-background-md, 
+.toolbar.pageinfo .toolbar-background-ios {
   background: $page-description-background;
 }
 
@@ -46,11 +48,11 @@ $text-color: rgba(74, 74, 74, 1);
   height: 4em;
 }
 
-.header .toolbar.welcome {
+.header .welcome {
   height: 12em;
 }
 
-.title-icon, 
+.title-icon,
 .title-text {
   flex: 1 1 auto;
 }
