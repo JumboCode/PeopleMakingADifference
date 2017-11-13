@@ -14,3 +14,52 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.toolbar .toolbar-background-md, .toolbar .toolbar-background-ios {
+  background: linear-gradient(to bottom, #008776 0%, #00baac 100%);
+}
+
+.toolbar.pageinfo .toolbar-background-md, .toolbar.pageinfo .toolbar-background-ios {
+  background: #74bdb4;
+}
+
+img.pmd-icon {
+  max-width: 3em;
+  max-height: 2em;
+}
+
+.title .toolbar-title {
+  color: white;
+  overflow: visible;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.header .toolbar {
+  height: 4em;
+}
+
+.header .toolbar.welcome {
+  height: 12em; 
+}
+
+.title-icon, .title-text {
+  flex: 1 1 auto;
+}
+
+.title-icon {
+  margin: 0 0.25rem 0 0.25rem;
+}
+
+.button {
+  border-radius: 24px;
+}
+
+.content-md {
+  color: rgba(74, 74, 74, 1);
+}
+
+.button-md {
+  color: rgba(74, 74, 74, 1);
+}
