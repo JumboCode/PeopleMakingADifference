@@ -4,8 +4,7 @@ import { IDPage } from '../ID Page/IDPage';
 
 @Component({
   selector: 'page-welcome',
-  templateUrl: 'welcome.html',
-  styleUrls: ['welcome.scss']
+  templateUrl: 'welcome.html'
 })
 export class WelcomePage {
 
