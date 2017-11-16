@@ -17,6 +17,8 @@
     "chai-json-schema": "^1.5.0",
     "commander": "^2.11.0",
     "ejs": "2.5.6",
+    "eslint": "^4.11.0",
+    "eslint-config-google": "^0.9.1",
     "express": "4.15.2",
     "mocha": "^4.0.1",
     "mongodb": "^2.2.31",
