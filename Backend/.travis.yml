@@ -1,7 +1,7 @@
 language: node_js
 node_js:
         - "stable"
-install
+install:
         - npm install
         - npm install --save-dev mocha
 script:
