@@ -1,0 +1,13 @@
+input {
+	background-color:#008675;
+	color: white;
+}
+
+@font-face {
+	font-family: "Avenir";
+	src: ../assets/Avenir;
+}
+
+.Avenir {
+	font-family: "Avenir", Verdana, Tahoma;
+}
