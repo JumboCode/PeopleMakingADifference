@@ -41,7 +41,7 @@ List of installation guidelines and instructions to run the different parts of t
 # Install Guidelines
 
 ### Before you do anything else:
-* Install [node package manager](https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm). This is important for installing both pieces of the frontend and the backend.
+* Install [node](https://nodejs.org/en/download/), which comes with node package manager. Npm is important for installing both pieces of the frontend and the backend.
 
 ## Database
   ### To Install:
@@ -76,8 +76,10 @@ List of installation guidelines and instructions to run the different parts of t
    * If running properly, should display “Node app is running on port 500”
 
 ## Desktop Front End
-
- ### To Install:
+ ### To Install Package:
+ * Requirements: none, can be within any directory, npm [installed](#before-you-do-anything-else)
+ * Command: **npm install @angular/cli**, or download manually through this link
+ ### To Install Dependencies:
  * Requirements: Within directory '/DesktopFrontend', npm [installed](#before-you-do-anything-else)
  * Command: **npm install**
  ### To Run:
@@ -87,7 +89,10 @@ List of installation guidelines and instructions to run the different parts of t
 
 ## Mobile Front End
 
- ### To Install:
+ ### To Install Package:
+ * Requirements: none, can be within any directory, npm [installed](#before-you-do-anything-else)
+ * Command: **npm install ionic**
+ ### To Install Dependencies:
  * Requirements: Within directory '/MobileFrontend', npm [installed](#before-you-do-anything-else)
  * Command: **npm install**
  ### To Run:
