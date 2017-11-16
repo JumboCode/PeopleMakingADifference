@@ -1,6 +1,5 @@
-input {
-	background-color:#008675;
-	color: white;
+label, button {
+	color:#008675;
 }
 
 @font-face {
