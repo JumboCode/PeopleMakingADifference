@@ -1,3 +1,6 @@
+![Front-End Checklist Logo](https://github.com/jumbocodefall2017/PeopleMakingADifference/blob/wireframes/TealLogo.png)
+
+
 # People Making A Difference - JumboCode Fall 2017
 
 ## App Description:
