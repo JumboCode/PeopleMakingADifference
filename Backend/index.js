@@ -25,6 +25,22 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+app.get("/uid/:uid", function(req, res){
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        mongodb.MongoClient.connect(uri, function(err, db){
+		if (err) throw err;
+		result = db.collection('volunteers').find({id:parseInt(req.params.uid)}).toArray(function(err, items){
+			if (items.length > 0){
+				res.send(items);
+			} else {
+				res.send("Error: UID Not Found!");
+			}
+		});
+		db.close();
+	});
+});
+
 app.get("/", function(req, res){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -36,7 +52,6 @@ app.get("/", function(req, res){
 		db.close();
 	});
 });
-
 
 app.get("/get_message", function(req, res){
   // if message exists return message otherwise return error string
@@ -53,6 +68,7 @@ app.get("/get_message", function(req, res){
       })
   });
 });
+
 
 
 // The parameters must be uid and location
@@ -141,22 +157,6 @@ app.post("/update_message", function(req, res){
 	});
 });
 
-
-app.get("/:uid", function(req, res){
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        mongodb.MongoClient.connect(uri, function(err, db){
-		if (err) throw err;
-		result = db.collection('volunteers').find({id:parseInt(req.params.uid)}).toArray(function(err, items){
-			if (items.length > 0){
-				res.send(items);
-			} else {
-				res.send("Error: UID Not Found!");
-			}
-		});
-		db.close();
-	});
-});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

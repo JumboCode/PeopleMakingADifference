@@ -31,8 +31,8 @@ var schema = {
 };
 
 it('uid', function(done) {
-	chai.request('http://localhost:5000/')
-		.get("1")
+	chai.request('http://localhost:5000')
+		.get("/uid/1")
 		.end(function(error, response) {
 			var obj = JSON.parse(response.text);
 			expect(obj[0]).to.be.jsonSchema(schema);
