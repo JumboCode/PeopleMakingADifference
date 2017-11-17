@@ -13,6 +13,6 @@ before_install:
 - chmod u+x trav.sh
 install:
 - npm install
-- npm install --save-dev mocha
+- npm install mocha
 script:
 - ./trav.sh
