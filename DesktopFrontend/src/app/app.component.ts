@@ -43,9 +43,8 @@ export class AppComponent implements OnInit {
   }
 
   postLocation(user_id, input_location) {
-    this.http.post("http://localhost:5000/update_assignment", { uid : user_id, location : input_location })
+    this.http.post("http://localhost:5000/update_location", { uid : user_id, location : input_location })
 	  .subscribe()
-
   }
 
   postMessage(input_message){
