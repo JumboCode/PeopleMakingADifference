@@ -1,3 +1,4 @@
+let exit = 0;
 var assert = require('assert');
 var expect = require('chai').expect;
 var chai = require('chai');
@@ -36,7 +37,7 @@ it('uid', function(done) {
 		.end(function(error, response) {
 			var obj = JSON.parse(response.text);
 			expect(obj[0]).to.be.jsonSchema(schema);
-			done();
+			exit += done();
 		});
 });
 
@@ -46,7 +47,7 @@ it('home', function(done) {
 		for (var i = 0; i < obj.length; i++) {
 			expect(obj[i]).to.be.jsonSchema(schema);
 		}
-		done();
+		exit += done();
 	});
 });
 
@@ -56,7 +57,7 @@ it('location', function(done) {
 		.send({ uid: 1, location: "campus center" })
 		.end(function(error, response) {
 			expect(response.text).to.equal("Successfully updated location");
-			done();	
+			exit += done();	
 		});
 });
 
@@ -66,11 +67,11 @@ it('assignment', function(done) {
 		.send({ uid: 1, assignment: "sleep" })
 		.end(function(error, response) {
 			expect(response.text).to.equal("Successfully updated assignment");
-			done();
+			exit += done();
 		});
 });
 
 it('end', function(done) {
-	process.exit(0);
+	process.exit(exit);
 });
 
