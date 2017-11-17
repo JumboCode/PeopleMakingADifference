@@ -13,4 +13,4 @@ install:
 - npm install
 - npm install --save-dev mocha
 script:
-- npm test
+- ./trav.sh
