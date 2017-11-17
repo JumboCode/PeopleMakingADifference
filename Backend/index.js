@@ -5,6 +5,13 @@ var bodyParser = require('body-parser'); // module used to parse POST parameters
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+// CORS! Yes, really! For real!
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 if (process.argv[2] == "--local" || process.argv[2] == "-l") {
 	var uri = 'mongodb://localhost:27017/pmd';
@@ -26,8 +33,6 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get("/uid/:uid", function(req, res){
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         mongodb.MongoClient.connect(uri, function(err, db){
 		if (err) throw err;
 		result = db.collection('volunteers').find({id:parseInt(req.params.uid)}).toArray(function(err, items){
@@ -42,8 +47,6 @@ app.get("/uid/:uid", function(req, res){
 });
 
 app.get("/", function(req, res){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     mongodb.MongoClient.connect(uri, function(err, db){
 		if (err) throw err;
 		result = db.collection('volunteers').find().toArray(function(err, items){
@@ -73,11 +76,6 @@ app.get("/get_message", function(req, res){
 
 // The parameters must be uid and location
 app.post("/update_location", function(req, res){
-        console.log("location updated")
-        res.header('Access-Control-Allow-Origin', req.headers.origin);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 	mongodb.MongoClient.connect(uri, function(err, db){
         console.log("connected to db")
 		if (err) throw err;
@@ -102,11 +100,6 @@ app.post("/update_location", function(req, res){
 
 // The parameters must be uid and assignment
 app.post("/update_assignment", function(req, res){
-        console.log("assignment updated")
-        res.header('Access-Control-Allow-Origin', req.headers.origin);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 	mongodb.MongoClient.connect(uri, function(err, db){
         console.log("connected to db")
         console.log(req.body.uid)
@@ -133,10 +126,6 @@ app.post("/update_assignment", function(req, res){
 
 // The parameter must be name 'message'
 app.post("/update_message", function(req, res){
-       	res.header('Access-Control-Allow-Origin', req.headers.origin);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 	
 	mongodb.MongoClient.connect(uri, function(err, db){
 		if (err)
