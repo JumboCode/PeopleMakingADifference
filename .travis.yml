@@ -9,6 +9,9 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+cache:
+  directories:
+  - /Backend/node_modules
 before_install:
 - chmod u+x trav.sh
 script:
