@@ -20,6 +20,9 @@ $gradient-light: #00baac;
 $page-description-background: #74bdb4;
 $white: #ffffff;
 $text-color: rgba(74, 74, 74, 1);
+$content-background-color: #f4f3f3;
+$content-background-color-alternate: $white;
+$button-border: #b4b4b4;
 
 .toolbar .toolbar-background-md,
 .toolbar .toolbar-background-ios {
@@ -63,9 +66,29 @@ $text-color: rgba(74, 74, 74, 1);
 
 .button {
   border-radius: 24px;
+  border: thin solid $button-border;
+}
+
+.button .button-inner::after {
+  content: ">";
+  padding-left: 1em;
 }
 
 .content-md,
 .button-md {
   color: $text-color;
+}
+
+.content,
+.item {
+  background: $content-background-color;
+}
+
+.second-title .toolbar-title {
+  justify-content: center;
+}
+
+.alternate-content {
+  background: $content-background-color-alternate;
+  border: thin solid $button-border;
 }

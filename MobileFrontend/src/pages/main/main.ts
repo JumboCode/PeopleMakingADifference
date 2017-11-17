@@ -46,7 +46,7 @@ export class MainPage implements OnInit {
         // set the values that are bound in the template
         this.personName = json[0].name;
         this.personAssignment = json[0].assignment;
-        this.personLocation = json[0].location
+        this.personLocation = json[0].location;
       } else {
         throw new Error(`JSON response from ${apiEndpoint} formatted incorrectly, expecting at least one result.`);
       }
