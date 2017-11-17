@@ -20,12 +20,12 @@
     "eslint": "^4.11.0",
     "eslint-config-google": "^0.9.1",
     "express": "4.15.2",
-    "mocha": "^4.0.1",
     "mongodb": "^2.2.31",
     "request-mocha": "^0.2.0"
   },
   "devDependencies": {
     "eslint": "^4.9.0",
+    "mocha": "^4.0.1",
     "request": "^2.81.0",
     "tape": "^4.7.0"
   },
