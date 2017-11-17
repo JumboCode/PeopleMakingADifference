@@ -1,10 +1,10 @@
-var mongodb = require('mongodb');
+const mongodb = require('mongodb');
 //var uri = process.env.MONGODB_URI;
-var uri = 'mongodb://localhost:27017/pmd';
+const uri = 'mongodb://localhost:27017/pmd';
 test = require('assert');
 
 
-var seedData = [
+const seedData = [
 	{
 		id: 1,
 		name: 'Tony Stark',
@@ -18,16 +18,16 @@ var seedData = [
                 location: 'The Death Star'
 	},
     {
-    	id: 3,
-    	name: 'Claire Underwood',
-    	assignment: 'Scheme',
-        location: "Washington"
+        id: 3,
+        name: 'Claire Underwood',
+        assignment: 'Scheme',
+        location: 'Washington'
     },
     {
-    	id: 4,
-    	name: 'Buffy the Vampire Slayer',
-    	assignment: 'Slay vampires',
-        location: "Hellmouth"
+        id: 4,
+        name: 'Buffy the Vampire Slayer',
+        assignment: 'Slay vampires',
+        location: 'Hellmouth'
     }
  ];
 
