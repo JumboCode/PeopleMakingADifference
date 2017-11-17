@@ -43,16 +43,10 @@ mongodb.MongoClient.connect(uri, function (err, db) {
 
     // do some work here with the database.
     var data = db.collection('volunteers');
-    db.collection('volunteers').insertMany(seedData, function(err, r){
-        // test.equal(null, err);
-        // test.equal(5, r.insertedCount);
-    });
+    db.collection('volunteers').insertMany(seedData, function(err, r){});
 
     var messageData = db.collection('message');
-    db.collection('message').insert(messageSeedData, function(err, r){
-        // test.equal(null, err);
-        // test.equal(5, r.insertedCount);
-    });
+    db.collection('message').insert(messageSeedData, function(err, r){});
     //Close connection
     db.close();
   }
