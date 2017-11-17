@@ -56,7 +56,7 @@ it('location', function(done) {
 		.send({ uid: 1, location: "campus center" })
 		.end(function(error, response) {
 			expect(response.text).to.equal("Successfully updated location");
-			done();
+			done();	
 		});
 });
 
@@ -67,7 +67,10 @@ it('assignment', function(done) {
 		.end(function(error, response) {
 			expect(response.text).to.equal("Successfully updated assignment");
 			done();
-	});
+		});
 });
 
+it('end', function(done) {
+	process.exit(0);
+});
 
