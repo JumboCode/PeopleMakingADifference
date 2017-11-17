@@ -23,7 +23,7 @@ export class IDPage {
 
     // make the HTTPRequest
     // see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
-    fetch(apiEndpoint + String(id))
+    fetch(`${apiEndpoint}uid/${String(id)}`)
 
         // convert the blob request and JSON parse it asynchronously
         .then((blob) => blob.json())
