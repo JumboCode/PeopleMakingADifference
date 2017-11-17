@@ -22,9 +22,14 @@ export class MainPage implements OnInit {
   ngOnInit(): void {
     this.getManifest();
     this.getMessage();
+    
+    setInterval(()=>{
+	this.pollBackend();
+        console.log("polling backend");
+    }, 7500);
   }
 
-  onRefreshClick() {
+  pollBackend() {
     this.getManifest();
     this.getMessage();
   }
