@@ -1,0 +1,34 @@
+<ion-header color="primary">
+  <ion-navbar>
+    
+    <ion-title>
+      <div class="title-icon">
+        <img src="assets/icon/pmd_transparent.png" class="pmd-icon" />
+      </div>
+      <div class="title-text">
+        People Making a Difference
+      </div>
+    </ion-title>
+  </ion-navbar>
+
+  <ion-navbar class="pageinfo">
+    <ion-title>
+      Check In
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <ion-item>
+    <ion-label>Type in the user ID:</ion-label>
+    <ion-input 
+      type="number"
+      [(ngModel)]="personId"
+    >
+    </ion-input> 
+    
+  </ion-item>
+  <p>{{errorMessage}}</p>
+  <button ion-button (click)="onSubmitClick()">Submit</button>
+
+</ion-content>

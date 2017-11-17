@@ -1,0 +1,17 @@
+page-welcome .content {
+  background: #f4f3f3;
+}
+
+page-welcome .big-icon {
+  display:  flex;
+  flex-direction: column;
+}
+
+page-welcome .big-icon > div {
+  text-align: center;
+}
+
+page-welcome .title-white {
+  color: white;
+  font-size: 2rem;
+}

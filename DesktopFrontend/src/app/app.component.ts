@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/map'
 
 @Component({
   selector: 'app-root',
@@ -30,22 +31,25 @@ export class AppComponent implements OnInit {
 
     // set up editing button
     for (var i = 0; i < this.volunteers.length; ++i) {
-      this.edit.push(false); 
+      this.edit.push(false);
     }
 		console.log(json);
 	});
   }
 
-  postAssignment(i: number, user_id, input_assignment) {
-    this.edit[i] = false;
+  postAssignment(user_id, input_assignment) {
     this.http.post("http://localhost:5000/update_assignment", { uid : user_id, assignment : input_assignment })
 	  .subscribe()
   }
 
-  postLocation(i: number, user_id, input_location) {
-    this.edit[i] = false;
-    this.http.post("http://localhost:5000/update_assignment", { uid : user_id, location : input_location })
+  postLocation(user_id, input_location) {
+    this.http.post("http://localhost:5000/update_location", { uid : user_id, location : input_location })
 	  .subscribe()
+  }
+
+  postMessage(input_message){
+    this.http.post("http://localhost:5000/update_message", { message : input_message })
+  .subscribe()
   }
 
   update(value: string) {

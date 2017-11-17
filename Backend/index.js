@@ -25,19 +25,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get("/", function(req, res){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    mongodb.MongoClient.connect(uri, function(err, db){
-		if (err) throw err;
-		result = db.collection('volunteers').find().toArray(function(err, items){
-			res.send(items);
-		});
-		db.close();
-	});
-});
-
-app.get("/:uid", function(req, res){
+app.get("/uid/:uid", function(req, res){
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         mongodb.MongoClient.connect(uri, function(err, db){
@@ -53,6 +41,36 @@ app.get("/:uid", function(req, res){
 	});
 });
 
+app.get("/", function(req, res){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    mongodb.MongoClient.connect(uri, function(err, db){
+		if (err) throw err;
+		result = db.collection('volunteers').find().toArray(function(err, items){
+			res.send(items);
+		});
+		db.close();
+	});
+});
+
+app.get("/get_message", function(req, res){
+  // if message exists return message otherwise return error string
+  mongodb.MongoClient.connect(uri, function(err, db){
+  if (err) throw err;
+      existence_check = db.collection('message').find().toArray(function(err, items){
+          if (items.length > 0) {
+              message = items[items.length-1].message;
+              res.send(String(message));
+          }
+          else {
+              res.send("Error: No message in database.");
+          }
+      })
+  });
+});
+
+
+
 // The parameters must be uid and location
 app.post("/update_location", function(req, res){
         console.log("location updated")
@@ -61,6 +79,7 @@ app.post("/update_location", function(req, res){
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 	mongodb.MongoClient.connect(uri, function(err, db){
+        console.log("connected to db")
 		if (err) throw err;
 		// if document with argument id exists then update, otherwise return UID not found
 		existence_check = db.collection('volunteers').find({"id" : parseInt(req.body.uid)}).toArray(function(err, items){
@@ -74,7 +93,7 @@ app.post("/update_location", function(req, res){
 					res.send("Successfully updated location");
 				}
 			else {
-					res.send("Error: UID Not Found!");
+					res.send("Error: UID Not Found2!");
 				}
 		});
 	});
@@ -89,6 +108,8 @@ app.post("/update_assignment", function(req, res){
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 	mongodb.MongoClient.connect(uri, function(err, db){
+        console.log("connected to db")
+        console.log(req.body.uid)
 		if (err) throw err;
 		// if document with argument id exists then update, otherwise return UID not found
 		existence_check = db.collection('volunteers').find({"id" : parseInt(req.body.uid)}).toArray(function(err, items){
@@ -102,12 +123,39 @@ app.post("/update_assignment", function(req, res){
 					res.send("Successfully updated assignment");
 				}
 			else {
+                    console.log("UID NOT FOUND")
 					res.send("Error: UID Not Found!");
 				}
 		});
 	});
 });
 
+
+// The parameter must be name 'message'
+app.post("/update_message", function(req, res){
+       	res.header('Access-Control-Allow-Origin', req.headers.origin);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	
+	mongodb.MongoClient.connect(uri, function(err, db){
+		if (err)
+            throw err;
+
+        var msg = req.body.message;
+        if (/[\\/&;<(*)>$=]/.test( msg )) {
+        	res.send('Invalid input!\n');
+        } else {
+        	coll = db.collection('message').find();
+        	if (coll.length > 0){
+        		db.collection('message').update({'message':msg});
+        	} else {
+        		db.collection('message').insert({'message':msg});
+        	}
+			res.send("Successfully created collection and updated message");
+        }
+	});
+});
 
 
 app.listen(app.get('port'), function() {

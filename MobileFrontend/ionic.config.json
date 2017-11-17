@@ -3,5 +3,7 @@
   "app_id": "",
   "type": "ionic-angular",
   "integrations": {},
-  "DEV_MODE": true
+  "DEV_MODE": true,
+  "PROD_SERVER": "http://pmd-server.herokuapp.com/",
+  "DEV_SERVER": "http://localhost:5000/"
 }

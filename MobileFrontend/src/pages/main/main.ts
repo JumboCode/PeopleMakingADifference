@@ -1,68 +1,70 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import * as config from '../../../ionic.config.json';
+import {Component, OnInit} from '@angular/core';
+import {NavController} from 'ionic-angular';
+import {ConfigService} from '../../app/config.service';
+import {UserService} from '../../app/user.service';
 
-@Component({
-  selector: 'page-main',
-  templateUrl: 'main.html'
-})
-export class MainPage {
-
-  personId: number = 2; //set to specific id temporarily
+@Component({selector: 'page-main', templateUrl: 'main.html'})
+export class MainPage implements OnInit {
+  personId: number;
   personName: string;
   personAssignment: string;
+  personLocation: string;
+  announcementMessage: string;
 
-  constructor(public navCtrl: NavController) {
-    this.getManifest()
+  constructor(
+      public navCtrl: NavController, public configService: ConfigService,
+      userService: UserService) {
+    this.personId = userService.getUser().id;
+    this.announcementMessage =
+        'This is a message to all volunteers, please have the most fun and thank you for volunteering! \ud83d\ude03';
+  }
+
+  ngOnInit(): void {
+    this.getManifest();
+    this.getMessage();
   }
 
   onRefreshClick() {
-    this.getManifest()
-  }
-
-  onIDInput(id: number){
-    // since this is called from keyup, we might get null 
-    // if the user backspaced the input away
-    if(id > 0){
-      this.personId = id;
-    }
+    this.getManifest();
+    this.getMessage();
   }
 
   getManifest() {
     // the api we hit that runs remotely - the "real" one
-    let apiEndpoint = "http://pmd-server.herokuapp.com/";
-
-    // check if we're trying to run locally
-    if(config['DEV_MODE'] === true){
-      apiEndpoint = "http://localhost:5000/";
-    }
+    const apiEndpoint = this.configService.getEndpointUrl();
 
     // make the HTTPRequest
     // see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
     fetch(apiEndpoint + String(this.personId))
 
-    // convert the blob request and JSON parse it asynchronously
-    .then((blob) => blob.json())
+        // convert the blob request and JSON parse it asynchronously
+        .then((blob) => blob.json())
 
-    .then((json) => {
-      if(json.length > 0){
-        // set the values that are bound in the template
-        this.personName = json[0].name;
-        this.personAssignment = json[0].assignment;
-      } else {
-        throw new Error(`JSON response from ${apiEndpoint} formatted incorrectly, expecting at least one result.`);
-      }
-    })
-    // handle HTTP errors
-    .catch((err) => {
-      this.personName = "ERROR";
-      this.personAssignment = "ERROR";
-      console.error(err);
-      console.error("Try turning on CORS or switching DEV_MODE");
-    })
-
+        .then((json) => {
+          if (json.length > 0) {
+            // set the values that are bound in the template
+            this.personName = json[0].name;
+            this.personAssignment = json[0].assignment;
+            this.personLocation = json[0].location;
+          } else {
+            throw new Error(`JSON response from ${
+                apiEndpoint} formatted incorrectly, expecting at least one result.`);
+          }
+        })
+        // handle HTTP errors
+        .catch((err) => {
+          this.personName = 'ERROR';
+          this.personAssignment = 'ERROR';
+          console.error(err);
+          console.error('Try turning on CORS or switching DEV_MODE');
+        });
   }
 
+  getMessage() {
+    const apiEndpoint = this.configService.getEndpointUrl();
 
-
+    fetch(apiEndpoint + 'get_message')
+        .then((blob) => blob.text())
+        .then((message) => this.announcementMessage = message);
+  }
 }

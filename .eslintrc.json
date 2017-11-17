@@ -1,0 +1,13 @@
+{
+    "extends": "google",
+    "env":{
+            "es6": true
+    },
+    "rules":{
+            "max-len":["error", 200],
+            "no-console": 2,
+            "no-unused-vars" : "warn",
+            "no-var": "warn",
+            "quotes": ["error", "single", { "avoidEscape": true }]
+    }
+}
