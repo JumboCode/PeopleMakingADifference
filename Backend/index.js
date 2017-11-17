@@ -25,13 +25,30 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/', function(req, res) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    mongodb.MongoClient.connect(uri, function(err, db) {
+app.get("/", function(req, res){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    mongodb.MongoClient.connect(uri, function(err, db){
 		if (err) throw err;
 		result = db.collection('volunteers').find().toArray(function(err, items) {
 			res.send(items);
+		});
+		db.close();
+	});
+});
+
+
+app.get("/uid/:uid", function(req, res){
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        mongodb.MongoClient.connect(uri, function(err, db){
+		if (err) throw err;
+		result = db.collection('volunteers').find({id:parseInt(req.params.uid)}).toArray(function(err, items){
+			if (items.length > 0){
+				res.send(items);
+			} else {
+				res.send("Error: UID Not Found!");
+			}
 		});
 		db.close();
 	});
@@ -51,6 +68,7 @@ app.get('/get_message', function(req, res) {
       });
   });
 });
+
 
 
 // The parameters must be uid and location
@@ -134,23 +152,6 @@ app.post('/update_message', function(req, res) {
         	}
 			res.send('Successfully created collection and updated message');
         }
-	});
-});
-
-
-app.get('/:uid', function(req, res) {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-        mongodb.MongoClient.connect(uri, function(err, db) {
-		if (err) throw err;
-		result = db.collection('volunteers').find({id: parseInt(req.params.uid)}).toArray(function(err, items) {
-			if (items.length > 0) {
-				res.send(items);
-			} else {
-				res.send('Error: UID Not Found!');
-			}
-		});
-		db.close();
 	});
 });
 
