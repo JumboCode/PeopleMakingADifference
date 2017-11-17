@@ -1,17 +1,37 @@
-<ion-content padding>
-  <p>
-	Hello, {{personName}}!
-  </p>
-  <p>
-	Your assignment is {{personAssignment}}.
-  </p>
-  <p>
-      You will be working at {{personLocation}}
-  </p>
-  <ion-card>
-    <ion-card-content>
-      {{announcementMessage}}
-    </ion-card-content>
-  </ion-card>
-  <button ion-button (click)="onRefreshClick()"> Refresh </button>
+<ion-header>
+  <ion-navbar>
+    
+    <ion-title>
+      <div class="title-icon">
+        <img src="assets/icon/pmd_transparent.png" class="pmd-icon" />
+      </div>
+      <div class="title-text">
+        People Making a Difference
+      </div>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-grid class="main-grid">
+    <ion-row justify-content-center>
+      <p>{{announcementMessage}}</p>
+    </ion-row>
+    <ion-row justify-content-center class="alternate-content" id="assignment-box">
+      <p>Your assignment is:</p>
+      <div id="assignment-details">
+        <p><strong>Role: </strong>{{personAssignment}}</p>
+        <p><strong>Room #: </strong>{{personLocation}}</p>
+        <p><strong>Starting Time: </strong>Placeholder</p>
+      </div>
+    </ion-row>
+    <ion-row justify-content-center>
+      <p>Questions? Call Lori at: </p>
+      <p>+1 (123) 456 - 7890</p>
+    </ion-row>
+    <ion-row justify-content-center>
+      <button ion-button (click)="onDoneClick()">Done for the day?</button>
+    </ion-row>
+  </ion-grid>
 </ion-content>
