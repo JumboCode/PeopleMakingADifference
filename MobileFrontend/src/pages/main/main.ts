@@ -40,7 +40,7 @@ export class MainPage implements OnInit {
 
     // make the HTTPRequest
     // see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
-    fetch(apiEndpoint + String(this.personId))
+    fetch(`${apiEndpoint}uid/${String(this.personId)}`)
         // convert the blob request and JSON parse it asynchronously
         .then((blob) => blob.json())
 
