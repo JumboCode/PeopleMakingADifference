@@ -9,8 +9,7 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
-install:
-- npm install
-- npm install --save-dev mocha
+before_install:
+- chmod u+x trav.sh
 script:
 - ./trav.sh
