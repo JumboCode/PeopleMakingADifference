@@ -32,22 +32,22 @@ const seedData = [
  ];
 
 
-// console.log(uri);
+ console.log(uri);
 
-// mongodb.MongoClient.connect(uri, function (err, db) {
-//   if (err) {
-//     console.log('Unable to connect to the mongoDB server. Error:', err);
-//   } else {
-//     console.log('Connection established to', uri);
+ mongodb.MongoClient.connect(uri, function (err, db) {
+   if (err) {
+    console.log('Unable to connect to the mongoDB server. Error:', err);
+  } else {
+    console.log('Connection established to', uri);
 
-//     // do some work here with the database.
-//     var data = db.collection('volunteers');
-// 	db.collection('volunteers').insertMany(seedData, function(err, r){
-// 		// test.equal(null, err);
-// 		// test.equal(5, r.insertedCount);
-// 	});
+    // do some work here with the database.
+    var data = db.collection('volunteers');
+	db.collection('volunteers').insertMany(seedData, function(err, r){
+		// test.equal(null, err);
+		// test.equal(5, r.insertedCount);
+	});
 
-//     //Close connection
-//     db.close();
-//   }
-// });
+    //Close connection
+    db.close();
+  }
+});
