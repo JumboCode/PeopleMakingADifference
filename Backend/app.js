@@ -8,34 +8,32 @@ const seedData = [
         id: 1,
         name: 'Tony Stark',
         assignment: 'Build Ironman suit to escape cave',
-                location: 'Stark Tower'
+                location: 'Stark Tower',
     },
     {
         id: 2,
         name: 'Darth Vader',
         assignment: 'Use the Force (For evil)',
-                location: 'The Death Star'
+        location: 'The Death Star',
     },
     {
         id: 3,
         name: 'Claire Underwood',
         assignment: 'Scheme',
-        location: 'Washington'
+        location: 'Washington',
     },
     {
         id: 4,
         name: 'Buffy the Vampire Slayer',
         assignment: 'Slay vampires',
-        location: 'Hellmouth'
-    }
+        location: 'Hellmouth',
+    },
  ];
 
  const messageSeedData = [
      {
-        message: "You guys are the best! Stay wholesome! <3"
+        message: 'You guys are the best! Stay wholesome! <3'
      }]
-
-console.log(uri);
 
 mongodb.MongoClient.connect(uri, function (err, db) {
   if (err) {
