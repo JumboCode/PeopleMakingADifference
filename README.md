@@ -2,7 +2,10 @@
 
 
 # People Making A Difference - JumboCode Fall 2017
-
+[![Build Status](https://travis-ci.org/jumbocodefall2017/PeopleMakingADifference.svg?branch=mobile_refresh)](https://travis-ci.org/jumbocodefall2017/PeopleMakingADifference)
+![License](https://img.shields.io/github/license/jumbocodefall2017/PeopleMakingADifference.svg)
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+![Contributors](https://img.shields.io/github/contributors/jumbocodefall2017/PeopleMakingADifference.svg)
 ## App Description:
 
 This app facilitates the check-in and check-out process for volunteers and notifies them about their roles and where they should be during their shifts. Hence, it has a back end that processes the data, front end desktop for the administrator to edit the information, and the front end mobile that displays the most up-to-date information to the volunteers.
