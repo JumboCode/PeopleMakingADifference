@@ -11,6 +11,7 @@ if (process.argv[2] == "--local" || process.argv[2] == "-l") {
 } else if (process.argv[2] == "--prod" || process.argv[2] == "-p") {
 	var uri = process.env.MONGODB_URI;
 	console.log("Database set to production.");
+}
 app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
 
 // CORS! Yes, really! For real!
