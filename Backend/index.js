@@ -5,15 +5,6 @@ const bodyParser = require('body-parser'); // module used to parse POST paramete
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-if (process.argv[2] == "--local" || process.argv[2] == "-l") {
-	var uri = 'mongodb://localhost:27017/pmd';
-	console.log("Database set to local.");
-} else if (process.argv[2] == "--prod" || process.argv[2] == "-p") {
-	var uri = process.env.MONGODB_URI;
-	console.log("Database set to production.");
-}
-app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
-
 // CORS! Yes, really! For real!
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
