@@ -5,8 +5,8 @@ import {ConfigService} from '../../app/config.service';
 import {User, UserService} from '../../app/user.service';
 import {MainPage} from '../main/main';
 
-@Component({selector: 'page-idpage', templateUrl: 'IDPage.html'})
-export class IDPage {
+@Component({selector: 'page-check-in-1', templateUrl: 'check_in_1.html'})
+export class CheckIn1 {
   personId: number;
   errorMessage = '';
 

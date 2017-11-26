@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {IDPage} from '../ID Page/IDPage';
+import {CheckIn1} from '../check_in/check_in_1';
 
 @Component({selector: 'page-welcome', templateUrl: 'welcome.html'})
 export class WelcomePage {
@@ -8,6 +8,6 @@ export class WelcomePage {
 
   onGetStartedClick() {
     // navigate to the id page
-    this.navCtrl.push(IDPage);
+    this.navCtrl.push(CheckIn1);
   }
 }
