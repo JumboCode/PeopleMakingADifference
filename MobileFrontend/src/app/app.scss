@@ -23,6 +23,7 @@ $text-color: rgba(74, 74, 74, 1);
 $content-background-color: #f4f3f3;
 $content-background-color-alternate: $white;
 $button-border: #b4b4b4;
+$input-border-color: #cecece;
 
 .toolbar .toolbar-background-md,
 .toolbar .toolbar-background-ios {
@@ -91,4 +92,18 @@ $button-border: #b4b4b4;
 .alternate-content {
   background: $content-background-color-alternate;
   border: thin solid $button-border;
+}
+
+.item .labeltext {
+  font-size: 1.5rem;
+  text-align: center;
+  color: $text-color;
+}
+
+.item.item-block .item-inner {
+  border-bottom: 1px solid $input-border-color;
+}
+
+.item .input-wrapper {
+  overflow: visible;
 }

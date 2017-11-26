@@ -3,11 +3,12 @@ import {NavController} from 'ionic-angular';
 
 import {ConfigService} from '../../app/config.service';
 import {User, UserService} from '../../app/user.service';
-import {MainPage} from '../main/main';
+import {CheckIn2} from './check_in_2';
 
 @Component({selector: 'page-check-in-1', templateUrl: 'check_in_1.html'})
 export class CheckIn1 {
-  personId: number;
+  eventId: number;
+  phoneNum: number;
   errorMessage = '';
 
   constructor(
@@ -34,7 +35,7 @@ export class CheckIn1 {
           this.userService.setUser(new User(id));
 
           // navigate to the main page
-          this.navCtrl.push(MainPage);
+          this.navCtrl.push(CheckIn2);
         })
         // handle HTTP errors
         .catch((err) => {
@@ -51,6 +52,6 @@ export class CheckIn1 {
   }
 
   onSubmitClick() {
-    this.checkID(this.personId);
+    this.checkID(this.eventId);
   }
 }

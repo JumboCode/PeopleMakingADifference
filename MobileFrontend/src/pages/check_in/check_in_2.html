@@ -19,22 +19,14 @@
 
 </ion-header>
 <ion-content padding text-center>
+  <p>Hi, {{personName}}.</p>
+  <p>You should receive a text message to the phone number you provided in the next few minutes.</p>
   <ion-item>
-    <ion-label stacked class="labeltext">Please enter the event ID #:</ion-label>
+    <ion-label stacked class="labeltext">Please enter the six-digit number you recevied below:</ion-label>
     <ion-input 
       type="number"
-      [(ngModel)]="eventId"
-      placeholder="(Actually, enter the user ID for testing)"
-    >
-    </ion-input> 
-    
-  </ion-item>
-  <ion-item>
-    <ion-label stacked class="labeltext">Please enter your mobile number below:</ion-label>
-    <ion-input 
-      type="tel"
-      [(ngModel)]="phoneNum"
-      placeholder="Ignore this field"
+      [(ngModel)]="responseCode"
+      placeholder="This doesn't do anything yet"
     >
     </ion-input> 
     
