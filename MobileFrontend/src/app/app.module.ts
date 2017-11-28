@@ -6,6 +6,7 @@ import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 
 import {CheckIn1} from '../pages/check_in/check_in_1';
 import {CheckIn2} from '../pages/check_in/check_in_2';
+import {CheckOut} from '../pages/check_out/check_out';
 import {MainPage} from '../pages/main/main';
 import {WelcomePage} from '../pages/welcome/welcome';
 
@@ -14,10 +15,10 @@ import {ConfigService} from './config.service';
 import {UserService} from './user.service';
 
 @NgModule({
-  declarations: [MyApp, MainPage, CheckIn1, CheckIn2, WelcomePage],
+  declarations: [MyApp, MainPage, CheckIn1, CheckIn2, CheckOut, WelcomePage],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, WelcomePage, CheckIn1, CheckIn2, MainPage],
+  entryComponents: [MyApp, WelcomePage, CheckIn1, CheckIn2, CheckOut, MainPage],
   providers: [
     StatusBar, SplashScreen, ConfigService, UserService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

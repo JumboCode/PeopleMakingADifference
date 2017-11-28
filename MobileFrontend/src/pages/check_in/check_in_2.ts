@@ -12,7 +12,9 @@ export class CheckIn2 {
   responseCode: number;
 
   constructor(
-      public navCtrl: NavController) {}
+      public navCtrl: NavController, public userService: UserService) {
+    this.personName = userService.getUser().name;
+  }
 
   onSubmitClick() {
     this.navCtrl.push(MainPage);

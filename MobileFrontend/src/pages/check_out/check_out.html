@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    
+    <ion-title>
+      <div class="title-icon">
+        <img src="assets/icon/pmd_transparent.png" class="pmd-icon" />
+      </div>
+      <div class="title-text">
+        People Making a Difference
+      </div>
+    </ion-title>
+  </ion-navbar>
+
+  <ion-navbar class="pageinfo">
+    <ion-title class="second-title">
+      Check In
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding text-center>
+  <ion-item>
+    <ion-label stacked class="labeltext">Please enter the exit event ID # below:</ion-label>
+    <ion-input 
+      type="number"
+      [(ngModel)]="exitId"
+      placeholder="This does not do anything yet"
+    >
+    </ion-input> 
+    
+  </ion-item>
+  <p>{{errorMessage}}</p>
+  <button ion-button (click)="onCheckOutClick()">Check Out</button>
+
+</ion-content>

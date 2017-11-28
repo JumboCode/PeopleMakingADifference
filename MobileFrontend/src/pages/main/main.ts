@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {ConfigService} from '../../app/config.service';
 import {UserService} from '../../app/user.service';
+import {CheckOut} from '../check_out/check_out';
 
 @Component({selector: 'page-main', templateUrl: 'main.html'})
 export class MainPage implements OnInit {
@@ -65,5 +66,9 @@ export class MainPage implements OnInit {
     fetch(apiEndpoint + 'get_message')
         .then((blob) => blob.text())
         .then((message) => this.announcementMessage = message);
+  }
+
+  onDoneClick() {
+    this.navCtrl.push(CheckOut);
   }
 }

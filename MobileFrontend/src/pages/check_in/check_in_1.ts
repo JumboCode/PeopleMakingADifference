@@ -32,7 +32,14 @@ export class CheckIn1 {
         .then((json) => {
           // the id provided is valid - set the current user of the app to use
           // this id
-          this.userService.setUser(new User(id));
+          const selectedUser = new User(id);
+          try {
+            const name = json[0].name;
+            selectedUser.setName(name);
+          } catch (e) {
+            console.error(`Could not get the user's name: ${e}`);
+          }
+          this.userService.setUser(selectedUser);
 
           // navigate to the main page
           this.navCtrl.push(CheckIn2);
