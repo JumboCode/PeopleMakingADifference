@@ -14,7 +14,7 @@ export class MainPage implements OnInit {
 
   constructor(
       public navCtrl: NavController, public configService: ConfigService,
-      userService: UserService) {
+      public userService: UserService) {
     this.personId = userService.getUser().id;
     this.announcementMessage =
         'This is a message to all volunteers, please have the most fun and thank you for volunteering! \ud83d\ude03';
@@ -70,5 +70,17 @@ export class MainPage implements OnInit {
 
   onDoneClick() {
     this.navCtrl.push(CheckOut);
+  }
+  
+  onSaveUserClick() {
+    this.userService.saveUser();
+  }
+  
+  onLoadUserClick() {
+    this.userService.loadUser().then(response => console.log('load_response', response));
+  }
+  
+  onDeleteUserClick() {
+    this.userService.deleteUser();
   }
 }
