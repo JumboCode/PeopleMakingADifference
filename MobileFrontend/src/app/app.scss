@@ -19,6 +19,7 @@ $gradient-dark: #008776;
 $gradient-light: #00baac;
 $page-description-background: #74bdb4;
 $white: #ffffff;
+$black: #000000;
 $text-color: rgba(74, 74, 74, 1);
 $content-background-color: #f4f3f3;
 $content-background-color-alternate: $white;
@@ -106,4 +107,8 @@ $input-border-color: #cecece;
 
 .item .input-wrapper {
   overflow: visible;
+}
+
+.loading-md .spinner-crescent circle {
+  stroke: $black;
 }
