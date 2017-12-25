@@ -15,7 +15,7 @@ export class CheckIn1 {
       public navCtrl: NavController, public configService: ConfigService,
       public userService: UserService, public loadingCtrl: LoadingController) {}
 
-  checkID(id: number): Promise<bool> {
+  checkID(id: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
       // clear the error message, if there is one
       this.errorMessage = '';

@@ -40,7 +40,7 @@ export class MainPage implements OnInit {
     this.getMessage();
   }
 
-  getManifest(): Promise<void> {
+  getManifest(): Promise<{}> {
     return new Promise((resolve, reject) => {
       // the api we hit that runs remotely - the "real" one
       const apiEndpoint = this.configService.getEndpointUrl();
@@ -76,7 +76,7 @@ export class MainPage implements OnInit {
       });
   }
 
-  getMessage(): Promise<void> {
+  getMessage(): Promise<{}> {
     return new Promise((resolve, reject) => {
       const apiEndpoint = this.configService.getEndpointUrl();
 
