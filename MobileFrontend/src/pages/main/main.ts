@@ -26,12 +26,15 @@ export class MainPage implements OnInit {
       content: 'Loading...'
     });
     loader.present();
-    this.getManifest()
-    .then(()=> {
-      this.getMessage()
-      .then(()=>{
-        loader.dismiss();
-      });
+    
+    // Hit the backend for the data we need, then hide the loading spinner.
+    Promise.all(
+      [
+        this.getManifest(),
+        this.getMessage()
+      ]
+    ).then(() => {
+      loader.dismiss();
     });
   }
 
