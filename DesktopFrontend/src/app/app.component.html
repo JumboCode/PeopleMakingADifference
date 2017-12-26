@@ -1,4 +1,17 @@
-<h1> The names and assignments of the volunteers are: </h1>
+<h1 class="Avenir"> The names and assignments of the volunteers are: </h1>
+
+<ul class="Avenir">    
+    <li *ngFor="let volunteer of volunteers; let i = index">
+       
+        <button (click)=enableEditing(i)>Edit</button>
+       
+        <label for="vName">Name: </label>   
+        <input #vname
+          name="vName" 
+          (keyup.enter)="update(vname.value)"
+          (blur)="update(vname.value)"
+          [disabled]=!edit[i]
+          value='{{ volunteers[i].name }}'>
 
 <p> Send a message to all volunteers </p>
 <input type="text" name="message" #message (keyup)="$event.keyCode == 13 ? postMessage(message.value) : null">
@@ -9,6 +22,7 @@
 
         <label for="vAssign">Assignment: </label>
         <input type="text" name="vAssign" #vassign (keyup)="$event.keyCode == 13 ? postAssignment(i+1, vassign.value) : null"
+
         [disabled]=!edit[i]
         value='{{ volunteers[i].assignment }}'>
 

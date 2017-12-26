@@ -36,9 +36,14 @@ export class MainPage implements OnInit {
     ).then(() => {
       loader.dismiss();
     });
+    
+    setInterval(() => {
+	    this.pollBackend();
+      console.log("polling backend");
+    }, 7500);
   }
 
-  onRefreshClick() {
+  pollBackend() {
     this.getManifest();
     this.getMessage();
   }
