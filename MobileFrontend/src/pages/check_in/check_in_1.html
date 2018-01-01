@@ -18,17 +18,28 @@
   </ion-navbar>
 
 </ion-header>
-<ion-content padding>
+<ion-content padding text-center>
   <ion-item>
-    <ion-label>Type in the user ID:</ion-label>
+    <ion-label stacked class="labeltext">Please enter the event ID #:</ion-label>
     <ion-input 
       type="number"
-      [(ngModel)]="personId"
+      [(ngModel)]="eventId"
+      placeholder="(Actually, enter the user ID for testing)"
+    >
+    </ion-input> 
+    
+  </ion-item>
+  <ion-item>
+    <ion-label stacked class="labeltext">Please enter your mobile number below:</ion-label>
+    <ion-input 
+      type="tel"
+      [(ngModel)]="phoneNum"
+      placeholder="Ignore this field"
     >
     </ion-input> 
     
   </ion-item>
   <p>{{errorMessage}}</p>
-  <button ion-button (click)="onSubmitClick()">Submit</button>
+  <button ion-button (click)="onSubmitClick()">Confirm</button>
 
 </ion-content>
