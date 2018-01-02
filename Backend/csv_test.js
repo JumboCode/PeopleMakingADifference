@@ -1,8 +1,15 @@
+if (process.argv.length < 3) {
+  console.error("💩💩💩 Provide a path to the CSV as an argument. 💩💩💩");
+  process.exit(1);
+}
+
 // import our CSV parser (not a library - this is the one we're writing in csv.js)
 const csv = require('./csv.js');
 
+const path_to_csv = process.argv[2];
+
 // pass the path of the CSV file to the parser
-let cool = new csv('./data.csv');
+const cool = new csv(path_to_csv);
 
 // parse the CSV into a javascript array and print it
 (async ()=>{
