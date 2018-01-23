@@ -13,18 +13,10 @@ Success: Returns timestamp of checking out
 If the endpoint send registers an error, then it will say “Error: UID not found”
 
 */
-
-
-module.exports = function(app){
+module.exports = function(app, dbconn){
 	// The parameter must be name 'checkout'
     app.post('/update_checkout', function(req, res) {
-        res.header('Access-Control-Allow-Origin', req.headers.origin);
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-            res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-
-        mongodb.MongoClient.connect(uri, function(err, db) {
-            if (err) throw err;
+        dbconn().then((db) => {
             // if document with argument id exists then update, otherwise return UID not found
             existenceCheck = db.collection('volunteers').find({'id': parseInt(req.body.uid)}).toArray(function(err, items) {
                 if (items.length > 0) {
@@ -43,6 +35,7 @@ module.exports = function(app){
                     res.send('Error: UID Not Found!');
                 }
             });
+            db.close();
         });
     });
 }

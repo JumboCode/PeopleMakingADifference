@@ -1,12 +1,7 @@
-module.exports = function(app){
+module.exports = function(app, dbconn){
 	// The parameters must be uid and assignment
     app.post('/update_assignment', function(req, res) {
-        res.header('Access-Control-Allow-Origin', req.headers.origin);
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        mongodb.MongoClient.connect(uri, function(err, db) {
-            if (err) throw err;
+        dbconn().then((db) => {
             // if document with argument id exists then update, otherwise return UID not found
             existenceCheck = db.collection('volunteers').find({'id': parseInt(req.body.uid)}).toArray(function(err, items) {
                 if (items.length > 0) {
@@ -15,13 +10,17 @@ module.exports = function(app){
                             $set: {
                                 'assignment': req.body.assignment,
                             },
-                        });
-                        res.send('Successfully updated assignment');
-                    } else {
-                        console.log('UID NOT FOUND');
-                        res.send('Error: UID Not Found!');
-                    }
+                        }
+                    );
+
+                    res.send('Successfully updated assignment');
+
+                } else {
+                    console.error('UID NOT FOUND:', req.body.uid);
+                    res.send('Error: A User With That ID Was Not Found!');
+                }
             });
+            db.close();
         });
     });
 }
