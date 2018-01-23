@@ -139,6 +139,36 @@ app.post('/update_message', function(req, res) {
     });
 });
 
+
+    app.post('/update_checkout', function(req, res) {
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+            res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+
+        mongodb.MongoClient.connect(uri, function(err, db) {
+            if (err) throw err;
+            // if document with argument id exists then update, otherwise return UID not found
+            existenceCheck = db.collection('volunteers').find({'id': parseInt(req.body.uid)}).toArray(function(err, items) {
+                if (items.length > 0) {
+	                if (items[0].checkout == false) {
+	                    db.collection('volunteers').update({id: parseInt(req.body.uid)},
+	                        {
+	                                    $set: {
+	                                        'checkout': Date.now(),
+	                                    },
+	                        });
+	                        res.send('Successfully Checked Out');   
+                    } else {
+	                    res.send('Error: You have already checked out!');
+                    }
+                } else {
+                    res.send('Error: UID Not Found!');
+                }
+            });
+        });
+    });
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
