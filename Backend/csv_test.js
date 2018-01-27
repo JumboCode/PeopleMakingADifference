@@ -14,14 +14,11 @@ const cool = new csv(path_to_csv);
 // parse the CSV into a javascript array and print it
 (async ()=>{
   let rows = await cool.parse();
-  console.log(rows);
+  cool.insert(rows);
 })();
 
 // NEXT:
 
 /*
-Take that javascript array and insert it into mongodb making sure to:
-
-- check for duplication
 - store all of it relative to an event ID (fake ID for now)
 */
