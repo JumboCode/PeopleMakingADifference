@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha"
+    "test": "mocha --exit"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "eslint": "^4.9.0",
-    "mocha": "^4.0.1",
+    "mocha": "^4.1.0",
     "request": "^2.81.0",
     "tape": "^4.7.0"
   },
