@@ -1,17 +1,13 @@
 language: node_js
 node_js:
 - "8"
-env:
-- CXX=g++-4.8
+cache:
+  directories:
+    - "node_modules"
 services:
 - mongodb
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
 before_install:
+- npm i
 - chmod u+x trav.sh
 script:
 - ./trav.sh
