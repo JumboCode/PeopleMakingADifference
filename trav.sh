@@ -2,5 +2,5 @@
 cd Backend
 npm install
 npm install mocha
+node app.js
 npm test
-exit 0
