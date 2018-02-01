@@ -8,25 +8,29 @@ const seedData = [
         id: 1,
         name: 'Tony Stark',
         assignment: 'Build Ironman suit to escape cave',
-                location: 'Stark Tower',
+        location: 'Stark Tower',
+        checkout: false,
     },
     {
         id: 2,
         name: 'Darth Vader',
         assignment: 'Use the Force (For evil)',
         location: 'The Death Star',
+        checkout: false,
     },
     {
         id: 3,
         name: 'Claire Underwood',
         assignment: 'Scheme',
         location: 'Washington',
+        checkout: false,
     },
     {
         id: 4,
         name: 'Buffy the Vampire Slayer',
         assignment: 'Slay vampires',
         location: 'Hellmouth',
+        checkout: false,
     },
  ];
 

@@ -1,15 +1,8 @@
-module.exports = function(app){
+module.exports = function(app, dbconn){
 	// The parameter must be name 'message'
     app.post('/update_message', function(req, res) {
-        res.header('Access-Control-Allow-Origin', req.headers.origin);
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-            res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-
-        mongodb.MongoClient.connect(uri, function(err, db) {
-            if (err) {
-                throw err;
-            }
+        dbconn().then((db) => {
+            if (err) throw err;
             const msg = req.body.message;
             if (/[\\/&;<(*)>$=]/.test( msg )) {
                 res.send('Invalid input!\n');
@@ -22,6 +15,7 @@ module.exports = function(app){
                 }
                 res.send('Successfully created collection and updated message');
             }
+            db.close();
         });
     });
 }

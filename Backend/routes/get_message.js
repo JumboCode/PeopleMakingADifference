@@ -1,8 +1,7 @@
-module.exports = function(app){
+module.exports = function(app, dbconn){
     app.get('/get_message', function(req, res) {
         // if message exists return message otherwise return error string
-        mongodb.MongoClient.connect(uri, function(err, db) {
-        if (err) throw err;
+        dbconn().then((db) => {
             existenceCheck = db.collection('message').find().toArray(function(err, items) {
                 if (items.length > 0) {
                     message = items[items.length-1].message;
@@ -11,6 +10,7 @@ module.exports = function(app){
                     res.send('Error: No message in database.');
                 }
             });
+            db.close();
         });
     });
 }
