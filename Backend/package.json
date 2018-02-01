@@ -20,6 +20,7 @@
     "eslint": "^4.11.0",
     "eslint-config-google": "^0.9.1",
     "express": "4.15.2",
+    "firebase-admin": "^5.8.2",
     "mongodb": "^2.2.31",
     "request-mocha": "^0.2.0"
   },
