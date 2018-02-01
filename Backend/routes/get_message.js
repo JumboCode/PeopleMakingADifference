@@ -9,8 +9,9 @@ module.exports = function(app, dbconn){
                 } else {
                     res.send('Error: No message in database.');
                 }
+                db.close();
             });
-            db.close();
+            
         });
     });
 }

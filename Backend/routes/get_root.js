@@ -3,8 +3,9 @@ module.exports = function(app, dbconn){
         dbconn().then((db) => {
             result = db.collection('volunteers').find().toArray(function(err, items) {
                 res.send(items);
+                db.close();
             });
-            db.close();
+            
         });
     });
 }

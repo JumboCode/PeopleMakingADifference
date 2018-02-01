@@ -19,8 +19,9 @@ module.exports = function(app, dbconn){
                     console.error('UID NOT FOUND:', req.body.uid);
                     res.send('Error: A User With That ID Was Not Found!');
                 }
+                db.close();
             });
-            db.close();
+            
         });
     });
 }
