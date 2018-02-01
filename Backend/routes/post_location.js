@@ -16,8 +16,9 @@ module.exports = function(app, dbconn){
                 } else {
                     res.send('Error: UID Not Found!');
                 }
+                db.close();
             });
-            db.close();
+            
         });
     });
 }
