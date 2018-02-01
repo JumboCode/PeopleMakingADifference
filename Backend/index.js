@@ -26,118 +26,26 @@ if (process.argv[2] == '--local' || process.argv[2] == '-l') {
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/public'));
-
-// views is directory for all template files
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
-app.get('/', function(req, res) {
-    mongodb.MongoClient.connect(uri, function(err, db) {
-        if (err) throw err;
-        result = db.collection('volunteers').find().toArray(function(err, items) {
-            res.send(items);
-        });
-        db.close();
-    });
-});
-
-
-app.get('/uid/:uid', function(req, res) {
-        mongodb.MongoClient.connect(uri, function(err, db) {
-        if (err) throw err;
-        result = db.collection('volunteers').find({id: parseInt(req.params.uid)}).toArray(function(err, items) {
-            if (items.length > 0) {
-                res.send(items);
-            } else {
-                res.send('Error: UID Not Found!');
-            }
-        });
-        db.close();
-    });
-});
-
-app.get('/get_message', function(req, res) {
-  // if message exists return message otherwise return error string
-  mongodb.MongoClient.connect(uri, function(err, db) {
-  if (err) throw err;
-      existenceCheck = db.collection('message').find().toArray(function(err, items) {
-          if (items.length > 0) {
-              message = items[items.length-1].message;
-              res.send(String(message));
-          } else {
-              res.send('Error: No message in database.');
-          }
-      });
-  });
-});
-
-
-// The parameters must be uid and location
-app.post('/update_location', function(req, res) {
-    mongodb.MongoClient.connect(uri, function(err, db) {
-        if (err) throw err;
-        // if document with argument id exists then update, otherwise return UID not found
-        existenceCheck = db.collection('volunteers').find({'id': parseInt(req.body.uid)}).toArray(function(err, items) {
-            if (items.length > 0) {
-                db.collection('volunteers').update({id: parseInt(req.body.uid)},
-                    {
-                                $set: {
-                                    'location': req.body.location,
-                                },
-                    });
-                    res.send('Successfully updated location');
-                } else {
-                    res.send('Error: UID Not Found!');
-                }
+// package up the database connection into a promise to pass to our modularized backend components
+const generic_database_connection = () => {
+    return new Promise((res, rej) => {
+        mongodb.MongoClient.connect(uri, (err, db) => {
+            if (err) throw err;
+            else res(db);
         });
     });
-});
+}
 
+// define our routes, which are each defined in their own files in ./routes 
+const routes = [
+    'get_message', 'get_uid', 'post_checkout', 'post_location', 'get_root', 'post_assignment',
+    'post_checkout', 'post_message'
+];
 
-// The parameters must be uid and assignment
-app.post('/update_assignment', function(req, res) {
-    mongodb.MongoClient.connect(uri, function(err, db) {
-        if (err) throw err;
-        // if document with argument id exists then update, otherwise return UID not found
-        existenceCheck = db.collection('volunteers').find({'id': parseInt(req.body.uid)}).toArray(function(err, items) {
-            if (items.length > 0) {
-                db.collection('volunteers').update({id: parseInt(req.body.uid)},
-                    {
-                        $set: {
-                            'assignment': req.body.assignment,
-                        },
-                    });
-                    res.send('Successfully updated assignment');
-                } else {
-                    console.log('UID NOT FOUND');
-                    res.send('Error: UID Not Found!');
-                }
-        });
-    });
-});
-
-
-// The parameter must be name 'message'
-app.post('/update_message', function(req, res) {
-    mongodb.MongoClient.connect(uri, function(err, db) {
-        if (err) {
-            throw err;
-        }
-        const msg = req.body.message;
-        if (/[\\/&;<(*)>$=]/.test( msg )) {
-            res.send('Invalid input!\n');
-        } else {
-            coll = db.collection('message').find();
-            if (coll.length > 0) {
-                db.collection('message').update({'message': msg});
-            } else {
-                db.collection('message').insert({'message': msg});
-            }
-            res.send('Successfully created collection and updated message');
-        }
-    });
-});
+// for each route, initialize that route by passing the express app and database connection function
+for (let route of routes) {
+    require(`./routes/${route}.js`)(app, generic_database_connection);
+}
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
