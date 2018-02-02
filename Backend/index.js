@@ -30,7 +30,11 @@ app.set('port', (process.env.PORT || 5000));
 const generic_database_connection = () => {
     return new Promise((res, rej) => {
         mongodb.MongoClient.connect(uri, (err, db) => {
-            if (err) throw err;
+            if (err) {
+                throw err;
+                rej(err);
+                return;
+            } 
             else res(db);
         });
     });
@@ -39,7 +43,7 @@ const generic_database_connection = () => {
 // define our routes, which are each defined in their own files in ./routes 
 const routes = [
     'get_message', 'get_uid', 'post_checkout', 'post_location', 'get_root', 'post_assignment',
-    'post_checkout', 'post_message'
+    'post_checkout', 'post_message', 'post_token'
 ];
 
 // for each route, initialize that route by passing the express app and database connection function
