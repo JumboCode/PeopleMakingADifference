@@ -1,4 +1,4 @@
-![Front-End Checklist Logo](https://github.com/jumbocodefall2017/PeopleMakingADifference/blob/wireframes/TealLogo.png)
+![Front-End Checklist Logo](https://github.com/JumboCode/PeopleMakingADifference/blob/wireframes/app_logo.png)
 
 
 # People Making A Difference - JumboCode Fall 2017
