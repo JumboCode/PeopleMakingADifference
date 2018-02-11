@@ -39,3 +39,9 @@ Thumbs.db
 # Directories 		#
 #####################
 Backend/node_modules
+
+# API Keys, Etc   #
+####################
+demo-key.json
+*key.json
+google-services.json
