@@ -1,6 +1,15 @@
-<h1 class="Avenir"> The names and assignments of the volunteers are: </h1>
+<!doctype HTML> 
 
-<ul class="Avenir">    
+<html>
+
+<body>
+
+<img src="Logo.png" alt = "Logo">
+<h1 class="changeColor" class="Tahoma"> People Making A Difference </h1>
+
+<h3 class="Tahoma"> Learn Something New, Make New Friends, Do Something Good! </h3>
+
+<!-- <ul class="Avenir">    
     <li *ngFor="let volunteer of volunteers; let i = index">
        
         <button (click)=enableEditing(i)>Edit</button>
@@ -13,27 +22,36 @@
           [disabled]=!edit[i]
           value='{{ volunteers[i].name }}'>
 
-<p> Send a message to all volunteers </p>
+        -->
+
+
+<p class="Tahoma"> Send a message to all volunteers </p>
 <input type="text" name="message" #message (keyup)="$event.keyCode == 13 ? postMessage(message.value) : null">
 
-<ul>
-    <li *ngFor="let volunteer of volunteers; index as i">
-        <p> {{ volunteers[i].name }} </p>
+<table class="Avenir">
+  <th> Name </th>
+  <th> Assignment </th>
+  <th> Location </th>
+    <tr *ngFor="let volunteer of volunteers; index as i">
+        <td> {{ volunteers[i].name }} </td>
 
-        <label for="vAssign">Assignment: </label>
+        <!--<label for="vAssign" class="spaceWord">Assignment: </label>-->
         <input type="text" name="vAssign" #vassign (keyup)="$event.keyCode == 13 ? postAssignment(i+1, vassign.value) : null"
 
         [disabled]=!edit[i]
         value='{{ volunteers[i].assignment }}'>
 
-        <label for="vLoc">Location: </label>
+        <!-- <label for="vLoc" class="spaceWord">Location: </label> -->
         <input type="text" name="vLoc" #vloc (keyup)="$event.keyCode == 13 ? postLocation(i+1, vloc.value) : null"
         [disabled]=!edit[i]
         value='{{ volunteers[i].location }}'>
 
         <button (click)=enableEditing(i)>Edit</button>
-    </li>
-</ul>
+    </tr>
+</table>
 
+</body>
+
+</html>
 
 
