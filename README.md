@@ -68,7 +68,7 @@ List of installation guidelines and instructions to run the different parts of t
   
  ### Dropping the Database:
  * If anything is wrong with the database (ex. it's been seeded multiple times), then you should drop the database
- * Command: *coming soon*
+ * Command: **db.dropDatabase()**
   
  ## Back End
 
