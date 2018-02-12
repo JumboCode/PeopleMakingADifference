@@ -35,6 +35,9 @@ export class MainPage implements OnInit {
       ]
     ).then(() => {
       loader.dismiss();
+    }).catch((err) => {
+      console.error(err);
+      loader.dismiss();
     });
     
     setInterval(() => {
@@ -44,8 +47,10 @@ export class MainPage implements OnInit {
   }
 
   pollBackend() {
-    this.getManifest();
-    this.getMessage();
+    this.getManifest()
+      .catch((err) => console.error(err));
+    this.getMessage()
+      .catch((err) => console.error(err));
   }
 
   getManifest(): Promise<{}> {
@@ -60,11 +65,11 @@ export class MainPage implements OnInit {
           .then((blob) => blob.json())
 
           .then((json) => {
-            if (json.length > 0) {
+            if (json.name && json.assignment && json.location) {
               // set the values that are bound in the template
-              this.personName = json[0].name;
-              this.personAssignment = json[0].assignment;
-              this.personLocation = json[0].location;
+              this.personName = json.name;
+              this.personAssignment = json.assignment;
+              this.personLocation = json.location;
             } else {
               throw new Error(`JSON response from ${
                   apiEndpoint} formatted incorrectly, expecting at least one result.`);
