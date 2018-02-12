@@ -3,12 +3,12 @@ module.exports = function(app, dbconn){
     app.post('/update_assignment', function(req, res) {
         dbconn().then((db) => {
             // if document with argument id exists then update, otherwise return UID not found
-            existenceCheck = db.collection('volunteers').find({'id': parseInt(req.body.uid)}).toArray(function(err, items) {
+            existenceCheck = db.collection('bowls').find({'id': parseInt(req.body.uid)}).toArray(function(err, items) {
                 if (items.length > 0) {
-                    db.collection('volunteers').update({id: parseInt(req.body.uid)},
+                    db.collection('bowls').update({'volunteers.id': parseInt(req.body.uid)},
                         {
                             $set: {
-                                'assignment': req.body.assignment,
+                                'volunteers.$.assignment': req.body.assignment,
                             },
                         }
                     );

@@ -18,14 +18,14 @@ module.exports = function(app, dbconn){
     app.post('/update_checkout', function(req, res) {
         dbconn().then((db) => {
             // if document with argument id exists then update, otherwise return UID not found
-            existenceCheck = db.collection('volunteers').find({'id': parseInt(req.body.uid)}).toArray(function(err, items) {
+            existenceCheck = db.collection('bowls').find({'volunteers.id': parseInt(req.body.uid)}).toArray(function(err, items) {
                 if (items.length > 0) {
 	                if (items[0].checkout == false) {
-	                    db.collection('volunteers').update({id: parseInt(req.body.uid)},
+	                    db.collection('bowls').update({'volunteers.id': parseInt(req.body.uid)},
 	                        {
-	                                    $set: {
-	                                        'checkout': Date.now(),
-	                                    },
+                                $set: {
+                                    'volunteers.$.checkout': Date.now(),
+                                },
 	                        });
 	                        res.send('Successfully Checked Out');   
                     } else {
