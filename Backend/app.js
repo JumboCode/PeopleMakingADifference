@@ -6,7 +6,7 @@ test = require('assert');
 const seedData = [
     {
         name: "Example Science Bowl",
-        active: true,
+        id: "1234",
         message: 'You guys are the best! Stay wholesome! <3',
         volunteers: [
             {
@@ -49,7 +49,7 @@ const seedData = [
    },
    {
         name: "Another Example Bowl",
-        active: false,
+        id: "0000",
         message: 'Socialism will win',
         volunteers: [
             {
@@ -59,7 +59,7 @@ const seedData = [
                 location: 'All out of bubble gum',
                 checkout: false,
                 checkin: false,
-                phone: 1234567894
+                phone: 1234567890
             },
             {
                 id: 6,
@@ -68,7 +68,7 @@ const seedData = [
                 location: 'Probably Florida',
                 checkout: false,
                 checkin: false,
-                phone: 1234567895
+                phone: 1234567891
             },
             {
                 id: 7,
@@ -77,7 +77,7 @@ const seedData = [
                 location: 'Limousine',
                 checkout: false,
                 checkin: false,
-                phone: 1234567896
+                phone: 1234567892
             },
             {
                 id: 8,
@@ -86,7 +86,7 @@ const seedData = [
                 location: 'Texas',
                 checkout: false,
                 checkin: false,
-                phone: 1234567897
+                phone: 1234567893
             },
         ]
    }
