@@ -93,12 +93,16 @@ export class MainPage implements OnInit {
     return new Promise((resolve, reject) => {
       const apiEndpoint = this.configService.getEndpointUrl();
 
-      fetch(apiEndpoint + 'get_message')
-          .then((blob) => blob.text())
-          .then((message) => {
-            this.announcementMessage = message;
-            resolve();
-          });
+      fetch(`${apiEndpoint}get_message/${String(this.personId)}`)
+        .then((blob) => blob.text())
+        .then((message) => {
+          this.announcementMessage = message;
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+          return;
+        });
     });
   }
 

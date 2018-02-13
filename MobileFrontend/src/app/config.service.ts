@@ -10,4 +10,11 @@ export class ConfigService {
     }
     return config['PROD_SERVER'];
   }
+
+  xwwwurlencode(dataObject: any): string {
+    // x-www-encoded expects key=value&key=value&key=value
+    return Object.keys(dataObject)
+      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(dataObject[key])}`)
+      .join('&');
+  }
 }

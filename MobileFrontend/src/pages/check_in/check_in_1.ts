@@ -7,7 +7,7 @@ import {CheckIn2} from './check_in_2';
 
 @Component({selector: 'page-check-in-1', templateUrl: 'check_in_1.html'})
 export class CheckIn1 {
-  eventId: number;
+  eventId: string;
   phoneNum: number;
   errorMessage = '';
 
@@ -15,17 +15,18 @@ export class CheckIn1 {
       public navCtrl: NavController, public configService: ConfigService,
       public userService: UserService, public loadingCtrl: LoadingController) {}
 
-  checkPhone(phone: number): Promise<boolean> {
+  checkLogin(phone: number, eventId: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
       // clear the error message, if there is one
       this.errorMessage = '';
 
       // the config will determine which endpoint to use
       const apiEndpoint = this.configService.getEndpointUrl();
-      const details = {
-        'phone': phone
+      const loginForm = {
+        'phone': phone,
+        'eventId': eventId
       }
-      const formBody = Object.keys(details).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(details[key])).join('&');
+      const formBody: string = this.configService.xwwwurlencode(loginForm);
       // make the HTTPRequest
       // see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
       fetch(`${apiEndpoint}update_checkin`, {
@@ -76,10 +77,10 @@ export class CheckIn1 {
       content: 'Validating...'
     });
     loader.present();
-    this.checkPhone(this.eventId)
-    .then(id_valid => {
+    this.checkLogin(this.phoneNum, this.eventId)
+    .then(login_valid => {
       loader.dismiss();
-      if(id_valid === true) {
+      if(login_valid === true) {
         // navigate to the main page
         this.navCtrl.push(CheckIn2);
       }
