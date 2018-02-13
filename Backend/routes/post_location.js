@@ -7,13 +7,14 @@ module.exports = function(app, dbconn){
                 if (items.length > 0) {
                     db.collection('bowls').update({'volunteers.id': parseInt(req.body.uid)},
                         {
-                                    $set: {
-                                        'volunteers.$.location': req.body.location,
-                                    },
+                            $set: {
+                                'volunteers.$.location': req.body.location,
+                            },
                         }
                     );
                     res.send('Successfully updated location');
                 } else {
+                    res.status(400);
                     res.send('Error: UID Not Found!');
                 }
                 db.close();

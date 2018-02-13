@@ -11,6 +11,7 @@ module.exports = function(app, dbconn){
                     message = items[items.length-1].message;
                     res.send(String(message));
                 } else {
+                    res.status(400);
                     res.send('Error: No message in database.');
                 }
                 db.close();

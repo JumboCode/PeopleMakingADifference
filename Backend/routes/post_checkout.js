@@ -29,9 +29,11 @@ module.exports = function(app, dbconn){
 	                        });
 	                        res.send('Successfully Checked Out');   
                     } else {
+                        res.status(400);
 	                    res.send('Error: You have already checked out!');
                     }
                 } else {
+                    res.status(400);
                     res.send('Error: UID Not Found!');
                 }
                 db.close();

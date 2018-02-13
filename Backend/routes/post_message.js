@@ -4,15 +4,20 @@ module.exports = function(app, dbconn){
         dbconn().then((db) => {
             const msg = req.body.message;
             if (/[\\/&;<(*)>$=]/.test( msg )) {
+                res.status(400);
                 res.send('Invalid input!\n');
             } else {
                 console.log(msg);
-                db.collection('bowls').update({active: true}, 
-                {
-                    $set: {
-                        'message': msg
+                db.collection('bowls').update(
+                    {
+                        'id': req.body.eventId
+                    }, 
+                    {
+                        $set: {
+                            'message': msg
+                        }
                     }
-                }).catch((err) => console.error(err));
+                ).catch((err) => console.error(err));
                 res.send('Successfully updated message');
             }
             db.close();
