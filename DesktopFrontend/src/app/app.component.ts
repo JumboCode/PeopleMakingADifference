@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-root',
@@ -9,55 +9,71 @@ import 'rxjs/add/operator/map'
 })
 
 export class AppComponent implements OnInit {
-  title = 'app';
-
-  volunteers: any = [];
-
-  value = '';
-  edit : boolean[] = [];
+  errorMessage = '';
+  bowls: any = [];
 
   constructor(private http: Http) { }
 
   ngOnInit() {
-  	this.loadItems();
+    this.loadItems();
   }
 
   // Gets the items into this.items by reading through the file
   loadItems() {
-  	this.http.get("http://localhost:5000/")
- 	.map(res => res.json())
-	.subscribe(json => {
-		this.volunteers = json;
-
-    // set up editing button
-    for (var i = 0; i < this.volunteers.length; ++i) {
-      this.edit.push(false);
-    }
-		console.log(json);
-	});
+    this.http.get('http://localhost:5000/')
+    .map(res => res.json())
+    .subscribe(json => {
+      this.bowls = json;
+    }, this.showError('reach database'));
   }
 
-  postAssignment(user_id, input_assignment) {
-    this.http.post("http://localhost:5000/update_assignment", { uid : user_id, assignment : input_assignment })
-	  .subscribe()
+  postAssignment(volunteer: any, input_assignment: string) {
+    this.errorMessage = '';
+    this.http.post('http://localhost:5000/update_assignment',
+      {
+        uid : volunteer.id,
+        assignment : input_assignment
+      }
+    )
+    .subscribe(res => {
+      volunteer.assignment = input_assignment;
+    }, this.showError(`update assignment for ${volunteer.name}`));
   }
 
-  postLocation(user_id, input_location) {
-    this.http.post("http://localhost:5000/update_location", { uid : user_id, location : input_location })
-	  .subscribe()
+  postLocation(volunteer: any, input_location: string) {
+    this.errorMessage = '';
+    this.http.post('http://localhost:5000/update_location',
+      {
+        uid : volunteer.id,
+        location : input_location
+      }
+    )
+    .subscribe(res => {
+      volunteer.location = input_location;
+    }, this.showError(`update location for ${volunteer.name}`));
   }
 
-  postMessage(input_message){
-    this.http.post("http://localhost:5000/update_message", { message : input_message })
-  .subscribe()
+  postMessage(bowl: any, input_message: string) {
+    this.errorMessage = '';
+    this.http.post('http://localhost:5000/update_message',
+      {
+        eventId: bowl.id,
+        message : input_message
+      }
+    )
+    .subscribe((res) => {
+      bowl.message = input_message;
+    }, this.showError(`update message for ${bowl.name}`));
+
   }
 
-  update(value: string) {
-	  this.value = value
+  enableEditing(volunteer: any) {
+    volunteer.edit = !volunteer.edit;
   }
 
-  enableEditing(i: number) {
-    this.edit[i] = true;
+  showError = (action: string) => (message: any) => {
+    console.error(message);
+    this.errorMessage = `Server error: Could not ${action}.`;
   }
 
 }
