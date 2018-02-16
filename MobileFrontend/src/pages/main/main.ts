@@ -3,6 +3,8 @@ import {NavController, LoadingController} from 'ionic-angular';
 import {ConfigService} from '../../app/config.service';
 import {UserService} from '../../app/user.service';
 import {CheckOut} from '../check_out/check_out';
+import {PushService} from '../../app/push.service';
+import {Platform} from 'ionic-angular';
 
 @Component({selector: 'page-main', templateUrl: 'main.html'})
 export class MainPage implements OnInit {
@@ -14,7 +16,8 @@ export class MainPage implements OnInit {
 
   constructor(
       public navCtrl: NavController, public configService: ConfigService,
-      public userService: UserService, public loadingCtrl: LoadingController) {
+      public userService: UserService, public loadingCtrl: LoadingController,
+      public pushService: PushService, public platform: Platform) {
     this.personId = userService.getUser().id;
     this.announcementMessage =
         'This is a message to all volunteers, please have the most fun and thank you for volunteering! \ud83d\ude03';
@@ -44,6 +47,21 @@ export class MainPage implements OnInit {
 	    this.pollBackend();
       console.log("polling backend");
     }, 7500);
+
+    this.platform.ready().then(() => {
+      // check to make sure this platform has the push notifications plugin
+      if(this.platform.is('cordova')){
+        this.pushService.register(
+          this.userService.getUser(),
+          this.configService.getEndpointUrl()
+        )
+        .then(response => {
+          console.log('push response', response);
+        });
+      }
+      
+    });
+    
   }
 
   pollBackend() {

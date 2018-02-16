@@ -1,9 +1,9 @@
 import {ErrorHandler, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {SplashScreen} from '@ionic-native/splash-screen';
-import {StatusBar} from '@ionic-native/status-bar';
 import {IonicApp, IonicErrorHandler, IonicModule, LoadingController} from 'ionic-angular';
 import {IonicStorageModule} from '@ionic/storage';
+import {FCM} from '@ionic-native/fcm';
+import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {CheckIn1} from '../pages/check_in/check_in_1';
 import {CheckIn2} from '../pages/check_in/check_in_2';
@@ -14,6 +14,7 @@ import {WelcomePage} from '../pages/welcome/welcome';
 import {MyApp} from './app.component';
 import {ConfigService} from './config.service';
 import {UserService} from './user.service';
+import {PushService} from './push.service';
 
 @NgModule({
   declarations: [MyApp, MainPage, CheckIn1, CheckIn2, CheckOut, WelcomePage],
@@ -21,7 +22,7 @@ import {UserService} from './user.service';
   bootstrap: [IonicApp],
   entryComponents: [MyApp, WelcomePage, CheckIn1, CheckIn2, CheckOut, MainPage],
   providers: [
-    StatusBar, SplashScreen, ConfigService, UserService, LoadingController,
+    ConfigService, UserService, LoadingController, PushService, FCM, SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
