@@ -39,3 +39,7 @@ Thumbs.db
 # Directories 		#
 #####################
 Backend/node_modules
+
+# User Sensitive #
+##################
+*.csv
