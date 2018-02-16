@@ -5,39 +5,92 @@ test = require('assert');
 
 const seedData = [
     {
-        id: 1,
-        name: 'Tony Stark',
-        assignment: 'Build Ironman suit to escape cave',
-        location: 'Stark Tower',
-        checkout: false,
-    },
-    {
-        id: 2,
-        name: 'Darth Vader',
-        assignment: 'Use the Force (For evil)',
-        location: 'The Death Star',
-        checkout: false,
-    },
-    {
-        id: 3,
-        name: 'Claire Underwood',
-        assignment: 'Scheme',
-        location: 'Washington',
-        checkout: false,
-    },
-    {
-        id: 4,
-        name: 'Buffy the Vampire Slayer',
-        assignment: 'Slay vampires',
-        location: 'Hellmouth',
-        checkout: false,
-    },
+        name: "Example Science Bowl",
+        id: "1234",
+        message: 'You guys are the best! Stay wholesome! <3',
+        volunteers: [
+            {
+                id: 1,
+                name: 'Tony Stark',
+                assignment: 'Build Ironman suit to escape cave',
+                location: 'Stark Tower',
+                checkout: false,
+                checkin: false,
+                phone: 1234567890
+            },
+            {
+                id: 2,
+                name: 'Darth Vader',
+                assignment: 'Use the Force (For evil)',
+                location: 'The Death Star',
+                checkout: false,
+                checkin: false,
+                phone: 1234567891
+            },
+            {
+                id: 3,
+                name: 'Claire Underwood',
+                assignment: 'Scheme',
+                location: 'Washington',
+                checkout: false,
+                checkin: false,
+                phone: 1234567892
+            },
+            {
+                id: 4,
+                name: 'Buffy the Vampire Slayer',
+                assignment: 'Slay vampires',
+                location: 'Hellmouth',
+                checkout: false,
+                checkin: false,
+                phone: 1234567893
+            },
+        ]
+   },
+   {
+        name: "Another Example Bowl",
+        id: "0000",
+        message: 'Socialism will win',
+        volunteers: [
+            {
+                id: 5,
+                name: 'Rowdy Roddy Piper',
+                assignment: 'Star in the movie They Live',
+                location: 'All out of bubble gum',
+                checkout: false,
+                checkin: false,
+                phone: 1234567890
+            },
+            {
+                id: 6,
+                name: 'Hulk Hogan',
+                assignment: 'Destroy Gawker Media',
+                location: 'Probably Florida',
+                checkout: false,
+                checkin: false,
+                phone: 1234567891
+            },
+            {
+                id: 7,
+                name: 'The Nature Boy Ric Flair',
+                assignment: 'Wooo!',
+                location: 'Limousine',
+                checkout: false,
+                checkin: false,
+                phone: 1234567892
+            },
+            {
+                id: 8,
+                name: 'The Undertaker',
+                assignment: 'Win the 2007 Royal Rumble for some reason',
+                location: 'Texas',
+                checkout: false,
+                checkin: false,
+                phone: 1234567893
+            },
+        ]
+   }
  ];
-
- const messageSeedData = [
-     {
-        message: 'You guys are the best! Stay wholesome! <3'
-     }]
 
 mongodb.MongoClient.connect(uri, function (err, db) {
   if (err) {
@@ -46,11 +99,9 @@ mongodb.MongoClient.connect(uri, function (err, db) {
     console.log('Connection established to', uri);
 
     // do some work here with the database.
-    var data = db.collection('volunteers');
-    db.collection('volunteers').insertMany(seedData, function(err, r){});
+    var data = db.collection('bowls');
+    db.collection('bowls').insertMany(seedData, function(err, r){});
 
-    var messageData = db.collection('message');
-    db.collection('message').insert(messageSeedData, function(err, r){});
     //Close connection
     db.close();
   }
