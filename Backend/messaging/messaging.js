@@ -1,44 +1,90 @@
 const admin = require("firebase-admin"),
-  serviceAccount = require("./demo-key.json"),
-  mongodb = require('mongodb');
+  serviceAccount = require("./demo-key.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://pmd-demo.firebaseio.com"
 });
 
+module.exports = {
+  messageOne: function(dbconn, uid, payload){
+    return new Promise((resolve, reject) => {
+      dbconn().then(db => {
+        db.collection('bowls').find(
+          {
+            "volunteers": {
+              $elemMatch: {
+                id: uid,
+                token: {
+                  $exists: true
+                }
+              }
+            }
+          }, 
+          {
+            'volunteers.$': 1
+          }
+        ).toArray((err, items) => {
+          if(items.length === 1){
+            const token = items[0].volunteers[0].token;
+            admin.messaging().sendToDevice(token, payload)
+            .then(response => {
+              resolve(response);
+              return;
+            })
+            .catch(err => {
+              reject(err);
+              return;
+            })
+          }
+        });
+      });
+    });
+  },
 
-let uri = '';
-if (process.argv[2] == '--local' || process.argv[2] == '-l') {
-    uri = 'mongodb://localhost:27017/pmd';
-    console.log('Database set to local.');
-} else if (process.argv[2] == '--prod' || process.argv[2] == '-p') {
-    uri = process.env.MONGODB_URI;
-    console.log('Database set to production.');
-} else {
-    console.log('Defaulted database to local. Use option --prod if production needed.');
-    uri = 'mongodb://localhost:27017/pmd';
+  messageAll: function(dbconn, eventId, payload){
+    return new Promise((resolve, reject) => {
+      dbconn().then(db => {
+        db.collection('bowls').find(
+          {
+            "id": eventId
+          }
+        ).toArray((err, items) => {
+          if(items.length === 1){
+            // this will resolve a promise whether it rejects or resolves with no errors
+            const reflect = function(promise){
+              return promise.then(
+                function(){
+                  return {status: "resolved"}
+                }, 
+                function(){
+                  return {status: "rejected"}
+                });
+            }
+            let push_promises = [];
+            for(let volunteer of items[0].volunteers){
+              const token = volunteer.token;
+              if(token){
+                push_promises.push(admin.messaging().sendToDevice(token, payload));
+              }
+            }
+            // await all the push notification attempts
+            // it is ok and expected if some of them fail
+            Promise.all(push_promises.map(reflect))
+            .then((results) => {
+              resolve(`Attempted to send ${results.length}, ${results.filter(x => x.status === "resolved").length} succeeded.`);
+              return;
+            })
+            .catch(err => {
+              reject(err);
+              return;
+            })
+          }
+        });
+      });
+    });
+    
+  }
 }
 
-let payload = {
-  notification: {
-    title: "Cool notif",
-    body: "💩💩💩💩💩💩💩💩💩"
-  }
-};
 
-mongodb.MongoClient.connect(uri, (err, db) => {
-  db.collection('volunteers').find({"token":{$exists: true}}).toArray((err, items) => {
-    for (let item of items) {
-      admin.messaging().sendToDevice(item['token'], payload)
-      .then((response) => {
-        console.log("sent message", response);
-
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    } 
-    db.close();
-  });
-});
