@@ -10,30 +10,18 @@ export class PushService {
     public fcm: FCM
   ){}
 
-  is_registered(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.storage.ready()
-      .then(() => {
-        this.storage.get('token')
-        .then(token => {
-          if(!token){
-            resolve(false);
-            return;
-          }
-          resolve(true);
-        });
-      });
-    });
-  }
-
   register(user: User, endpoint: string): Promise<any>{
     return new Promise((resolve, reject) => {
-      this.fcm.subscribeToTopic('all');
       this.fcm.getToken().then(token => {
         this.send_token(endpoint, token, user.id)
         .then(response => resolve(response))
         .catch(err => reject(err));
       });
+      this.fcm.onTokenRefresh().subscribe(token => {
+        this.send_token(endpoint, token, user.id)
+        .then(response => console.log('refreshed token.'))
+        .catch(err => console.error('error refreshing token', err));
+      })
     });
   }
 
