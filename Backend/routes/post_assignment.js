@@ -1,3 +1,4 @@
+const messaging = require('../messaging/messaging.js');
 module.exports = function(app, dbconn){
 	// The parameters must be uid and assignment
     app.post('/update_assignment', function(req, res) {
@@ -13,6 +14,20 @@ module.exports = function(app, dbconn){
                         }
                     );
 
+                    // send the notification to alert the user that their assignment has been updated
+                    const payload = {
+                        notification: {
+                            title: `PMD: ${items[0].name}`,
+                            body: `Assignment update: ${req.body.assignment}`
+                        }
+                    }
+                    messaging.messageOne(dbconn, parseInt(req.body.uid), payload)
+                    .then(response => {
+                        console.log('sent', response);
+                    })
+                    .catch(err => {
+                        console.error('push error', err);
+                    });
                     res.send('Successfully updated assignment');
 
                 } else {
