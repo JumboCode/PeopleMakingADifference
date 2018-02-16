@@ -7,8 +7,8 @@ import {MainPage} from '../main/main';
 
 @Component({selector: 'page-check-in-2', templateUrl: 'check_in_2.html'})
 export class CheckIn2 {
-  personName = "Lucy";
-  errorMessage = '';
+  personName: string;
+  errorMessage: string;
   responseCode: number;
 
   constructor(
