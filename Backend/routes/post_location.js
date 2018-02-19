@@ -1,3 +1,4 @@
+const messaging = require('../messaging/messaging.js');
 module.exports = function(app, dbconn){
 	// The parameters must be uid and location
     app.post('/update_location', function(req, res) {
@@ -12,6 +13,20 @@ module.exports = function(app, dbconn){
                             },
                         }
                     );
+
+                    const payload = {
+                        notification: {
+                            title: `PMD: ${items[0].name}`,
+                            body: `Location update: ${req.body.location}`
+                        }
+                    }
+                    messaging.messageOne(dbconn, parseInt(req.body.uid), payload)
+                    .then(response => {
+                        console.log('sent', response);
+                    })
+                    .catch(err => {
+                        console.error('push error', err);
+                    });
                     res.send('Successfully updated location');
                 } else {
                     res.status(400);
