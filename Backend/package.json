@@ -21,7 +21,8 @@
     "eslint-config-google": "^0.9.1",
     "express": "4.15.2",
     "mongodb": "^2.2.31",
-    "request-mocha": "^0.2.0"
+    "request-mocha": "^0.2.0",
+    "twilio": "^3.11.3"
   },
   "devDependencies": {
     "eslint": "^4.9.0",
