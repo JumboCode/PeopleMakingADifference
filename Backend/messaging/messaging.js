@@ -3,7 +3,7 @@ const admin = require("firebase-admin"),
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://pmd-demo.firebaseio.com"
+  databaseURL: "https://people-making-a-difference.firebaseio.com"
 });
 
 module.exports = {
