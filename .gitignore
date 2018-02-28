@@ -46,8 +46,6 @@ Backend/node_modules
 ####################
 demo-key.json
 *key.json
-google-services.json
-GoogleService-Info.plist
 
 # User Sensitive #
 ##################
