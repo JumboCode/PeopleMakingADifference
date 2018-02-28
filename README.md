@@ -78,6 +78,7 @@ List of installation guidelines and instructions to run the different parts of t
   
  ### To Run:
  * Requirements: Back end install complete, currently within directory '/backend', MongoDB [running](#to-run-mongodb)
+ * Requirements: A node api key json file for the firebase admin SDK. Create one [here](https://firebase.google.com).
  * Command: **node index.js**
    * If running properly, should display “Node app is running on port 500”
 
