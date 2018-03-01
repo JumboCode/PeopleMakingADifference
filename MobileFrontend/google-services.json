@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "70853020347",
+    "firebase_url": "https://people-making-a-difference.firebaseio.com",
+    "project_id": "people-making-a-difference",
+    "storage_bucket": "people-making-a-difference.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70853020347:android:a98a07d60ba37cc7",
+        "android_client_info": {
+          "package_name": "com.jumbocode.pmd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70853020347-ntosdsvgst8sr57hmj09ok8189p80tnm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsJvT1b5k9Ax8Jb7L18Ag4XApf9SdY_t0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
