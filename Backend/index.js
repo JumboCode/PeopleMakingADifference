@@ -11,7 +11,7 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-  
+
 let uri = '';
 if (process.argv[2] == '--local' || process.argv[2] == '-l') {
     uri = 'mongodb://localhost:27017/pmd';
@@ -40,10 +40,10 @@ const generic_database_connection = () => {
     });
 }
 
-// define our routes, which are each defined in their own files in ./routes 
+// define our routes, which are each defined in their own files in ./routes
 const routes = [
     'get_message', 'get_uid', 'post_checkout', 'post_location', 'get_root', 'post_assignment',
-    'post_checkout', 'post_checkin', 'post_message', 'post_token' 
+    'post_checkout', 'post_checkin', 'post_message', 'post_token', 'post_sms'
 ];
 
 // for each route, initialize that route by passing the express app and database connection function
