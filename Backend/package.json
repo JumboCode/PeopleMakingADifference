@@ -22,7 +22,8 @@
     "express": "4.15.2",
     "mongodb": "^2.2.31",
     "request-mocha": "^0.2.0",
-    "twilio": "^3.11.3"
+    "twilio": "^3.11.3",
+    "firebase-admin": "^5.9.1"
   },
   "devDependencies": {
     "eslint": "^4.9.0",
