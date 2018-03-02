@@ -1,3 +1,5 @@
+const sms = require('../messaging/sms.js');
+
 module.exports = function(app, dbconn){
   // The parameter must be name 'checkout'
     app.post('/update_checkin', function(req, res) {
@@ -5,9 +7,9 @@ module.exports = function(app, dbconn){
           // if document with argument phone exists then update, otherwise return UID not found
           existenceCheck = db.collection('bowls').find(
             {
-              id: req.body.eventId, 
+              id: req.body.eventId,
               'volunteers.phone': parseInt(req.body.phone)
-            }, 
+            },
             {
               'volunteers.$': 1
             }
@@ -29,13 +31,14 @@ module.exports = function(app, dbconn){
                 } else {
                   res.send(items[0].volunteers[0]);
                 }
+                sms(dbconn, req.body.phone, items[0].volunteers[0].id);
               } else {
                 res.status(400);
                 res.send('Error: UID Not Found!');
               }
               db.close();
           });
-            
+
         });
     });
 }
