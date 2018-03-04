@@ -1,9 +1,8 @@
 module.exports = function(dbconn, phone_num, uid){
-
-    auth = require("./twilio-key.json");
-
-    var verif_num = "";
-    for (var i = 0; i < 5; i++) {
+    const auth = require("./twilio-key.json");
+    // generate a string of 5 random numbers e.g. 01017
+    let verif_num = "";
+    for (let i = 0; i < 5; i++) {
         verif_num += parseInt(Math.random() * 10) + "";
     }
 
@@ -12,10 +11,11 @@ module.exports = function(dbconn, phone_num, uid){
 
     client.messages.create({
         to: phone_num,
-        from: '+19093455880',
+        from: '+12082852033',
         body: 'Your PMD verification code is: ' + verif_num,
     })
-    .then(message => console.log(message.sid));
+    .then(message => console.log(message.sid))
+    .catch(err => console.error(err));
 
     dbconn().then((db) => {
         db.collection('bowls').update({'volunteers.id': parseInt(uid)},
