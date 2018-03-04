@@ -1,22 +1,49 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavController} from 'ionic-angular';
+
+import {Platform, LoadingController} from 'ionic-angular';
 
 import {ConfigService} from '../../app/config.service';
 import {UserService} from '../../app/user.service';
 import {MainPage} from '../main/main';
 
+
 @Component({selector: 'page-check-in-2', templateUrl: 'check_in_2.html'})
-export class CheckIn2 {
+export class CheckIn2 implements OnInit {
   personName: string;
   errorMessage: string;
   responseCode: string;
 
   constructor(
-    public navCtrl: NavController, public userService: UserService, public configService: ConfigService) {
+    public navCtrl: NavController, public userService: UserService, 
+    public configService: ConfigService, public loadingCtrl: LoadingController) {
     this.personName = userService.getUser().name;
   }
 
-  onSubmitClick() {
+  ngOnInit(): void {
+    if(this.userService.getDebug()){
+      let loader = this.loadingCtrl.create({
+        spinner: 'crescent',
+        content: 'Waiting for text message...'
+      });
+      loader.present();
+      let interval = setInterval(() => {
+        console.log('checking...')
+        if(this.userService.getUser().hasCode()){
+          console.log(`code: ${this.userService.getUser().getCode()}`);
+          this.verifyCode(this.userService.getUser().getCode())
+          .then(verified => {
+            loader.dismiss();
+            this.userService.saveUser();
+            this.navCtrl.push(MainPage);
+            clearInterval(interval);
+          })
+        }
+      }, 500);
+    }
+  }
+
+  onSubmitClick(): void {
     // clear the error message, if there is one
     this.errorMessage = '';
     this.verifyCode(this.responseCode)
@@ -35,13 +62,12 @@ export class CheckIn2 {
 
   verifyCode(responseCode: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-
-
+    
       // the config will determine which endpoint to use
       const apiEndpoint = this.configService.getEndpointUrl();
 
       const verificationForm = {
-        'verif_code': this.responseCode,
+        'verif_code': responseCode,
         'uid': this.userService.getUser().id
       }
 
@@ -78,7 +104,6 @@ export class CheckIn2 {
         // }
         resolve(false);
       });
-
     });
   }
 }

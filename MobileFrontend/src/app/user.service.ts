@@ -1,19 +1,29 @@
 import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
+import {Platform} from 'ionic-angular';
+
+// this weird thing comes from a cordova plugin - don't worry about it
+declare var SMS: any;
 
 // Represents a user of the app, and contains all the info needed to fetch from
 // the server for this user
 export class User {
   name: string;
+  code: string;
   constructor(public id: number) {}
-  setName(name: string){ this.name = name; }
+  setName(name: string): void { this.name = name; }
+  setCode(code: string): void { this.code = code; }
+  getCode(): string { return this.code; }
+  hasCode(): boolean { return this.code && this.code.length > 0; }
 }
 
 @Injectable()
 export class UserService {
   user: User;
+  debug: boolean;
   
-  constructor(public storage: Storage){}
+  constructor(public storage: Storage, 
+  public platform: Platform){}
 
   // set the current user to:
   setUser(newUser: User): void {
@@ -76,5 +86,42 @@ export class UserService {
         }); 
       });
     }); 
+  }
+
+  watchForVerificationText(): Promise<boolean> {
+    return new Promise((resolve, reject)=>{
+      if(!this.debug){
+        resolve(false);
+      }
+      this.platform.ready().then(() => {
+        if(this.platform.is('android') && SMS){
+          SMS.startWatch(()=>{
+            document.addEventListener('onSMSArrive', this.handleIncomingSms);
+            resolve(true);
+          }, err => {
+            resolve(false);
+          });
+        } else {
+          resolve(false);
+        }
+      })
+    });
+  }
+
+  handleIncomingSms = (e: any): void => {
+    let sms = e.data;
+    let filtered = sms.body.match(/(Sent from your Twilio trial account - )?Your PMD verification code is: ([0-9]{5})/);
+    if(filtered){
+      this.user.setCode(filtered[2]);
+      document.removeEventListener('onSMSArrive', this.handleIncomingSms);
+    }
+  }
+
+  setDebug(mode: boolean): void {
+    this.debug = mode;
+  }
+
+  getDebug(): boolean {
+    return this.debug;
   }
 }

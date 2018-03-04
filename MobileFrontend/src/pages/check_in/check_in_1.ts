@@ -1,19 +1,44 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavController, LoadingController} from 'ionic-angular';
+import {Platform} from 'ionic-angular';
+
+import {AndroidPermissions} from '@ionic-native/android-permissions';
 
 import {ConfigService} from '../../app/config.service';
 import {User, UserService} from '../../app/user.service';
 import {CheckIn2} from './check_in_2';
 
 @Component({selector: 'page-check-in-1', templateUrl: 'check_in_1.html'})
-export class CheckIn1 {
+export class CheckIn1 implements OnInit {
   eventId: string;
   phoneNum: number;
   errorMessage = '';
 
   constructor(
       public navCtrl: NavController, public configService: ConfigService,
-      public userService: UserService, public loadingCtrl: LoadingController) {}
+      public userService: UserService, public loadingCtrl: LoadingController,
+      public androidPermissions: AndroidPermissions, public platform: Platform) {}
+
+   ngOnInit(): void {
+    this.platform.ready().then(() => {
+      if(this.platform.is('android')){
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_SMS)
+        .then(
+          success => {
+            console.log('Sms read permission granted')
+            this.userService.watchForVerificationText()
+          },
+          err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_SMS)
+        );
+
+        this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.READ_SMS]);
+      }
+      
+    });
+    
+  }
+
+
 
   checkLogin(phone: number, eventId: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
@@ -86,4 +111,6 @@ export class CheckIn1 {
       }
     });
   }
+
+  
 }

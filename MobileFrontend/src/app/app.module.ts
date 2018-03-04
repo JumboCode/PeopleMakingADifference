@@ -4,6 +4,7 @@ import {IonicApp, IonicErrorHandler, IonicModule, LoadingController} from 'ionic
 import {IonicStorageModule} from '@ionic/storage';
 import {FCM} from '@ionic-native/fcm';
 import {SplashScreen} from '@ionic-native/splash-screen';
+import {AndroidPermissions} from '@ionic-native/android-permissions';
 
 import {CheckIn1} from '../pages/check_in/check_in_1';
 import {CheckIn2} from '../pages/check_in/check_in_2';
@@ -23,6 +24,7 @@ import {PushService} from './push.service';
   entryComponents: [MyApp, WelcomePage, CheckIn1, CheckIn2, CheckOut, MainPage],
   providers: [
     ConfigService, UserService, LoadingController, PushService, FCM, SplashScreen,
+    AndroidPermissions,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
