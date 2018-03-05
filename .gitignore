@@ -40,7 +40,7 @@ Thumbs.db
 
 # Directories 		#
 #####################
-Backend/node_modules
+node_modules
 
 # API Keys, Etc   #
 ####################
@@ -50,4 +50,3 @@ demo-key.json
 # User Sensitive #
 ##################
 *.csv
-
