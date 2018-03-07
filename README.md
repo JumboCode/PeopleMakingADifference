@@ -27,7 +27,7 @@ This app facilitates the check-in and check-out process for volunteers and notif
 10. **Documentation/Developer:** [Josh Lee](http://joshleetufts.com/)
 11. **Developer:** [Bhushan Suwal](https://github.com/bsuwal)
 12. **Developer:** [Kevin Bae](https://github.com/kevinbae15)
-
+13. **Developer:** [Andrea Vorametsanti](https://github.com/avoram01)
 ## Overview of the Project
 
 The project consists of three major parts: the backend (which utilizes the database), the desktop frontend, and the mobile frontend.
@@ -68,7 +68,8 @@ List of installation guidelines and instructions to run the different parts of t
   
  ### Dropping the Database:
  * If anything is wrong with the database (ex. it's been seeded multiple times), then you should drop the database
- * Command: *coming soon*
+ * Requirements: on PMD database (command: **use pmd**)
+ * Command: **db.dropDatabase()**
   
  ## Back End
 
