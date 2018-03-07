@@ -1,11 +1,14 @@
+<img src="/assets/img/Logo.png" alt = "Logo">
+<h1 class="changeColor" class="Tahoma"> People Making A Difference </h1>
+
+<h3 class="Tahoma"> Learn Something New, Make New Friends, Do Something Good! </h3>
+
 <h1 class="Avenir"> The names and assignments of the volunteers are: </h1>
 <nav>
 <a routerLink="create-event" routerLinkActive="active">Crisis Center</a>
 </nav>
 
 
-
-<router-outlet>
 <div class="bowls">
   <p *ngIf="errorMessage.length > 0;" style="color: red;">{{ errorMessage }}</p>
   <div 
@@ -17,7 +20,7 @@
     <p>Event Id: {{ bowl.id }}</p>
 
     <p> 
-      <label for="message">Send a message to all volunteers:</label>
+      <label class="Tahoma" for="message">Send a message to all volunteers:</label>
       <input 
         type="text" 
         name="message" 
@@ -28,28 +31,34 @@
     
 
     <ul>
-      <li *ngFor="let volunteer of bowl.volunteers;">
-          <p> {{ volunteer.name }} </p>
+      <table class="Avenir">
+        <th> Name </th>
+        <th> Assignment </th>
+        <th> Location </th>
 
-          <label for="vAssign">Assignment: </label>
-          <input type="text" name="vAssign" #vassign (keyup)="$event.keyCode == 13 ? postAssignment(volunteer, vassign.value) : null"
+        <tr *ngFor="let volunteer of bowl.volunteers;">
+            <td> {{ volunteer.name }} </td>
 
-          [disabled]=!volunteer.edit
-          value='{{ volunteer.assignment }}'>
+            <label for="vAssign">Assignment: </label>
+            <input type="text" name="vAssign" #vassign (keyup)="$event.keyCode == 13 ? postAssignment(volunteer, vassign.value) : null"
 
-          <label for="vLoc">Location: </label>
-          <input type="text" name="vLoc" #vloc (keyup)="$event.keyCode == 13 ? postLocation(volunteer, vloc.value) : null"
-          [disabled]=!volunteer.edit
-          value='{{ volunteer.location }}'>
+            [disabled]=!volunteer.edit
+            value='{{ volunteer.assignment }}'>
 
-          <button (click)=enableEditing(volunteer)>Edit</button>
-      </li>
+            <label for="vLoc">Location: </label>
+            <input type="text" name="vLoc" #vloc (keyup)="$event.keyCode == 13 ? postLocation(volunteer, vloc.value) : null"
+            [disabled]=!volunteer.edit
+            value='{{ volunteer.location }}'>
+
+            <button (click)=enableEditing(volunteer)>Edit</button>
+        </tr>
+      </table>
     </ul>
 
   </div>
 </div>
 
-</router-outlet>
+<router-outlet></router-outlet>
 
 
 
