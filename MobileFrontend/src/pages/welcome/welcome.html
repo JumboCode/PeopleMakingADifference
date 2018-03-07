@@ -19,6 +19,13 @@
     </ion-row>
     <ion-row justify-content-center>
       <button ion-button (click)="onGetStartedClick()">Let's Get Started</button>
+
+    </ion-row>
+    <ion-row justify-content-center>
+      <ion-item>
+        <ion-label>Debug: Autoread SMS</ion-label>
+        <ion-checkbox color="dark" checked="false" [(ngModel)]="debugSMS" [disabled]="notAndroid"></ion-checkbox>
+      </ion-item>
     </ion-row>
     <ion-row justify-content-center>
       <p>Questions? Call Lori at: </p>

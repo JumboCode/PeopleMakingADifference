@@ -20,7 +20,7 @@ module.exports = {
                 }
               }
             }
-          }, 
+          },
           {
             'volunteers.$': 1
           }
@@ -56,7 +56,7 @@ module.exports = {
               return promise.then(
                 function(){
                   return {status: "resolved"}
-                }, 
+                },
                 function(){
                   return {status: "rejected"}
                 });
@@ -83,8 +83,6 @@ module.exports = {
         });
       });
     });
-    
+
   }
 }
-
-

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    
+
     <ion-title>
       <div class="title-icon">
         <img src="assets/icon/pmd_transparent.png" class="pmd-icon" />
@@ -22,16 +22,15 @@
   <p>Hi, {{personName}}.</p>
   <p>You should receive a text message to the phone number you provided in the next few minutes.</p>
   <ion-item>
-    <ion-label stacked class="labeltext">Please enter the six-digit number you recevied below:</ion-label>
+
+    <ion-label stacked class="labeltext">Please enter the five-digit number you recevied below:</ion-label>
     <ion-input 
       type="number"
       [(ngModel)]="responseCode"
-      placeholder="This doesn't do anything yet"
     >
-    </ion-input> 
-    
+    </ion-input>
+
   </ion-item>
   <p>{{errorMessage}}</p>
   <button ion-button (click)="onSubmitClick()">Confirm</button>
-
 </ion-content>
