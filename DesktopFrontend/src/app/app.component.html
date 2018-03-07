@@ -1,5 +1,11 @@
 <h1 class="Avenir"> The names and assignments of the volunteers are: </h1>
+<nav>
+<a routerLink="create-event" routerLinkActive="active">Crisis Center</a>
+</nav>
 
+
+
+<router-outlet>
 <div class="bowls">
   <p *ngIf="errorMessage.length > 0;" style="color: red;">{{ errorMessage }}</p>
   <div 
@@ -42,6 +48,8 @@
 
   </div>
 </div>
+
+</router-outlet>
 
 
 
