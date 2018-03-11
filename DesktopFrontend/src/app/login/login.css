@@ -19,6 +19,21 @@
     left: 2.5%;
 }
 
+#padding {
+    padding: 40px;
+}
+
+div.container {
+    text-align: center;
+    border: 1px solid gray;
+    width: 300px;
+    margin: auto;
+    padding-top: 30px;
+    padding-bottom: 25px;
+
+
+}
+
 
 /*$gradient-dark: #008776;
 $gradient-light: #00baac;
