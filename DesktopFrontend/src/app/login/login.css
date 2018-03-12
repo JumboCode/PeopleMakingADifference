@@ -1,8 +1,11 @@
+body {
+    font-family: "Avenir";
+}
+
 
 #header {
     background: #00B29A;
     height: 190px;
-    font-family: "Avenir";
     color: white;
     font-size: 25px;
     padding-top: 40px;
@@ -23,112 +26,30 @@
     padding: 40px;
 }
 
+#padding2 {
+    padding: 15px;
+}
+
 div.container {
     text-align: center;
-    border: 1px solid gray;
-    width: 300px;
+    color: gray;
+    border: 1px solid silver;
+    width: 500px;
+    height: 160px;
     margin: auto;
-    padding-top: 30px;
+    padding-top: 50px;
     padding-bottom: 25px;
-
-
+    border-radius: 10px;
+    font-size: 30px;
 }
 
 
-/*$gradient-dark: #008776;
-$gradient-light: #00baac;
-$page-description-background: #74bdb4;
-$white: #ffffff;
-$black: #000000;
-$text-color: rgba(74, 74, 74, 1);
-$content-background-color: #f4f3f3;
-$content-background-color-alternate: $white;
-$button-border: #b4b4b4;
-$input-border-color: #cecece;
-
-.toolbar .toolbar-background-md,
-.toolbar .toolbar-background-ios {
-  background: linear-gradient(to bottom, $gradient-dark 0%, $gradient-light 100%);
+button {
+    background-color: #00B29A;
+    border-radius: 4px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    height: 35px;
+    width: 150px;
 }
-
-.toolbar.pageinfo .toolbar-background-md,
-.toolbar.pageinfo .toolbar-background-ios {
-  background: $page-description-background;
-}
-
-.pmd-icon {
-  max-height: 2em;
-  max-width: 3em;
-}
-
-.title .toolbar-title {
-  align-items: center;
-  color: $white;
-  display: flex;
-  font-size: 1.5rem;
-  overflow: visible;
-}
-
-.header .toolbar {
-  height: 4em;
-}
-
-.header .welcome {
-  height: 12em;
-}
-
-.title-icon,
-.title-text {
-  flex: 1 1 auto;
-}
-
-.title-icon {
-  margin: 0 0.25rem;
-}
-
-.button {
-  border-radius: 24px;
-  border: thin solid $button-border;
-}
-
-.button .button-inner::after {
-  content: ">";
-  padding-left: 1em;
-}
-
-.content-md,
-.button-md {
-  color: $text-color;
-}
-
-.content,
-.item {
-  background: $content-background-color;
-}
-
-.second-title .toolbar-title {
-  justify-content: center;
-}
-
-.alternate-content {
-  background: $content-background-color-alternate;
-  border: thin solid $button-border;
-}
-
-.item .labeltext {
-  color: $text-color;
-  font-size: 1.5rem;
-  text-align: center;
-}
-
-.item.item-block .item-inner {
-  border-bottom: 1px solid $input-border-color;
-}
-
-.item .input-wrapper {
-  overflow: visible;
-}
-
-.spinner-crescent circle {
-  stroke: $black;
-}*/
