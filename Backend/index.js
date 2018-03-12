@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongodb = require('mongodb');
 const bodyParser = require('body-parser'); // module used to parse POST parameters
+
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
@@ -43,7 +44,7 @@ const generic_database_connection = () => {
 // define our routes, which are each defined in their own files in ./routes
 const routes = [
     'get_message', 'get_uid', 'post_checkout', 'post_location', 'get_root', 'post_assignment',
-    'post_checkout', 'post_checkin', 'post_message', 'post_token', 'post_verification'
+    'post_checkout', 'post_checkin', 'post_message', 'post_token', 'post_verification', 'post_event'
 ];
 // for each route, initialize that route by passing the express app and database connection function
 for (let route of routes) {
