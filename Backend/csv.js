@@ -11,6 +11,7 @@ class CSV_parser {
   parse() {
     return new Promise((res, rej) => {
       let rows = [];
+      let feedback = [];
       fs.createReadStream(this.path)
         .pipe(
           fast_csv({
@@ -40,29 +41,26 @@ class CSV_parser {
               assignment: row['ROLE'],
               location: row['Room']
             };
-            rows.push(newRow);
+            if(newRow.name && newRow.email && newRow.cell && newRow.assignment && newRow.location){
+              rows.push(newRow);
+            } else {
+              const rowRepresentation = [
+                row['FirstName'], row['LastName'], row['Email'], 
+                row['CellPhone'], row['ROLE'], row['Room']
+              ].join(', ');
+              feedback.push(`Skipped:\t${rowRepresentation}\nThis row was missing either FirstName, LastName, Email, CellPhone, ROLE, or Room data.\n`);
+            }
+            
           })
           .on('end', () => {
-            res(rows);
+            res({rows: rows, feedback: feedback});
           })
         );
     });
   }
   
-  insert(data){
-    let uri = '';
-    if (process.argv[2] == '--local' || process.argv[2] == '-l') {
-        uri = 'mongodb://localhost:27017/pmd';
-        console.log('Database set to local.');
-    } else if (process.argv[2] == '--prod' || process.argv[2] == '-p') {
-        uri = process.env.MONGODB_URI;
-        console.log('Database set to production.');
-    } else {
-        console.log('Defaulted database to local. Use option --prod if production needed.');
-        uri = 'mongodb://localhost:27017/pmd';
-    }
-    
-    mongodb.MongoClient.connect(uri, function(err, db) {
+  insert(dbconn, data){   
+    dbconn().then((db) => {
         if (err) throw err;
         // find the largest id by sorting by id and grabbing the top row
         db.collection('volunteers').find().sort({id: -1}).limit(1).toArray((err, items) => {
