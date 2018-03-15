@@ -34,28 +34,16 @@ module.exports = function(app, dbconn){
       { name: 'csvFile', maxCount: 1 }
   ]);
 	app.post('/update_event', cpUpload, function(req, res, next) {
-        // dbconn().then((db) => {
-        //      db.collection('bowls').find().toArray(function(err, items) {
-        //         res.send(items);
-        //         db.close();
-        //     });
-            
-        // });
         if('csvFile' in req.files){
           const csv = require('../csv.js');
           const filepath = req.files.csvFile[0].path;
-          console.log('got path', filepath);
           const parser = new csv(filepath);
           parser.parse().then(parseResult => {
             const {rows, feedback} = parseResult;
-            for(let feedbackResult of feedback){
-              console.log(feedbackResult);
-            }
+            res.send(feedback.join('<br />'));
           })
         } else {
-          console.log('did not');
-          console.log(req.files);
+          res.status(400).send('No file!');
         }
-        res.send('lol');
     });
 }

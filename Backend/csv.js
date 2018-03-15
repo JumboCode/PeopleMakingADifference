@@ -48,7 +48,7 @@ class CSV_parser {
                 row['FirstName'], row['LastName'], row['Email'], 
                 row['CellPhone'], row['ROLE'], row['Room']
               ].join(', ');
-              feedback.push(`Skipped:\t${rowRepresentation}\nThis row was missing either FirstName, LastName, Email, CellPhone, ROLE, or Room data.\n`);
+              feedback.push(`Skipped:    ${rowRepresentation}<br />This row was missing either FirstName, LastName, Email, CellPhone, ROLE, or Room data.`);
             }
             
           })
