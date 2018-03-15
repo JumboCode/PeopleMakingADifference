@@ -59,16 +59,21 @@ class CSV_parser {
     });
   }
   
-  insert(dbconn, data){   
+  insert(dbconn, event_name, data){   
     dbconn().then((db) => {
         if (err) throw err;
-        // find the largest id by sorting by id and grabbing the top row
-        db.collection('volunteers').find().sort({id: -1}).limit(1).toArray((err, items) => {
-          // if there are no rows, we'll start with id = 1
+
+        // start by finding the bowl which has the volunteer with the highest ID
+        db.collection('bowls').find().sort({'volunteers.id': -1}).limit(1).toArray((err, items) => {
+          // if there are no rows at all, we will start with 1
           let maxId = 0;
-          if(items.length > 0){
-            maxId = items[0]['id'];
+          // of the bowl that has the volunteer with the highest id, actually find that id and save it
+          for (let item of items){
+            if(item['id'] > maxId){
+              maxId = item['id'];
+            }
           }
+
           // assign each row to an incrementing id
           for (let row=0; row<data.length; row++) {
             maxId += 1;
@@ -77,9 +82,14 @@ class CSV_parser {
           // insert all our data
           for (let row=0; row<data.length; row++) {
             // do a "upsert" insert or update on cell number
-            db.collection('volunteers').update({
-              'cell': data[row]['cell']
-            }, data[row], {upsert: true});
+            db.collection('bowls').update({
+              'name': event_name,
+              'volunteers.cell': data[row]['cell']
+            }, {
+              $set: {
+                'volunteers.$': data[row]
+              }
+            }, {upsert: true});
           }
           
           db.close();
