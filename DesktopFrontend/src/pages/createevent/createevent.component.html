@@ -1,0 +1,4 @@
+<input type="text" #nameField (keyup)="onTitleChange(nameField.value)" placeholder="Name of Event" />
+<input type="file" value="Upload File Here" (change)="onFileChange($event)"/>
+<button (click)="onSubmitClick()">Submit New Event</button>
+

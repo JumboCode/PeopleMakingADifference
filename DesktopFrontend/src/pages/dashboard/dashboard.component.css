@@ -1,0 +1,28 @@
+.sameLine {
+  display: inline;
+  line-height: 80%;
+}
+
+.spaceWord {
+  word-spacing: 30px;
+}
+
+.changeColor {
+  color:#008675;
+}
+
+table tr:nth-child(odd) {
+  background-color: #deefed;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+}
+
+label, button {
+  color:#008675;
+}
