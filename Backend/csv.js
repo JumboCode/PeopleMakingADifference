@@ -123,7 +123,8 @@ class CSV_parser {
           }
         });
       }
-    }  
+    } 
+    db.close(); 
   }
 }
 
