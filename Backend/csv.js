@@ -37,7 +37,7 @@ class CSV_parser {
             let newRow = {
               name: row['FirstName'] + ' ' + row['LastName'],
               email: row['Email'],
-              cell: row['CellPhone'],
+              cell: row['CellPhone'].replace(/\-/g, ""),
               assignment: row['ROLE'],
               location: row['Room']
             };
@@ -53,48 +53,77 @@ class CSV_parser {
             
           })
           .on('end', () => {
+            if (feedback.length === 0){
+              feedback = ["All rows parsed successfully."];
+            }
             res({rows: rows, feedback: feedback});
           })
         );
     });
   }
   
-  insert(dbconn, event_name, data){   
-    dbconn().then((db) => {
-        if (err) throw err;
+  async insert(dbconn, event_name, data){
+    let db = await dbconn();   
+    // start by finding the bowl which has the volunteer with the highest ID
+    let err, bowls = await db.collection('bowls').find().sort({'volunteers.id': -1}).limit(1).toArray();
+    // if there are no rows at all, we will start with 1
+    let maxId = 0;
+    if(bowls.length > 0) {
+      // of the bowl that has the volunteer with the highest id, actually find that id and save it
+      for (let item of bowls[0]['volunteers']){
+        if(item['id'] > maxId){
+          maxId = item['id'];
+        }
+      }
+    }
 
-        // start by finding the bowl which has the volunteer with the highest ID
-        db.collection('bowls').find().sort({'volunteers.id': -1}).limit(1).toArray((err, items) => {
-          // if there are no rows at all, we will start with 1
-          let maxId = 0;
-          // of the bowl that has the volunteer with the highest id, actually find that id and save it
-          for (let item of items){
-            if(item['id'] > maxId){
-              maxId = item['id'];
-            }
-          }
+    // assign each row to an incrementing id
+    for (let row=0; row<data.length; row++) {
+      maxId += 1;
+      data[row]['id'] = maxId;
+    }
 
-          // assign each row to an incrementing id
-          for (let row=0; row<data.length; row++) {
-            maxId += 1;
-            data[row]['id'] = maxId;
+    // check if an event already exists with the submitted name
+    let event_query_err, event_query_bowls = await db.collection('bowls').find({
+      'name': event_name
+    }).toArray();
+
+    // if it does not, create it and populate it with data
+    if(event_query_bowls.length === 0){
+      let event_insert_err, event_insert_bowls = await db.collection('bowls').insert({
+        'name': event_name,
+        'message': 'Thank you for volunteering!',
+        'id': 'dummy',
+        'volunteers': []
+      });
+    }
+
+
+    // insert all our data
+    for (let row=0; row<data.length; row++) {
+      // Start by attempting an update
+      // we can't do an upsert here because the volunteer data is inside an array
+      let volunteer_update_err, volunteer_update_result = await db.collection('bowls').update({
+        'name': event_name,
+        'volunteers.cell': String(data[row]['cell'])
+      }, {
+        $set: {
+          'volunteers.$': data[row]
+        }
+      });
+
+      // if we didn't just update an existing row, we must be inserting a new row...
+      if(volunteer_update_result.result.nModified === 0){
+        // insert it by pushing the new row onto the volunteers array
+        let volunteer_push_err, volunteer_push_result = await db.collection('bowls').update({
+          'name': event_name
+        }, {
+          $push: {
+            'volunteers': data[row]
           }
-          // insert all our data
-          for (let row=0; row<data.length; row++) {
-            // do a "upsert" insert or update on cell number
-            db.collection('bowls').update({
-              'name': event_name,
-              'volunteers.cell': data[row]['cell']
-            }, {
-              $set: {
-                'volunteers.$': data[row]
-              }
-            }, {upsert: true});
-          }
-          
-          db.close();
         });
-    });
+      }
+    }  
   }
 }
 
