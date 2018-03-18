@@ -13,6 +13,11 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+});
+
 let uri = '';
 if (process.argv[2] == '--local' || process.argv[2] == '-l') {
     uri = 'mongodb://localhost:27017/pmd';
