@@ -1,10 +1,13 @@
-const admin = require("firebase-admin"),
-  serviceAccount = require("./demo-key.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://people-making-a-difference.firebaseio.com"
-});
+const admin = require("firebase-admin");
+if(process.env.TRAVIS_MODE === "True") {
+  const serviceAccount = "nothing, there's no API KEY";
+} else {
+  const serviceAccount = require("./demo-key.json");
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://people-making-a-difference.firebaseio.com"
+  });
+}
 
 module.exports = {
   messageOne: function(dbconn, uid, payload){
