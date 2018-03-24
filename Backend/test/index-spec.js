@@ -95,9 +95,3 @@ it('assignment', function(done) {
 			done();
 	});
 });
-
-it('sms', function(done) {
-    chai.request('http://localhost:5000')
-        .post("/send_sms")
-        .send()
-})

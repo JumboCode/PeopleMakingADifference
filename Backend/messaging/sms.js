@@ -1,4 +1,7 @@
 module.exports = function(dbconn, phone_num, uid){
+    if(process.env.TRAVIS_MODE === "True"){
+        return;
+    }
     const auth = require("./twilio-key.json");
     // generate a string of 5 random numbers e.g. 01017
     let verif_num = "";
