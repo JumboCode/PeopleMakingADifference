@@ -5,13 +5,15 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateEventComponent } from '../pages/createevent/createevent.component';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { LoginComponent } from '../pages/login/login.component'
 
 import { AppComponent } from './app.component';
 
 const appRoutes: Routes = [
   { path: 'create-event', component: CreateEventComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 
@@ -19,7 +21,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     CreateEventComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
