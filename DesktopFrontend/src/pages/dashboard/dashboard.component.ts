@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -12,7 +13,7 @@ export class DashboardComponent implements OnInit {
   errorMessage = '';
   bowls: any = [];
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private router: Router) { }
 
   ngOnInit() {
     this.loadItems();
@@ -97,6 +98,10 @@ export class DashboardComponent implements OnInit {
     }
     
     volunteer.edit = false;
+  }
+
+  goToCreateEvent(){
+    this.router.navigate(['/create-event']);
   }
 
 }
