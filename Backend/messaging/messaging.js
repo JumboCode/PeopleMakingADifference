@@ -1,10 +1,13 @@
-const admin = require("firebase-admin"),
-  serviceAccount = require("./demo-key.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://people-making-a-difference.firebaseio.com"
-});
+const admin = require("firebase-admin");
+if(process.env.TRAVIS_MODE === "True") {
+  const serviceAccount = "nothing, there's no API KEY";
+} else {
+  const serviceAccount = require("./demo-key.json");
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://people-making-a-difference.firebaseio.com"
+  });
+}
 
 module.exports = {
   messageOne: function(dbconn, uid, payload){
@@ -20,7 +23,7 @@ module.exports = {
                 }
               }
             }
-          }, 
+          },
           {
             'volunteers.$': 1
           }
@@ -56,7 +59,7 @@ module.exports = {
               return promise.then(
                 function(){
                   return {status: "resolved"}
-                }, 
+                },
                 function(){
                   return {status: "rejected"}
                 });
@@ -83,8 +86,6 @@ module.exports = {
         });
       });
     });
-    
+
   }
 }
-
-

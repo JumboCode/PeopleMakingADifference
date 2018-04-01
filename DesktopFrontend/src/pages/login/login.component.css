@@ -1,3 +1,7 @@
+label, button {
+	color:#008675;
+}
+
 @font-face {
 	font-family: "Avenir";
 	src: ../assets/Avenir;
@@ -6,9 +10,3 @@
 .Avenir {
 	font-family: "Avenir", Verdana, Tahoma;
 }
-
-.Tahoma {
-	font-family: "Tahoma";
-	color:#008675;
-}
-

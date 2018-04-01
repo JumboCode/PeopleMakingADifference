@@ -1,0 +1,68 @@
+<nav>
+  <button (click)="goToCreateEvent()">Create Event</button>
+</nav>
+
+<div class="bowls">
+  <p *ngIf="errorMessage.length > 0;" style="color: red;">{{ errorMessage }}</p>
+  <div 
+    class="bowl"
+    *ngFor="let bowl of bowls;"
+  >
+    <h3>{{ bowl.name }}</h3>
+    <p>Current Message: {{ bowl.message }}</p>
+    <p>Event Id: {{ bowl.id }}</p>
+
+    <p> 
+      <label class="Tahoma" for="message">Send a message to all volunteers:</label>
+      <input 
+        type="text" 
+        name="message" 
+        #message 
+        (keyup.enter)="postMessage(bowl)"
+        (keyup)="bowl.new_message = message.value"
+      />
+      <button (click)="postMessage(bowl)">Send</button>
+    </p>
+    
+
+    <ul>
+      <table class="Avenir">
+        <th> Name </th>
+        <th> Assignment </th>
+        <th> Location </th>
+
+        <tr *ngFor="let volunteer of bowl.volunteers;">
+            <td> {{ volunteer.name }} </td>
+
+            <td *ngIf="volunteer.edit">
+              <input type="text" name="vAssign" #vassign 
+                (keyup.enter)="saveEdits(volunteer)"
+                (keyup)="volunteer.new_assignment = vassign.value"
+                value="{{ volunteer.assignment }}">
+            </td>
+            <td *ngIf="volunteer.edit">
+              <input type="text" name="vLoc" #vloc 
+              (keyup.enter)="saveEdits(volunteer)"
+              (keyup)="volunteer.new_location = vloc.value"
+              value="{{ volunteer.location }}">
+            </td>
+            <td *ngIf="volunteer.edit">
+              <button (click)="saveEdits(volunteer)">Save</button>
+            </td>
+
+            <td *ngIf="!volunteer.edit">
+              {{ volunteer.assignment }}
+            </td>
+            <td *ngIf="!volunteer.edit">
+              {{ volunteer.location }}
+            </td>
+            <td *ngIf="!volunteer.edit">
+              <button (click)="enableEditing(volunteer)">Edit</button>
+            </td>
+            
+        </tr>
+      </table>
+    </ul>
+
+  </div>
+</div>

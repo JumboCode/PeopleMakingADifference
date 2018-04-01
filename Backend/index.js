@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongodb = require('mongodb');
 const bodyParser = require('body-parser'); // module used to parse POST parameters
+
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
@@ -11,7 +12,12 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-  
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+});
+
 let uri = '';
 if (process.argv[2] == '--local' || process.argv[2] == '-l') {
     uri = 'mongodb://localhost:27017/pmd';
@@ -34,18 +40,17 @@ const generic_database_connection = () => {
                 throw err;
                 rej(err);
                 return;
-            } 
+            }
             else res(db);
         });
     });
 }
 
-// define our routes, which are each defined in their own files in ./routes 
+// define our routes, which are each defined in their own files in ./routes
 const routes = [
     'get_message', 'get_uid', 'post_checkout', 'post_location', 'get_root', 'post_assignment',
-    'post_checkout', 'post_checkin', 'post_message', 'post_token' 
+    'post_checkout', 'post_checkin', 'post_message', 'post_token', 'post_verification', 'post_event'
 ];
-
 // for each route, initialize that route by passing the express app and database connection function
 for (let route of routes) {
     require(`./routes/${route}.js`)(app, generic_database_connection);

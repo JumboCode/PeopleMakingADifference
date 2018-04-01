@@ -51,3 +51,7 @@ demo-key.json
 # User Sensitive #
 ##################
 *.csv
+
+# Other #
+######################
+twilio-key.json
