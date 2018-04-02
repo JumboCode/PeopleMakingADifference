@@ -7,6 +7,7 @@ const seedData = [
     {
         name: "Example Science Bowl",
         id: "1234",
+        exit_id: "4321",
         message: 'You guys are the best! Stay wholesome! <3',
         volunteers: [
             {
@@ -50,6 +51,7 @@ const seedData = [
    {
         name: "Another Example Bowl",
         id: "0000",
+        exit_id: "0000",
         message: 'Socialism will win',
         volunteers: [
             {
