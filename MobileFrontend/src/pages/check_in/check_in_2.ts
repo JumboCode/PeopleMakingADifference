@@ -21,7 +21,7 @@ export class CheckIn2 implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.userService.getDebug()){
+    if(!this.userService.getDebug()){
       let loader = this.loadingCtrl.create({
         spinner: 'crescent',
         content: 'Waiting for text message...'
@@ -37,7 +37,7 @@ export class CheckIn2 implements OnInit {
             this.userService.saveUser();
             this.navCtrl.push(MainPage);
             clearInterval(interval);
-          })
+          });
         }
       }, 500);
     }

@@ -7,8 +7,8 @@ import {Platform} from 'ionic-angular';
 @Component({selector: 'page-welcome', templateUrl: 'welcome.html'})
 export class WelcomePage implements OnInit {
   constructor(public navCtrl: NavController, public userService: UserService, public platform: Platform) {}
-  debugSMS: boolean = false;
   notAndroid: boolean = true;
+  debugSms: boolean = false;
   ngOnInit(): void {
     this.platform.ready().then(() => {
       this.notAndroid = !this.platform.is('android');
@@ -16,7 +16,7 @@ export class WelcomePage implements OnInit {
   }
   
   onGetStartedClick() {
-    this.userService.setDebug(this.debugSMS);
+    this.userService.setDebug(this.debugSms);
     // navigate to the id page
     this.navCtrl.push(CheckIn1);
   }
