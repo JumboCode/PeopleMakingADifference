@@ -11,7 +11,7 @@
     <h3>{{ bowl.name }}</h3>
     <p>Current Message: {{ bowl.message }}</p>
     <p>Event Id: {{ bowl.id }}</p>
-
+    <p>Exit Id: {{bowl.exit_id}}</p>
     <p> 
       <label class="Tahoma" for="message">Send a message to all volunteers:</label>
       <input 
@@ -27,9 +27,13 @@
 
     <ul>
       <table class="Avenir">
+
         <th> Name </th>
         <th> Assignment </th>
         <th> Location </th>
+        <th> Check In </th>
+        <th> Check out </th>
+        <th> Volunteering Time </th>
 
         <tr *ngFor="let volunteer of bowl.volunteers;">
             <td> {{ volunteer.name }} </td>
@@ -46,9 +50,7 @@
               (keyup)="volunteer.new_location = vloc.value"
               value="{{ volunteer.location }}">
             </td>
-            <td *ngIf="volunteer.edit">
-              <button (click)="saveEdits(volunteer)">Save</button>
-            </td>
+            
 
             <td *ngIf="!volunteer.edit">
               {{ volunteer.assignment }}
@@ -56,8 +58,20 @@
             <td *ngIf="!volunteer.edit">
               {{ volunteer.location }}
             </td>
+            <td>
+              {{ volunteer.checkin | volunteerTime }}
+            </td>
+            <td>
+              {{ volunteer.checkout | volunteerTime }}
+            </td>
+            <td>
+              {{ volunteer.checkout - volunteer.checkin | volunteerDuration }}
+            </td>
             <td *ngIf="!volunteer.edit">
               <button (click)="enableEditing(volunteer)">Edit</button>
+            </td>
+            <td *ngIf="volunteer.edit">
+              <button (click)="saveEdits(volunteer)">Save</button>
             </td>
             
         </tr>
