@@ -31,7 +31,9 @@ module.exports = function(app, dbconn){
               res.send(items[0].volunteers[0]);
             }
             // send the sms verification token
-            sms(dbconn, req.body.phone, items[0].volunteers[0].id);
+            sms(dbconn, req.body.phone, items[0].volunteers[0].id, req.body.debug);
+            
+            
           } else {
             res.status(400);
             res.send('Error: UID Not Found!');

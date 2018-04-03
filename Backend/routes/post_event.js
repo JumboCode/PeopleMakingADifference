@@ -21,6 +21,7 @@ module.exports = function(app, dbconn){
       cb(null, './uploads')
     },
     filename: (req, file, cb) => {
+      // name the file something that won't collide
       cb(null, `${file.fieldname}-${Date.now()}.csv`)
     }
   });    
@@ -30,22 +31,22 @@ module.exports = function(app, dbconn){
       { name: 'csvFile', maxCount: 1 }
   ]);
 	app.post('/update_event', cpUpload, async function(req, res, next) {
-        if('csvFile' in req.files){
-          // load the CSV parsing library
-          const csv = require('../csv.js');
-          const filepath = req.files.csvFile[0].path;
-          const parser = new csv(filepath);
+    if('csvFile' in req.files){
+      // load the CSV parsing library
+      const csv = require('../csv.js');
+      const filepath = req.files.csvFile[0].path;
+      const parser = new csv(filepath);
 
-          // feed it the file and get the rows back
-          parser.parse().then(parseResult => {
-            const {rows, feedback} = parseResult;
+      // feed it the file and get the rows back
+      parser.parse().then(parseResult => {
+        const {rows, feedback} = parseResult;
 
-            // have the parser handle the database updating
-            parser.insert(dbconn, String(req.body.eventName), rows);
-            res.send(feedback.join('<br />'));
-          })
-        } else {
-          res.status(400).send('No file!');
-        }
-    });
+        // have the parser handle the database updating
+        parser.insert(dbconn, String(req.body.eventName), rows);
+        res.send(feedback.join('<br />'));
+      })
+    } else {
+      res.status(400).send('It appears that you uploaded something that is not a CSV file. Please try again.');
+    }
+  });
 }

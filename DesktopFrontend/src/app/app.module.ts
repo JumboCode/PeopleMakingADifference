@@ -5,7 +5,9 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateEventComponent } from '../pages/createevent/createevent.component';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
-import { LoginComponent } from '../pages/login/login.component'
+import { LoginComponent } from '../pages/login/login.component';
+import { VolunteerTimePipe } from './volunteer-time.pipe';
+import { VolunteerDurationPipe } from './volunteer-duration.pipe';
 
 import { AppComponent } from './app.component';
 
@@ -22,7 +24,9 @@ const appRoutes: Routes = [
     AppComponent,
     CreateEventComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    VolunteerTimePipe,
+    VolunteerDurationPipe
   ],
   imports: [
     BrowserModule,

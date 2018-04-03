@@ -13,7 +13,7 @@
 
   <ion-navbar class="pageinfo">
     <ion-title class="second-title">
-      Check In
+      Check Out
     </ion-title>
   </ion-navbar>
 
@@ -22,14 +22,13 @@
   <ion-item>
     <ion-label stacked class="labeltext">Please enter the exit event ID # below:</ion-label>
     <ion-input 
-      type="number"
+      type="text"
       [(ngModel)]="exitId"
-      placeholder="This does not do anything yet"
     >
     </ion-input> 
     
   </ion-item>
-  <p>{{errorMessage}}</p>
+  <p>{{feedback}}</p>
   <button ion-button (click)="onCheckOutClick()">Check Out</button>
 
 </ion-content>

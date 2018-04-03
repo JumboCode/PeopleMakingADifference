@@ -93,7 +93,8 @@ class CSV_parser {
       let event_insert_err, event_insert_bowls = await db.collection('bowls').insert({
         'name': event_name,
         'message': 'Thank you for volunteering!',
-        'id': 'dummy',
+        'id': this.generate_event_id(5),
+        'exit_id': this.generate_event_id(5),
         'volunteers': []
       });
     }
@@ -125,6 +126,19 @@ class CSV_parser {
       }
     } 
     db.close(); 
+  }
+
+  generate_event_id(length){
+    // allowed characters: A-Z, 0-9
+    const spaces = [ [48, 57], [65, 90] ];
+    let str = "";
+    for (let i=0; i<length; i++){
+      // pick letter or number, then pick a character and append it
+      let [low, high] = spaces[Math.floor(Math.random() * spaces.length)];
+      let charCode = Math.floor(Math.random() * (high - low)) + low;
+      str += String.fromCharCode(charCode)
+    }
+    return str;
   }
 }
 

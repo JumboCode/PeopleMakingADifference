@@ -47,10 +47,13 @@ export class CheckIn1 implements OnInit {
 
       // the config will determine which endpoint to use
       const apiEndpoint = this.configService.getEndpointUrl();
+      const debugMode = this.userService.getDebug();
       const loginForm = {
         'phone': phone,
-        'eventId': eventId
+        'eventId': eventId,
+        'debug': String(debugMode)
       }
+      
       const formBody: string = this.configService.xwwwurlencode(loginForm);
       // make the HTTPRequest
       // see https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
@@ -97,6 +100,9 @@ export class CheckIn1 implements OnInit {
   }
 
   onSubmitClick() {
+    if(this.userService.getDebug()){
+
+    }
     let loader = this.loadingCtrl.create({
       spinner: 'crescent',
       content: 'Validating...'
