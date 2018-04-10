@@ -1,14 +1,29 @@
 import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
+import {NavController, App} from 'ionic-angular/index';
+import {CheckOut} from '../pages/check_out/check_out';
 import {User} from './user.service';
 import {FCM} from '@ionic-native/fcm';
 // allows the app to receive push notifications
 @Injectable()
 export class PushService {
+  private navCtrl: NavController;
   constructor(
     public storage: Storage, 
-    public fcm: FCM
-  ){}
+    public fcm: FCM,
+    private app: App
+  ){
+    this.navCtrl = app.getActiveNav();
+    fcm.onNotification().subscribe(data => {
+      if(data['intent'] && data['intent'] === 'checkout_reminder'){
+        this.navCtrl.push(CheckOut);
+      } else {
+        console.log('not checkout reminder')
+      }
+    })
+
+
+  }
 
   register(user: User, endpoint: string): Promise<any>{
     return new Promise((resolve, reject) => {
@@ -22,10 +37,7 @@ export class PushService {
         .then(response => console.log('refreshed token.'))
         .catch(err => console.error('error refreshing token', err));
       });
-      this.fcm.onNotification().subscribe(data => {
-        console.log('background', data.wasTapped);
-        console.log('data', data);
-      })
+      
     });
   }
 
