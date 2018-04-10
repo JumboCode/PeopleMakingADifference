@@ -45,7 +45,7 @@ module.exports = {
     });
   },
 
-  messageAll: function(dbconn, eventId, payload){
+  messageAll: function(dbconn, eventId, payload, filter = () => true ){
     return new Promise((resolve, reject) => {
       dbconn().then(db => {
         db.collection('bowls').find(
@@ -67,7 +67,7 @@ module.exports = {
             let push_promises = [];
             for(let volunteer of items[0].volunteers){
               const token = volunteer.token;
-              if(token){
+              if(token && filter(volunteer)){
                 push_promises.push(admin.messaging().sendToDevice(token, payload));
               }
             }
