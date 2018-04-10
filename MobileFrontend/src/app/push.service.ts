@@ -21,6 +21,10 @@ export class PushService {
         this.send_token(endpoint, token, user.id)
         .then(response => console.log('refreshed token.'))
         .catch(err => console.error('error refreshing token', err));
+      });
+      this.fcm.onNotification().subscribe(data => {
+        console.log('background', data.wasTapped);
+        console.log('data', data);
       })
     });
   }
