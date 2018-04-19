@@ -26,10 +26,13 @@ module.exports = function(app, dbconn){
                   }
                 }
               );
-              res.send(items[0].volunteers[0]);
-            } else {
-              res.send(items[0].volunteers[0]);
             }
+            // send only the data we need to send
+            const {id, name} = items[0].volunteers[0];
+            res.send({
+              'id': id,
+              'name': name
+            });
             // send the sms verification token
             sms(dbconn, req.body.phone, items[0].volunteers[0].id, req.body.debug);
             
