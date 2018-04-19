@@ -104,4 +104,16 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/create-event']);
   }
 
+  sendCheckoutReminder(bowl){
+    this.http.post('http://localhost:5000/update_reminder',
+      {
+        eventId: bowl.id
+      }
+    )
+    .subscribe((res) => {
+      console.log('reminder', res);
+    }, 
+    this.showError(`send reminder for ${bowl.name}`));
+  }
+
 }
