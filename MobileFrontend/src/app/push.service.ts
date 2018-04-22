@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {NavController, App} from 'ionic-angular/index';
-import {CheckOut} from '../pages/check_out/check_out';
+import {CheckOutReminded} from '../pages/check_out_reminded/check_out_reminded';
 import {User} from './user.service';
 import {FCM} from '@ionic-native/fcm';
 import {Platform} from 'ionic-angular';
@@ -20,7 +20,7 @@ export class PushService {
       if(this.platform.is('android')){
         fcm.onNotification().subscribe(data => {
           if(data['intent'] && data['intent'] === 'checkout_reminder'){
-            this.navCtrl.push(CheckOut);
+            this.navCtrl.push(CheckOutReminded);
           }
         });
       }
