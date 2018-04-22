@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    
+    <ion-title>
+      <div class="title-icon">
+        <img src="assets/icon/pmd_transparent.png" class="pmd-icon" />
+      </div>
+      <div class="title-text">
+        People Making a Difference
+      </div>
+    </ion-title>
+  </ion-navbar>
+
+  <ion-navbar class="pageinfo">
+    <ion-title class="second-title">
+      Forgot To Check Out?
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding text-center>
+  <ion-item>
+    <ion-label stacked class="labeltext">Please enter the time you would have checked out from the event:</ion-label>
+    <ion-input 
+      type="time"
+      [(ngModel)]="checkoutTime"
+    >
+    </ion-input> 
+    
+  </ion-item>
+  <p>{{feedback}}</p>
+  <button ion-button (click)="onCheckOutClick()">Check Out</button>
+
+</ion-content>
