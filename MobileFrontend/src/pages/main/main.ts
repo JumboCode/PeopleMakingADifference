@@ -3,6 +3,7 @@ import {NavController, LoadingController} from 'ionic-angular';
 import {ConfigService} from '../../app/config.service';
 import {UserService} from '../../app/user.service';
 import {CheckOut} from '../check_out/check_out';
+import {CheckOutReminded} from '../check_out_reminded/check_out_reminded';
 import {PushService} from '../../app/push.service';
 import {Platform} from 'ionic-angular';
 
@@ -138,5 +139,9 @@ export class MainPage implements OnInit {
   
   onDeleteUserClick() {
     this.userService.deleteUser();
+  }
+
+  onCheckoutReminded(){
+    this.navCtrl.push(CheckOutReminded);
   }
 }

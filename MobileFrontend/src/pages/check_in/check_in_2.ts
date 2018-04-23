@@ -56,8 +56,6 @@ export class CheckIn2 implements OnInit {
         this.errorMessage = "Incorrect verification code."
       }
     })
-    // this.navCtrl.push(MainPage);
-    // console.log(this.responseCode);
   }
 
   verifyCode(responseCode: string): Promise<boolean> {
@@ -86,22 +84,11 @@ export class CheckIn2 implements OnInit {
       .then((blob) => blob.json())
 
       .then((json) => {
-        // the id provided is valid - set the current user of the app to use
-        // this id
-        
-
         resolve(true);
       })
       // handle HTTP errors
       .catch((err) => {
         console.error(err);
-
-        // if the response we get from the server is not valid json,
-        // our attempt to JSON parse it above throws a SyntaxError
-        // we always get invalid JSON when the ID is invalid
-        // if (err.name === 'SyntaxError') {
-        //   this.errorMessage = 'Invalid Phone Number';
-        // }
         resolve(false);
       });
     });

@@ -15,7 +15,7 @@ module.exports = function(app, dbconn){
         }
       ).toArray((err, items) => {
         if(items.length === 1){
-          res.send(items[0].volunteers[0]);
+          res.send({'response': 'Ok, you\'re verified.'});
         } else {
           res.status(400);
           res.send('Error: Verification Incorrect!');
