@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
   // Gets the items into this.items by reading through the file
   loadItems() {
-    this.http.get('http://localhost:5000/')
+    this.http.get('/')
     .map(res => res.json())
     .subscribe(json => {
       this.bowls = json;
@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
 
   postAssignment(volunteer: any) {
     this.errorMessage = '';
-    this.http.post('http://localhost:5000/update_assignment',
+    this.http.post('/update_assignment',
       {
         uid : volunteer.id,
         assignment : volunteer.new_assignment
@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
 
   postLocation(volunteer: any) {
     this.errorMessage = '';
-    this.http.post('http://localhost:5000/update_location',
+    this.http.post('/update_location',
       {
         uid : volunteer.id,
         location : volunteer.new_location
@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
       return;
     }
     this.errorMessage = '';
-    this.http.post('http://localhost:5000/update_message',
+    this.http.post('/update_message',
       {
         eventId: bowl.id,
         message : bowl.new_message
@@ -105,7 +105,7 @@ export class DashboardComponent implements OnInit {
   }
 
   sendCheckoutReminder(bowl){
-    this.http.post('http://localhost:5000/update_reminder',
+    this.http.post('/update_reminder',
       {
         eventId: bowl.id
       }

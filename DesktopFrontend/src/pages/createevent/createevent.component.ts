@@ -34,7 +34,7 @@ export class CreateEventComponent implements OnInit {
     input.append('csvFile', this.csvFile);
     input.append('eventName', this.nameFieldText);
 
-    fetch(`http://localhost:5000/update_event`, {
+    fetch(`/update_event`, {
       method: 'POST',
       body: input
     }).then(response => {
