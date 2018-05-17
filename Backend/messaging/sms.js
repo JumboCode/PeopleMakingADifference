@@ -13,7 +13,10 @@ module.exports = function(dbconn, phone_num, uid, debug_mode){
             })
         });
     } else {
-        const auth = require("./twilio-key.json");
+        const auth = {
+            accountSid: process.env.TWILIO_ACC_ID,
+            authToken: process.env.TWILIO_AUTH_TOKEN
+        };
         // generate a string of 5 random numbers e.g. 01017
         let verif_num = "";
         for (let i = 0; i < 5; i++) {
