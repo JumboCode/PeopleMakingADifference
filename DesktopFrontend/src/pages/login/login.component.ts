@@ -11,6 +11,9 @@ import { firebase } from '@firebase/app';
 
 export class LoginComponent implements OnInit {
 
+  error: boolean = false;
+  errorMessage: string;
+
   constructor(private router: Router, public afAuth: AngularFireAuth) { }
 
   ngOnInit() {
@@ -20,10 +23,14 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
-  demoLogin(){
-    this.afAuth.auth.signInWithEmailAndPassword("invalid@gmail.com", "this is not real, it won't work")
+  doLogin(username: string, password: string){
+    this.afAuth.auth.signInWithEmailAndPassword(username, password)
     .then((user)=>{
-      console.log(user);
+      this.router.navigate(['/dashboard']);
+    })
+    .catch((err)=>{
+      this.error = true;
+      this.errorMessage = "Incorrect username or password.";
     });
   }
 
