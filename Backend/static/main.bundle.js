@@ -557,7 +557,7 @@ module.exports = "label, button {\n\tcolor:#008675;\n}\n\n@font-face {\n\tfont-f
 /***/ "./src/pages/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n  <div class=\"form-group\">\n    <label for=\"username\">Username</label>\n    <input type=\"text\" class=\"form-control\" id=\"username\" required>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"password\">Password</label>\n    <input type=\"text\" class=\"form-control\" id=\"password\">\n  </div>\n  <div id=\"padding2\"></div>\n  <button type=\"submit\" class=\"btn btn-success\">Submit</button>\n</form>\n"
+module.exports = "<form>\n  <p *ngIf=\"error\" style=\"color: red;\">{{errorText}}</p>\n  <div class=\"form-group\">\n    <label for=\"username\">Username</label>\n    <input #uname type=\"text\" class=\"form-control\" id=\"username\" required>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"password\">Password</label>\n    <input #pass type=\"text\" class=\"form-control\" id=\"password\">\n  </div>\n  <div id=\"padding2\"></div>\n  <button type=\"submit\" class=\"btn btn-success\" (click)=\"doLogin(uname.value, pass.value)\">Submit</button>\n</form>\n"
 
 /***/ }),
 
@@ -585,16 +585,22 @@ var LoginComponent = /** @class */ (function () {
     function LoginComponent(router, afAuth) {
         this.router = router;
         this.afAuth = afAuth;
+        this.error = false;
     }
     LoginComponent.prototype.ngOnInit = function () {
     };
     LoginComponent.prototype.demoNavigate = function () {
         this.router.navigate(['/dashboard']);
     };
-    LoginComponent.prototype.demoLogin = function () {
-        this.afAuth.auth.signInWithEmailAndPassword("invalid@gmail.com", "this is not real, it won't work")
+    LoginComponent.prototype.doLogin = function (username, password) {
+        var _this = this;
+        this.afAuth.auth.signInWithEmailAndPassword(username, password)
             .then(function (user) {
-            console.log(user);
+            _this.router.navigate(['/dashboard']);
+        })
+            .catch(function (err) {
+            _this.error = true;
+            _this.errorMessage = "Incorrect username or password.";
         });
     };
     LoginComponent = __decorate([
