@@ -37,11 +37,11 @@ class CSV_parser {
             let newRow = {
               name: row['FirstName'] + ' ' + row['LastName'],
               email: row['Email'],
-              cell: row['CellPhone'].replace(/\-/g, ""),
+              phone: row['CellPhone'].replace(/\-/g, ""),
               assignment: row['ROLE'],
               location: row['Room']
             };
-            if(newRow.name && newRow.email && newRow.cell && newRow.assignment && newRow.location){
+            if(newRow.name && newRow.email && newRow.phone && newRow.assignment && newRow.location){
               rows.push(newRow);
             } else {
               const rowRepresentation = [
@@ -106,7 +106,7 @@ class CSV_parser {
       // we can't do an upsert here because the volunteer data is inside an array
       let volunteer_update_err, volunteer_update_result = await db.collection('bowls').update({
         'name': event_name,
-        'volunteers.cell': String(data[row]['cell'])
+        'volunteers.phone': String(data[row]['phone'])
       }, {
         $set: {
           'volunteers.$': data[row]
