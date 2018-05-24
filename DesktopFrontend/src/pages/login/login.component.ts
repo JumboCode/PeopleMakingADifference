@@ -23,12 +23,13 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
-  doLogin(username: string, password: string){
-    this.afAuth.auth.signInWithEmailAndPassword(username, password)
+  doLogin(username: any, password: any){
+    this.afAuth.auth.signInWithEmailAndPassword(username.value, password.value)
     .then((user)=>{
       this.router.navigate(['/dashboard']);
     })
     .catch((err)=>{
+      console.log('got here')
       this.error = true;
       this.errorMessage = "Incorrect username or password.";
     });

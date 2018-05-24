@@ -1,5 +1,5 @@
 <form>
-  <p *ngIf="error" style="color: red;">{{errorText}}</p>
+  <p *ngIf="error" style="color: red;">{{errorMessage}}</p>
   <div class="form-group">
     <label for="username">Username</label>
     <input #uname type="text" class="form-control" id="username" required>
@@ -7,8 +7,8 @@
 
   <div class="form-group">
     <label for="password">Password</label>
-    <input #pass type="text" class="form-control" id="password">
+    <input #pass type="password" class="form-control" id="password">
   </div>
   <div id="padding2"></div>
-  <button type="submit" class="btn btn-success" (click)="doLogin(uname.value, pass.value)">Submit</button>
+  <button type="submit" class="btn btn-success" (click)="doLogin(uname, pass)">Submit</button>
 </form>
