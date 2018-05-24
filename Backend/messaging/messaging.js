@@ -10,7 +10,7 @@ const firebaseCreds = process.env.MONGODB_URI ? {
   client_email: process.env.FIREBASE_CLIENT_EMAIL,
   client_id: process.env.FIREBASE_CLIENT_ID,
   client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
-} : require('./demo-key.json');
+} : process.env.TRAVIS_MODE ? {} : require('./demo-key.json');
 
 if(process.env.TRAVIS_MODE === "True") {
   const serviceAccount = "nothing, there's no API KEY";
