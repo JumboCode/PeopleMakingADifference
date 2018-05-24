@@ -52,7 +52,7 @@ export class CheckOut {
         this.feedback = text;
         this.userService.deleteUser().then(deleted => {
           resolve(true);
-        })
+        });
         
       })
       // handle HTTP errors
