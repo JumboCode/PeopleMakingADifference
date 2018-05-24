@@ -37,7 +37,7 @@ class CSV_parser {
             let newRow = {
               name: row['FirstName'] + ' ' + row['LastName'],
               email: row['Email'],
-              phone: row['CellPhone'].replace(/\-/g, ""),
+              phone: parseInt(row['CellPhone'].replace(/\-/g, "")),
               assignment: row['ROLE'],
               location: row['Room']
             };
