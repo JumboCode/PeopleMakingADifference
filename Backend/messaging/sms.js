@@ -28,7 +28,7 @@ module.exports = function(dbconn, phone_num, uid, debug_mode){
 
         client.messages.create({
             to: phone_num,
-            from: '+12082852033',
+            from: '+12083149864',
             body: 'Your PMD verification code is: ' + verif_num,
         })
         .then(message => console.log(message.sid))
