@@ -85,14 +85,13 @@ export class CheckIn1 implements OnInit {
       // handle HTTP errors
       .catch((err) => {
         console.error(err);
-        console.error('Try turning on CORS or switching DEV_MODE');
 
         // if the response we get from the server is not valid json,
         // our attempt to JSON parse it above throws a SyntaxError
         // we always get invalid JSON when the ID is invalid
-        if (err.name === 'SyntaxError') {
-          this.errorMessage = 'Invalid Phone Number';
-        }
+        // if (err.name === 'SyntaxError') {
+        this.errorMessage = 'Invalid phone number, or you have already checked out of this event.';
+        // }
         resolve(false);
       });
     });
