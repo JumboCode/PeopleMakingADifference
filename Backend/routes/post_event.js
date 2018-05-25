@@ -4,10 +4,12 @@ module.exports = function(app, dbconn){
   const fileFilter = (req, file, cb) => {
     if(file.fieldname == 'csvFile'
       &&
-      ( 
+      (
         file.mimetype == 'text/csv'
         ||
         file.mimetype == 'application/csv'
+        ||
+        file.mimetype == 'application/vnd.ms-excel'
       )
     ) {
       cb(null, true);
@@ -24,7 +26,7 @@ module.exports = function(app, dbconn){
       // name the file something that won't collide
       cb(null, `${file.fieldname}-${Date.now()}.csv`)
     }
-  });    
+  });
 
   const upload = multer({ storage: storageHandler, fileFilter: fileFilter });
   const cpUpload = upload.fields([
