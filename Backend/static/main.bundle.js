@@ -20,14 +20,14 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.css":
 /***/ (function(module, exports) {
 
-module.exports = "@font-face {\n\tfont-family: \"Avenir\";\n\tsrc: ../assets/Avenir;\n}\n\n.Avenir {\n\tfont-family: \"Avenir\", Verdana, Tahoma;\n}\n\n.Tahoma {\n\tfont-family: \"Tahoma\";\n\tcolor:#008675;\n}\n\n"
+module.exports = "@font-face {\n\tfont-family: \"Avenir\";\n\tsrc: ../assets/Avenir;\n}\n\n.Avenir {\n\tfont-family: \"Avenir\", Verdana, Tahoma;\n}\n\n.Tahoma {\n\tfont-family: \"Tahoma\";\n\tcolor:#008675;\n}\n\n.headerbar .logo {\n  width: 10em;\n}\n\n.headerbar .headertext {\n  display: inline-block;\n  vertical-align: top;\n}\n\n.headerbar .headertext h3 {\n  font-style: italic;\n  margin: 0.5em 0;\n  font-family: sans-serif;\n}\n\n.headerbar .headertext h1 {\n  font-family: sans-serif;\n  margin: 0.5em 0;\n  font-weight: lighter;\n}\n"
 
 /***/ }),
 
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<img src=\"assets/img/Logo.png\" alt = \"Logo\">\n<h1 class=\"changeColor\" class=\"Tahoma\"> People Making A Difference </h1>\n\n<h3 class=\"Tahoma\"> Learn Something New, Make New Friends, Do Something Good! </h3>\n\n<router-outlet></router-outlet>\n\n\n\n"
+module.exports = "<div class=\"headerbar\">\n  <img class=\"logo\" src=\"assets/img/Logo.png\" alt = \"Logo\">\n  <div class=\"headertext\">\n    <h1 class=\"changeColor\" class=\"Tahoma\"> People Making A Difference </h1>\n\n    <h3 class=\"Tahoma\"> Learn Something New, Make New Friends, Do Something Good! </h3>\n  </div>\n  \n</div>\n\n<router-outlet></router-outlet>\n\n\n\n"
 
 /***/ }),
 
@@ -415,14 +415,14 @@ var CreateEventComponent = /** @class */ (function () {
 /***/ "./src/pages/dashboard/dashboard.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".sameLine {\n  display: inline;\n  line-height: 80%;\n}\n\n.spaceWord {\n  word-spacing: 30px;\n}\n\n.changeColor {\n  color:#008675;\n}\n\ntable tr:nth-child(odd) {\n  background-color: #deefed;\n  padding-top: 12px;\n  padding-bottom: 12px;\n}\n\ntable th {\n  padding-top: 12px;\n  padding-bottom: 12px;\n  text-align: left;\n}\n\nlabel, button {\n  color:#008675;\n}"
+module.exports = ".sameLine {\n  display: inline;\n  line-height: 80%;\n}\n\n.spaceWord {\n  word-spacing: 30px;\n}\n\n.changeColor {\n  color:#008675;\n}\n\ntable tr:nth-child(odd) {\n  background-color: #deefed;\n  padding-top: 12px;\n  padding-bottom: 12px;\n}\n\ntable tr:hover {\n  background-color: #babdc1;\n}\n\ntable th {\n  padding-top: 12px;\n  padding-bottom: 12px;\n  text-align: left;\n}\n\nlabel, button {\n  color:#008675;\n}\n\n.pmd-button {\n  width: 10em;\n  height: 3em;\n  background-color: white;\n  border: thin solid #008675;\n}\n\n.pmd-button-red {\n  width: 10em;\n  height: 3em;\n  background-color: white;\n  color: #f75954;\n  border: thin solid #f75954;\n}\n\n.pmd-button-red:hover {\n  background-color: #f75954;\n  color: white;\n}\n\n.pmd-button:hover {\n  background-color: #008675;\n  color: white;\n}\n\n.bowl h3.bowlname {\n  font-size: xx-large;\n}\n\n.bowlinfo {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n}\n\n.bowlinfo p {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n  font-size: x-large;\n  text-align: center;\n}\n\n.pmd-message {\n  height: 3em;\n}\n\n.bowl {\n  border: medium solid #008675;\n  margin: 1em 0;\n  padding: 0.5em;\n}\n\n"
 
 /***/ }),
 
 /***/ "./src/pages/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav>\n  <button (click)=\"goToCreateEvent()\">Create Event</button>\n</nav>\n\n<div class=\"bowls\">\n  <p *ngIf=\"errorMessage.length > 0;\" style=\"color: red;\">{{ errorMessage }}</p>\n  <div \n    class=\"bowl\"\n    *ngFor=\"let bowl of bowls;\"\n  >\n    <h3>{{ bowl.name }}</h3>\n    <p>Current Message: {{ bowl.message }}</p>\n    <p>Event Id: {{ bowl.id }}</p>\n    <p>Exit Id: {{bowl.exit_id}}</p>\n    <button (click)=\"sendCheckoutReminder(bowl)\">Send Checkout Reminder</button>\n    <p> \n      <label class=\"Tahoma\" for=\"message\">Send a message to all volunteers:</label>\n      <input \n        type=\"text\" \n        name=\"message\" \n        #message \n        (keyup.enter)=\"postMessage(bowl)\"\n        (keyup)=\"bowl.new_message = message.value\"\n      />\n      <button (click)=\"postMessage(bowl)\">Send</button>\n    </p>\n    \n\n    <ul>\n      <table class=\"Avenir\">\n\n        <th> Name </th>\n        <th> Assignment </th>\n        <th> Location </th>\n        <th> Check In </th>\n        <th> Check out </th>\n        <th> Volunteering Time </th>\n\n        <tr *ngFor=\"let volunteer of bowl.volunteers;\">\n            <td> {{ volunteer.name }} </td>\n\n            <td *ngIf=\"volunteer.edit\">\n              <input type=\"text\" name=\"vAssign\" #vassign \n                (keyup.enter)=\"saveEdits(volunteer)\"\n                (keyup)=\"volunteer.new_assignment = vassign.value\"\n                value=\"{{ volunteer.assignment }}\">\n            </td>\n            <td *ngIf=\"volunteer.edit\">\n              <input type=\"text\" name=\"vLoc\" #vloc \n              (keyup.enter)=\"saveEdits(volunteer)\"\n              (keyup)=\"volunteer.new_location = vloc.value\"\n              value=\"{{ volunteer.location }}\">\n            </td>\n            \n\n            <td *ngIf=\"!volunteer.edit\">\n              {{ volunteer.assignment }}\n            </td>\n            <td *ngIf=\"!volunteer.edit\">\n              {{ volunteer.location }}\n            </td>\n            <td>\n              {{ volunteer.checkin | volunteerTime }}\n            </td>\n            <td>\n              {{ volunteer.checkout | volunteerTime }}\n            </td>\n            <td>\n              {{ volunteer.checkout - volunteer.checkin | volunteerDuration }}\n            </td>\n            <td *ngIf=\"!volunteer.edit\">\n              <button (click)=\"enableEditing(volunteer)\">Edit</button>\n            </td>\n            <td *ngIf=\"volunteer.edit\">\n              <button (click)=\"saveEdits(volunteer)\">Save</button>\n            </td>\n            \n        </tr>\n      </table>\n    </ul>\n\n  </div>\n</div>"
+module.exports = "<nav>\n  <button class=\"pmd-button\" (click)=\"goToCreateEvent()\">Create Event</button>\n</nav>\n\n<div class=\"bowls\">\n  <p *ngIf=\"errorMessage.length > 0;\" style=\"color: red;\">{{ errorMessage }}</p>\n  <div \n    class=\"bowl\"\n    *ngFor=\"let bowl of bowls;\"\n  >\n    <div *ngIf=\"bowl.deleted!==true\">\n      <div class=\"bowltitle\">\n        <h3 class=\"bowlname\">{{ bowl.name }}</h3>\n        <button *ngIf=\"bowl.deleting!==true\" class=\"pmd-button-red\" (click)=\"deleteBowl(bowl)\">Delete Event</button>\n        <div *ngIf=\"bowl.deleting===true\">\n          <p>Are you sure you want to delete the event \"{{bowl.name}}\"?</p>\n          <button class=\"pmd-button\" (click)=\"confirmDelete(bowl)\">Confirm</button>\n          <button class=\"pmd-button\" (click)=\"cancelDelete(bowl)\">Cancel</button>\n        </div>\n      </div>\n      <div class=\"bowlinfo\">\n        <p>Current Message: {{ bowl.message }}</p>\n        <p>Event Id: {{ bowl.id }}</p>\n        <p>Exit Id: {{bowl.exit_id}}</p>\n      </div>\n      <button class=\"pmd-button\" (click)=\"sendCheckoutReminder(bowl)\">Send Checkout Reminder</button>\n      <p> \n        <label class=\"Tahoma\" for=\"message\">Send a message to all volunteers:</label>\n        <input \n          type=\"text\" \n          name=\"message\" \n          #message \n          (keyup.enter)=\"postMessage(bowl)\"\n          (keyup)=\"bowl.new_message = message.value\"\n          class=\"pmd-message\"\n        />\n        <button class=\"pmd-button\" (click)=\"postMessage(bowl)\">Send</button>\n      </p>\n      \n\n      <ul>\n        <table class=\"Avenir\">\n\n          <th> Name </th>\n          <th> Assignment </th>\n          <th> Location </th>\n          <th> Check In </th>\n          <th> Check out </th>\n          <th> Volunteering Time </th>\n\n          <tr *ngFor=\"let volunteer of bowl.volunteers;\">\n              <td> {{ volunteer.name }} </td>\n\n              <td *ngIf=\"volunteer.edit\">\n                <input type=\"text\" name=\"vAssign\" #vassign \n                  (keyup.enter)=\"saveEdits(volunteer)\"\n                  (keyup)=\"volunteer.new_assignment = vassign.value\"\n                  value=\"{{ volunteer.assignment }}\">\n              </td>\n              <td *ngIf=\"volunteer.edit\">\n                <input type=\"text\" name=\"vLoc\" #vloc \n                (keyup.enter)=\"saveEdits(volunteer)\"\n                (keyup)=\"volunteer.new_location = vloc.value\"\n                value=\"{{ volunteer.location }}\">\n              </td>\n              \n\n              <td *ngIf=\"!volunteer.edit\">\n                {{ volunteer.assignment }}\n              </td>\n              <td *ngIf=\"!volunteer.edit\">\n                {{ volunteer.location }}\n              </td>\n              <td>\n                {{ volunteer.checkin | volunteerTime }}\n              </td>\n              <td>\n                {{ volunteer.checkout | volunteerTime }}\n              </td>\n              <td>\n                {{ volunteer.checkout - volunteer.checkin | volunteerDuration }}\n              </td>\n              <td *ngIf=\"!volunteer.edit\">\n                <button class=\"pmd-button\" (click)=\"enableEditing(volunteer)\">Edit</button>\n              </td>\n              <td *ngIf=\"volunteer.edit\">\n                <button class=\"pmd-button\" (click)=\"saveEdits(volunteer)\">Save</button>\n              </td>\n              \n          </tr>\n        </table>\n      </ul>\n\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -531,6 +531,24 @@ var DashboardComponent = /** @class */ (function () {
             .subscribe(function (res) {
             console.log('reminder', res);
         }, this.showError("send reminder for " + bowl.name));
+    };
+    DashboardComponent.prototype.deleteBowl = function (bowl) {
+        bowl.deleting = true;
+    };
+    DashboardComponent.prototype.confirmDelete = function (bowl) {
+        console.log("confirm delete");
+        this.errorMessage = '';
+        this.http.post('/delete_event', {
+            eventId: bowl.id
+        })
+            .subscribe(function () {
+            console.log("deleted " + bowl.name);
+            bowl.deleted = true;
+        }, this.showError("delete event " + bowl.name));
+    };
+    DashboardComponent.prototype.cancelDelete = function (bowl) {
+        console.log("cancel delete");
+        bowl.deleting = false;
     };
     DashboardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
