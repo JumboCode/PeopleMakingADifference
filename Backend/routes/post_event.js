@@ -10,6 +10,8 @@ module.exports = function(app, dbconn){
         file.mimetype == 'application/csv'
         ||
         file.mimetype == 'application/vnd.ms-excel'
+        ||
+        file.mimetype == 'application/octet-stream'
       )
     ) {
       cb(null, true);
