@@ -116,4 +116,31 @@ export class DashboardComponent implements OnInit {
     this.showError(`send reminder for ${bowl.name}`));
   }
 
+  deleteBowl(bowl){
+    bowl.deleting = true;
+  }
+
+  confirmDelete(bowl){
+    console.log("confirm delete");
+
+    this.errorMessage = '';
+    this.http.post('/delete_event',
+      {
+        eventId : bowl.id
+      }
+    )
+    .subscribe(
+      ()=>{
+        console.log(`deleted ${bowl.name}`);
+        bowl.deleted = true;
+      }, 
+      this.showError(`delete event ${bowl.name}`)
+    );
+  }
+
+  cancelDelete(bowl){
+    console.log("cancel delete");
+    bowl.deleting = false;
+  }
+
 }

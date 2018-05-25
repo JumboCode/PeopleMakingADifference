@@ -17,6 +17,10 @@ table tr:nth-child(odd) {
   padding-bottom: 12px;
 }
 
+table tr:hover {
+  background-color: #babdc1;
+}
+
 table th {
   padding-top: 12px;
   padding-bottom: 12px;
@@ -26,3 +30,54 @@ table th {
 label, button {
   color:#008675;
 }
+
+.pmd-button {
+  width: 10em;
+  height: 3em;
+  background-color: white;
+  border: thin solid #008675;
+}
+
+.pmd-button-red {
+  width: 10em;
+  height: 3em;
+  background-color: white;
+  color: #f75954;
+  border: thin solid #f75954;
+}
+
+.pmd-button-red:hover {
+  background-color: #f75954;
+  color: white;
+}
+
+.pmd-button:hover {
+  background-color: #008675;
+  color: white;
+}
+
+.bowl h3.bowlname {
+  font-size: xx-large;
+}
+
+.bowlinfo {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bowlinfo p {
+  flex: 1 1 auto;
+  font-size: x-large;
+  text-align: center;
+}
+
+.pmd-message {
+  height: 3em;
+}
+
+.bowl {
+  border: medium solid #008675;
+  margin: 1em 0;
+  padding: 0.5em;
+}
+
