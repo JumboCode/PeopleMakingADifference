@@ -140,13 +140,15 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2__ = __webpack_require__("./node_modules/angularfire2/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_angularfire2_auth__ = __webpack_require__("./node_modules/angularfire2/auth/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__app_component__ = __webpack_require__("./src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ngx_cookie__ = __webpack_require__("./node_modules/ngx-cookie/fesm5/ngx-cookie.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__app_component__ = __webpack_require__("./src/app/app.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -173,7 +175,7 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_13__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_5__pages_createevent_createevent_component__["a" /* CreateEventComponent */],
                 __WEBPACK_IMPORTED_MODULE_6__pages_dashboard_dashboard_component__["a" /* DashboardComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__pages_login_login_component__["a" /* LoginComponent */],
@@ -186,12 +188,13 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["c" /* JsonpModule */],
                 __WEBPACK_IMPORTED_MODULE_10_angularfire2__["a" /* AngularFireModule */].initializeApp(__WEBPACK_IMPORTED_MODULE_12__environments_environment__["a" /* environment */].firebase),
+                __WEBPACK_IMPORTED_MODULE_13_ngx_cookie__["a" /* CookieModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_11_angularfire2_auth__["b" /* AngularFireAuthModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* RouterModule */].forRoot(appRoutes, { enableTracing: false } // <-- debugging purposes only
                 )
             ],
             providers: [],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_13__app_component__["a" /* AppComponent */]]
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_14__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
@@ -434,7 +437,8 @@ module.exports = "<nav>\n  <button class=\"pmd-button\" (click)=\"goToCreateEven
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngx_cookie__ = __webpack_require__("./node_modules/ngx-cookie/fesm5/ngx-cookie.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__("./node_modules/rxjs/_esm5/add/operator/map.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -448,11 +452,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent(http, router) {
+    function DashboardComponent(http, router, _cookieService) {
         var _this = this;
         this.http = http;
         this.router = router;
+        this._cookieService = _cookieService;
         this.errorMessage = '';
         this.bowls = [];
         this.showError = function (action) { return function (message) {
@@ -466,7 +472,8 @@ var DashboardComponent = /** @class */ (function () {
     // Gets the items into this.items by reading through the file
     DashboardComponent.prototype.loadItems = function () {
         var _this = this;
-        this.http.get('/')
+        var urlString = "/?token=" + this._cookieService.get("userFirebaseToken");
+        this.http.get(urlString)
             .map(function (res) { return res.json(); })
             .subscribe(function (json) {
             _this.bowls = json;
@@ -556,7 +563,7 @@ var DashboardComponent = /** @class */ (function () {
             template: __webpack_require__("./src/pages/dashboard/dashboard.component.html"),
             styles: [__webpack_require__("./src/pages/dashboard/dashboard.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_3_ngx_cookie__["b" /* CookieService */]])
     ], DashboardComponent);
     return DashboardComponent;
 }());
@@ -587,6 +594,7 @@ module.exports = "<form>\n  <p *ngIf=\"error\" style=\"color: red;\">{{errorMess
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__("./node_modules/angularfire2/auth/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngx_cookie__ = __webpack_require__("./node_modules/ngx-cookie/fesm5/ngx-cookie.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -599,10 +607,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(router, afAuth) {
+    function LoginComponent(router, afAuth, _cookieService) {
         this.router = router;
         this.afAuth = afAuth;
+        this._cookieService = _cookieService;
         this.error = false;
     }
     LoginComponent.prototype.ngOnInit = function () {
@@ -614,10 +624,11 @@ var LoginComponent = /** @class */ (function () {
         var _this = this;
         this.afAuth.auth.signInWithEmailAndPassword(username.value, password.value)
             .then(function (user) {
+            user.getIdToken().then(function (token) {
+                _this._cookieService.put("userFirebaseToken", token);
+            });
             _this.router.navigate(['/dashboard']);
-        })
-            .catch(function (err) {
-            console.log('got here');
+        }).catch(function (err) {
             _this.error = true;
             _this.errorMessage = "Incorrect username or password.";
         });
@@ -628,7 +639,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__("./src/pages/login/login.component.html"),
             styles: [__webpack_require__("./src/pages/login/login.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */], __WEBPACK_IMPORTED_MODULE_3_ngx_cookie__["b" /* CookieService */]])
     ], LoginComponent);
     return LoginComponent;
 }());

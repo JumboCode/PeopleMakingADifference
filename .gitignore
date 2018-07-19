@@ -46,6 +46,7 @@ node_modules
 ####################
 demo-key.json
 *key.json
+.env
 
 # User Sensitive #
 ##################
@@ -54,4 +55,3 @@ demo-key.json
 # Other #
 ######################
 twilio-key.json
-

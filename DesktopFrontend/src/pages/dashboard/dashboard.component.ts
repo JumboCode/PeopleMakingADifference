@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
   errorMessage = '';
   bowls: any = [];
 
-  constructor(private http: Http, private router: Router) { }
+  constructor(private http: Http, private router: Router, private _cookieService:CookieService) {}
 
   ngOnInit() {
     this.loadItems();
@@ -21,7 +22,8 @@ export class DashboardComponent implements OnInit {
 
   // Gets the items into this.items by reading through the file
   loadItems() {
-    this.http.get('/')
+    let urlString = "/?token=" + this._cookieService.get("userFirebaseToken");
+    this.http.get(urlString)
     .map(res => res.json())
     .subscribe(json => {
       this.bowls = json;
@@ -40,7 +42,7 @@ export class DashboardComponent implements OnInit {
       () => {
         volunteer.assignment = volunteer.new_assignment;
         console.log('updated assignment')
-      }, 
+      },
       this.showError(`update assignment for ${volunteer.name}`));
   }
 
@@ -56,7 +58,7 @@ export class DashboardComponent implements OnInit {
       ()=>{
         volunteer.location = volunteer.new_location;
         console.log('updated location')
-      }, 
+      },
       this.showError(`update location for ${volunteer.name}`));
   }
 
@@ -96,7 +98,7 @@ export class DashboardComponent implements OnInit {
     if(volunteer.new_assignment !== volunteer.assignment && volunteer.new_assignment) {
       this.postAssignment(volunteer);
     }
-    
+
     volunteer.edit = false;
   }
 
@@ -112,7 +114,7 @@ export class DashboardComponent implements OnInit {
     )
     .subscribe((res) => {
       console.log('reminder', res);
-    }, 
+    },
     this.showError(`send reminder for ${bowl.name}`));
   }
 
@@ -133,7 +135,7 @@ export class DashboardComponent implements OnInit {
       ()=>{
         console.log(`deleted ${bowl.name}`);
         bowl.deleted = true;
-      }, 
+      },
       this.showError(`delete event ${bowl.name}`)
     );
   }

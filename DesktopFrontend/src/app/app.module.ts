@@ -12,6 +12,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
+import { CookieModule } from 'ngx-cookie';
+
 import { AppComponent } from './app.component';
 
 const appRoutes: Routes = [
@@ -33,10 +35,11 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    FormsModule, 
+    FormsModule,
     HttpModule,
     JsonpModule,
     AngularFireModule.initializeApp(environment.firebase),
+    CookieModule.forRoot(),
     AngularFireAuthModule,
     RouterModule.forRoot(
       appRoutes,
