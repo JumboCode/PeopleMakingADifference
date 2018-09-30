@@ -38,7 +38,18 @@ export class CheckIn1 implements OnInit {
     
   }
 
-
+  isDebugUser(phone: number): boolean {
+  	// putting a healthy dose of test accounts here _just in case_
+  	return String(phone) in {
+  		"1234567890": true,
+  		"9987654321": true,
+  		"9999999999": true,
+  		"8888888888": true,
+  		"7777777777": true,
+  		"6666666666": true,
+  		"5555555555": true
+  	}
+  }
 
   checkLogin(phone: number, eventId: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
@@ -51,7 +62,7 @@ export class CheckIn1 implements OnInit {
       const loginForm = {
         'phone': phone,
         'eventId': eventId,
-        'debug': String(debugMode)
+        'debug': String(debugMode || this.isDebugUser(phone))
       }
       
       const formBody: string = this.configService.xwwwurlencode(loginForm);
@@ -99,9 +110,6 @@ export class CheckIn1 implements OnInit {
   }
 
   onSubmitClick() {
-    if(this.userService.getDebug()){
-
-    }
     let loader = this.loadingCtrl.create({
       spinner: 'crescent',
       content: 'Validating...'
@@ -117,5 +125,7 @@ export class CheckIn1 implements OnInit {
     });
   }
 
-  
+  onSignupClick() {
+    window.open('http://www.pmd.org/events.phtml', '_system', 'location=yes');
+  }
 }
