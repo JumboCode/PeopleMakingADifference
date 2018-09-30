@@ -30,6 +30,7 @@ module.exports = function(app, dbconn){
               res.status(400).send({
                 'message': 'You have already checked out from this event.'
               });
+              return;
             }
             // send only the data we need to send
             const {id, name} = items[0].volunteers[0];
