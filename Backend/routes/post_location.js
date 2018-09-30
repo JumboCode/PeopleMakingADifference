@@ -13,12 +13,23 @@ module.exports = function(app, dbconn){
                             },
                         }
                     );
-
                     const payload = {
-                        notification: {
-                            title: `PMD: ${items[0].name}`,
-                            body: `Location update: ${req.body.location}`,
-                            icon: `fcm_push_icon`,
+                        android: {
+                            notification: {
+                                title: `PMD: ${items[0].name}`,
+                                body: `Location update: ${req.body.location}`,
+                                icon: `fcm_push_icon`,
+                            }
+                        },
+                        apns: {
+                            payload: {
+                                aps: {
+                                    alert: {
+                                        title: `PMD: ${items[0].name}`,
+                                        body: `Location update: ${req.body.location}`
+                                    }
+                                }
+                            }
                         }
                     }
                     messaging.messageOne(dbconn, parseInt(req.body.uid), payload)
