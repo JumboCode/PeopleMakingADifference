@@ -77,7 +77,10 @@ export class CheckIn1 implements OnInit {
       })
 
       // convert the blob request and JSON parse it asynchronously
-      .then((blob) => blob.json())
+      .then((blob) => {
+        if(blob.ok) return blob.json()
+        throw "Invalid Response"
+      })
 
       .then((json) => {
         // the id provided is valid - set the current user of the app to use
@@ -94,15 +97,9 @@ export class CheckIn1 implements OnInit {
         resolve(true);
       })
       // handle HTTP errors
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
-
-        // if the response we get from the server is not valid json,
-        // our attempt to JSON parse it above throws a SyntaxError
-        // we always get invalid JSON when the ID is invalid
-        // if (err.name === 'SyntaxError') {
         this.errorMessage = 'Invalid phone number, or you have already checked out of this event.';
-        // }
         resolve(false);
       });
     });
