@@ -29,6 +29,7 @@
     "@ionic-native/android-permissions": "^4.5.3",
     "@ionic-native/core": "^4.2.0",
     "@ionic-native/fcm": "^4.5.3",
+    "@ionic-native/in-app-browser": "4.4.2",
     "@ionic-native/splash-screen": "^4.5.3",
     "@ionic/storage": "2.0.1",
     "android-versions": "^1.3.0",
@@ -36,6 +37,7 @@
     "cordova-plugin-android-permissions": "^1.0.0",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-fcm": "^2.1.2",
+    "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.19",
     "cordova-plugin-sms": "^1.0.5",
@@ -66,7 +68,8 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-fcm": {},
       "cordova-plugin-android-permissions": {},
-      "cordova-plugin-sms": {}
+      "cordova-plugin-sms": {},
+      "cordova-plugin-inappbrowser": {}
     },
     "platforms": [
       "android"

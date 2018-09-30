@@ -3,6 +3,7 @@ import {NavController, LoadingController} from 'ionic-angular';
 import {Platform} from 'ionic-angular';
 
 import {AndroidPermissions} from '@ionic-native/android-permissions';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 import {ConfigService} from '../../app/config.service';
 import {User, UserService} from '../../app/user.service';
@@ -15,9 +16,13 @@ export class CheckIn1 implements OnInit {
   errorMessage = '';
 
   constructor(
-      public navCtrl: NavController, public configService: ConfigService,
-      public userService: UserService, public loadingCtrl: LoadingController,
-      public androidPermissions: AndroidPermissions, public platform: Platform) {}
+      public navCtrl: NavController, 
+      public configService: ConfigService,
+      public userService: UserService, 
+      public loadingCtrl: LoadingController,
+      public androidPermissions: AndroidPermissions, 
+      public platform: Platform,
+      private iab: InAppBrowser) {}
 
    ngOnInit(): void {
     this.platform.ready().then(() => {
@@ -123,6 +128,6 @@ export class CheckIn1 implements OnInit {
   }
 
   onSignupClick() {
-    window.open('http://www.pmd.org/events.phtml', '_system', 'location=yes');
+    this.iab.create('http://www.pmd.org/events.phtml', '_system', 'location=yes');
   }
 }
