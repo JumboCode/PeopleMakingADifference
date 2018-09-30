@@ -24,22 +24,10 @@ module.exports = function(app, dbconn){
                     id: req.body.eventId
                 }).toArray((err, items)=>{
                     const payload = {
-                        android: {
-                            notification: {
-                                title: `PMD: ${items[0].name}`,
-                                body: `New message: ${msg}`,
-                                icon: `fcm_push_icon`,
-                            }
-                        },
-                        apns: {
-                            payload: {
-                                aps: {
-                                    alert: {
-                                        title: `PMD: ${items[0].name}`,
-                                        body: `New message: ${msg}`
-                                    }
-                                }
-                            }
+                        notification: {
+                            title: `PMD: ${items[0].name}`,
+                            body: `New message: ${msg}`,
+                            icon: `fcm_push_icon`,
                         }
                     }
                     messaging.messageAll(dbconn, req.body.eventId, payload)

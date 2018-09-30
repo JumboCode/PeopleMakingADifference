@@ -16,22 +16,10 @@ module.exports = function(app, dbconn){
 
                     // send the notification to alert the user that their assignment has been updated
                     const payload = {
-                        android: {
-                            notification: {
-                                title: `PMD: ${items[0].name}`,
-                                body: `Assignment update: ${req.body.assignment}`,
-                                icon: `fcm_push_icon`,
-                            }
-                        },
-                        apns: {
-                            payload: {
-                                aps: {
-                                    alert: {
-                                        title: `PMD: ${items[0].name}`,
-                                        body: `Assignment update: ${req.body.assignment}`
-                                    }
-                                }
-                            }
+                        notification: {
+                            title: `PMD: ${items[0].name}`,
+                            body: `Assignment update: ${req.body.assignment}`,
+                            icon: `fcm_push_icon`,
                         }
                     }
                     messaging.messageOne(dbconn, parseInt(req.body.uid), payload)
