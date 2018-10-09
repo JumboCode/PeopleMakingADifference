@@ -72,8 +72,8 @@ module.exports = {
                 function(){
                   return {status: "resolved"}
                 },
-                function(){
-                  return {status: "rejected"}
+                function(reason){
+                  return {status: "rejected", reason: reason}
                 });
             }
             let push_promises = [];
@@ -87,6 +87,10 @@ module.exports = {
             // it is ok and expected if some of them fail
             Promise.all(push_promises.map(reflect))
             .then((results) => {
+              let rejections = results.filter(x => x.status === "rejected");
+              for(rejected in rejections){
+                console.log(`Rejection reason: ${rejected.reason}`);
+              }
               resolve(`Attempted to send ${results.length}, ${results.filter(x => x.status === "resolved").length} succeeded.`);
               return;
             })
