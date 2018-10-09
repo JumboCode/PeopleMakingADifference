@@ -26,7 +26,8 @@ module.exports = function(app, dbconn){
                     const payload = {
                         notification: {
                             title: `PMD: ${items[0].name}`,
-                            body: `New message: ${msg}`
+                            body: `New message: ${msg}`,
+                            icon: `fcm_push_icon`,
                         }
                     }
                     messaging.messageAll(dbconn, req.body.eventId, payload)
