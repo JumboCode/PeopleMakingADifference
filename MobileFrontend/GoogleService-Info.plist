@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>70853020347-t0tjfhksi5iq4juemq4rmomvnb5jljkp.apps.googleusercontent.com</string>
+	<string>70853020347-1u8k1ji181njbuaab1l8ua40bgs0gb14.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.70853020347-t0tjfhksi5iq4juemq4rmomvnb5jljkp</string>
+	<string>com.googleusercontent.apps.70853020347-1u8k1ji181njbuaab1l8ua40bgs0gb14</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAZjOnM7uXPgc5ni-hpvefPR1ANx5g_ZvI</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.jumbocode.pmd</string>
+	<string>org.jumbocode.pmd</string>
 	<key>PROJECT_ID</key>
 	<string>people-making-a-difference</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:70853020347:ios:a98a07d60ba37cc7</string>
+	<string>1:70853020347:ios:c00d80e91540d8f3</string>
 	<key>DATABASE_URL</key>
 	<string>https://people-making-a-difference.firebaseio.com</string>
 </dict>

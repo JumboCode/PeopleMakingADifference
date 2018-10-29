@@ -86,6 +86,6 @@
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <plugin name="cordova-plugin-sms" spec="^1.0.5" />
-    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~3.0.0" />
     <engine name="android" spec="~6.3.0" />
 </widget>
