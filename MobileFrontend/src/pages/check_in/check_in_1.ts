@@ -4,6 +4,7 @@ import {Platform} from 'ionic-angular';
 
 import {AndroidPermissions} from '@ionic-native/android-permissions';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {SafariViewController} from '@ionic-native/safari-view-controller';
 
 import {ConfigService} from '../../app/config.service';
 import {User, UserService} from '../../app/user.service';
@@ -22,7 +23,8 @@ export class CheckIn1 implements OnInit {
       public loadingCtrl: LoadingController,
       public androidPermissions: AndroidPermissions, 
       public platform: Platform,
-      private iab: InAppBrowser) {}
+      private iab: InAppBrowser,
+      private svc: SafariViewController) {}
 
    ngOnInit(): void {
     this.platform.ready().then(() => {
@@ -128,6 +130,16 @@ export class CheckIn1 implements OnInit {
   }
 
   onSignupClick() {
-    this.iab.create('http://www.pmd.org/events.phtml', '_system', 'location=yes');
+    this.svc.isAvailable()
+      .then((available: boolean) => {
+        if (available) {
+          this.svc.show({
+            url: 'https://www.pmd.org/events.phtml'
+          });
+        } else {
+          this.iab.create('https://www.pmd.org/events.phtml', '_system', 'location=yes');
+        }
+      }
+    );
   }
 }
