@@ -40,7 +40,7 @@
     "cordova-plugin-fcm-with-dependecy-updated": "~4.1.0",
     "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
-    "cordova-plugin-ionic-webview": "^1.1.19",
+    "cordova-plugin-ionic-webview": "^2.2.0",
     "cordova-plugin-safariviewcontroller": "^1.6.0",
     "cordova-plugin-sms": "^1.0.5",
     "cordova-plugin-splashscreen": "^5.0.2",
