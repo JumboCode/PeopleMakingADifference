@@ -12,53 +12,57 @@ class CSV_parser {
     return new Promise((res, rej) => {
       let rows = [];
       let feedback = [];
-      fs.createReadStream(this.path)
-        .pipe(
-          fast_csv({
-            // This may look strange, but it has a purpose. 
-            // There are ~89 columns in the CSV, and we only care about a few of them.
-            // So, this is a sparse array containing the ones we want, and empty space
-            // for every one we don't want.
-            headers: [
-              , , , , , ,
-              "FirstName",
-              "LastName", , , , , , , , , , , ,
-              "Email",
-              "CellPhone", , , , , , , , , , , , ,
-              "ROLE",
-              "BACKUP ROLE", , , , , , , , , ,
-              'Room', , , , , , , , , ,
-              "TRAINING DATE(s)", , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
-            ],
-            // Replace the first line of the CSV file (the header line) with our sparse array.
-            renameHeaders: true
-          })
-          .on('data', (row) => {
-            let newRow = {
-              name: row['FirstName'] + ' ' + row['LastName'],
-              email: row['Email'],
-              cell: row['CellPhone'].replace(/\-/g, ""),
-              assignment: row['ROLE'],
-              location: row['Room']
-            };
-            if(newRow.name && newRow.email && newRow.cell && newRow.assignment && newRow.location){
-              rows.push(newRow);
-            } else {
-              const rowRepresentation = [
-                row['FirstName'], row['LastName'], row['Email'], 
-                row['CellPhone'], row['ROLE'], row['Room']
-              ].join(', ');
-              feedback.push(`Skipped:    ${rowRepresentation}<br />This row was missing either FirstName, LastName, Email, CellPhone, ROLE, or Room data.`);
-            }
-            
-          })
-          .on('end', () => {
-            if (feedback.length === 0){
-              feedback = ["All rows parsed successfully."];
-            }
-            res({rows: rows, feedback: feedback});
-          })
-        );
+      try {
+        fs.createReadStream(this.path)
+          .pipe(
+            fast_csv({
+              // This may look strange, but it has a purpose. 
+              // There are ~89 columns in the CSV, and we only care about a few of them.
+              // So, this is a sparse array containing the ones we want, and empty space
+              // for every one we don't want.
+              headers: [
+                , , , , , ,
+                "FirstName",
+                "LastName", , , , , , , , , , , ,
+                "Email",
+                "CellPhone", , , , , , , , , , , , ,
+                "ROLE",
+                "BACKUP ROLE", , , , , , , , , ,
+                'Room', , , , , , , , , ,
+                "TRAINING DATE(s)", , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
+              ],
+              // Replace the first line of the CSV file (the header line) with our sparse array.
+              renameHeaders: true
+            })
+            .on('data', (row) => {
+              let newRow = {
+                name: row['FirstName'] + ' ' + row['LastName'],
+                email: row['Email'],
+                phone: parseInt(row['CellPhone'].replace(/\-/g, "")),
+                assignment: row['ROLE'],
+                location: row['Room']
+              };
+              if(newRow.name && newRow.email && newRow.phone && newRow.assignment && newRow.location){
+                rows.push(newRow);
+              } else {
+                const rowRepresentation = [
+                  row['FirstName'], row['LastName'], row['Email'], 
+                  row['CellPhone'], row['ROLE'], row['Room']
+                ].join(', ');
+                feedback.push(`Skipped:    ${rowRepresentation}<br />This row was missing either FirstName, LastName, Email, CellPhone, ROLE, or Room data.`);
+              }
+              
+            })
+            .on('end', () => {
+              if (feedback.length === 0){
+                feedback = ["All rows parsed successfully."];
+              }
+              res({rows: rows, feedback: feedback});
+            })
+          );
+      } catch(e) {
+        rej(e);
+      }
     });
   }
   
@@ -106,7 +110,7 @@ class CSV_parser {
       // we can't do an upsert here because the volunteer data is inside an array
       let volunteer_update_err, volunteer_update_result = await db.collection('bowls').update({
         'name': event_name,
-        'volunteers.cell': String(data[row]['cell'])
+        'volunteers.phone': String(data[row]['phone'])
       }, {
         $set: {
           'volunteers.$': data[row]

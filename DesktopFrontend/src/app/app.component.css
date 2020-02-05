@@ -12,3 +12,23 @@
 	color:#008675;
 }
 
+.headerbar .logo {
+  width: 10em;
+}
+
+.headerbar .headertext {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.headerbar .headertext h3 {
+  font-style: italic;
+  margin: 0.5em 0;
+  font-family: sans-serif;
+}
+
+.headerbar .headertext h1 {
+  font-family: sans-serif;
+  margin: 0.5em 0;
+  font-weight: lighter;
+}

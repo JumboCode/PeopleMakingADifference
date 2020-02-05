@@ -28,7 +28,7 @@ module.exports = function(app, dbconn){
                 }
             ).toArray(function(err, items) {
                 if (items.length > 0) {
-	                if (items[0].volunteers[0].checkout == false) {
+	                if (!items[0].volunteers[0].checkout) {
 	                    db.collection('bowls').update(
                             {
                                 'volunteers.id': parseInt(req.body.uid),

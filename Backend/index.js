@@ -5,6 +5,10 @@ const bodyParser = require('body-parser'); // module used to parse POST paramete
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use('/dashboard', express.static('static')); // Static file virtual path (where the dashboard gets served)
+// app.get(/dashboard\/(dashboard|login|create-event)/, (req, res) => {
+//   res.sendFile(`${__dirname}/static/index.html`);
+// });
 
 // CORS! Yes, really! For real!
 app.use(function(req, res, next) {
@@ -50,8 +54,7 @@ const generic_database_connection = () => {
 const routes = [
     'get_message', 'get_uid', 'post_checkout', 'post_location', 'get_root', 'post_assignment',
     'post_checkout', 'post_checkin', 'post_message', 'post_token', 'post_verification', 'post_event',
-    'post_checkout_reminder', 'post_checkout_reminded'
-];
+    'post_checkout_reminder', 'post_checkout_reminded', 'post_event_deletion'];
 // for each route, initialize that route by passing the express app and database connection function
 for (let route of routes) {
     require(`./routes/${route}.js`)(app, generic_database_connection);

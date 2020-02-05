@@ -1,11 +1,10 @@
 {
   "name": "pmd_mobile",
-  "app_id": "",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
   },
+  "type": "ionic-angular",
   "DEV_MODE": true,
   "PROD_SERVER": "http://pmd-server.herokuapp.com/",
-  "DEV_SERVER": "http://localhost:5000/"
+  "DEV_SERVER": "http://people-making-a-difference.herokuapp.com/"
 }

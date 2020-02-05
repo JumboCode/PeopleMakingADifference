@@ -10,3 +10,59 @@ label, button {
 .Avenir {
 	font-family: "Avenir", Verdana, Tahoma;
 }
+
+body {
+    font-family: "Avenir";
+}
+
+
+#header {
+    background: #00B29A;
+    height: 190px;
+    color: white;
+    font-size: 25px;
+    padding-top: 40px;
+    padding-left: calc(2.5% + 200px);
+}
+
+#title {
+    font-size: 35px;
+}
+
+#logo {
+    position: absolute;
+    top: 30px;
+    left: 2.5%;
+}
+
+#padding {
+    padding: 40px;
+}
+
+#padding2 {
+    padding: 15px;
+}
+
+div.container {
+    text-align: center;
+    color: gray;
+    border: 1px solid silver;
+    width: 500px;
+    height: 160px;
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 25px;
+    border-radius: 10px;
+    font-size: 30px;
+}
+
+
+button {
+    background-color: #00B29A;
+    border-radius: 4px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    height: 35px;
+    width: 150px;
+}

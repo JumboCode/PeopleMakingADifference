@@ -3,14 +3,15 @@ module.exports = function(app, dbconn){
   // The parameter must be name 'eventId'
     app.post('/update_reminder', function(req, res) {
       const payload = {
-          notification: {
-              title: `PMD: Did You Forget?`,
-              body: `We have not received your check-out time. No problem - just tap here to set it!`,
-              click_action: "FCM_PLUGIN_ACTIVITY",
-          },
-          data: {
-            intent: 'checkout_reminder'
-          }
+        notification: {
+          title: `PMD: Did You Forget?`,
+          body: `We have not received your check-out time. No problem - just tap here to set it!`,
+          icon: `fcm_push_icon`,
+          click_action: "FCM_PLUGIN_ACTIVITY",
+        },
+        data: {
+          intent: 'checkout_reminder'
+        }
       }
 
       if(req.body.eventId){
@@ -26,6 +27,6 @@ module.exports = function(app, dbconn){
       } else {
         res.status(400).send('Please provide a valid event id.');
       }
-            
+
     });
 }

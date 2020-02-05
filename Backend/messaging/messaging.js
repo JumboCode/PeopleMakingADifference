@@ -1,10 +1,22 @@
 const admin = require("firebase-admin");
+const firebaseCreds = process.env.MONGODB_URI ? {
+  type : "service_account",
+  project_id: "people-making-a-difference",
+  auth_uri: "https://accounts.google.com/o/oauth2/auth",
+  token_uri: "https://accounts.google.com/o/oauth2/token",
+  auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+  private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
+  private_key: JSON.parse(process.env.FIREBASE_PRIVATE_KEY),
+  client_email: process.env.FIREBASE_CLIENT_EMAIL,
+  client_id: process.env.FIREBASE_CLIENT_ID,
+  client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
+} : process.env.TRAVIS_MODE ? {} : require('./demo-key.json');
+
 if(process.env.TRAVIS_MODE === "True") {
   const serviceAccount = "nothing, there's no API KEY";
 } else {
-  const serviceAccount = require("./demo-key.json");
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert(firebaseCreds),
     databaseURL: "https://people-making-a-difference.firebaseio.com"
   });
 }
@@ -60,8 +72,8 @@ module.exports = {
                 function(){
                   return {status: "resolved"}
                 },
-                function(){
-                  return {status: "rejected"}
+                function(reason){
+                  return {status: "rejected", reason: reason}
                 });
             }
             let push_promises = [];
@@ -75,6 +87,10 @@ module.exports = {
             // it is ok and expected if some of them fail
             Promise.all(push_promises.map(reflect))
             .then((results) => {
+              let rejections = results.filter(x => x.status === "rejected");
+              for(rejected in rejections){
+                console.log(`Rejection reason: ${rejected.reason}`);
+              }
               resolve(`Attempted to send ${results.length}, ${results.filter(x => x.status === "resolved").length} succeeded.`);
               return;
             })

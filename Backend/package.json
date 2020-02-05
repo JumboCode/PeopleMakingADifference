@@ -3,7 +3,7 @@
   "version": "0.2.6",
   "description": "test server with sample data",
   "engines": {
-    "node": "6.11.1"
+    "node": "8.11.2"
   },
   "main": "index.js",
   "scripts": {

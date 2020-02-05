@@ -8,7 +8,7 @@ module.exports = function(app, dbconn){
                     db.collection('bowls').update({'volunteers.id': parseInt(req.body.uid)},
                         {
                             $set: {
-                                'volunteers.$.token': req.body.token,
+                                'volunteers.$.token': req.body.token
                             },
                         }
                     );

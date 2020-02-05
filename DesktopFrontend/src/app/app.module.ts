@@ -8,6 +8,11 @@ import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { LoginComponent } from '../pages/login/login.component';
 import { VolunteerTimePipe } from './volunteer-time.pipe';
 import { VolunteerDurationPipe } from './volunteer-duration.pipe';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+
+import { CookieModule } from 'ngx-cookie';
 
 import { AppComponent } from './app.component';
 
@@ -30,9 +35,12 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    FormsModule, 
+    FormsModule,
     HttpModule,
     JsonpModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    CookieModule.forRoot(),
+    AngularFireAuthModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only

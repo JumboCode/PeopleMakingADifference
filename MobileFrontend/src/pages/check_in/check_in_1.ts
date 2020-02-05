@@ -3,6 +3,8 @@ import {NavController, LoadingController} from 'ionic-angular';
 import {Platform} from 'ionic-angular';
 
 import {AndroidPermissions} from '@ionic-native/android-permissions';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {SafariViewController} from '@ionic-native/safari-view-controller';
 
 import {ConfigService} from '../../app/config.service';
 import {User, UserService} from '../../app/user.service';
@@ -15,9 +17,14 @@ export class CheckIn1 implements OnInit {
   errorMessage = '';
 
   constructor(
-      public navCtrl: NavController, public configService: ConfigService,
-      public userService: UserService, public loadingCtrl: LoadingController,
-      public androidPermissions: AndroidPermissions, public platform: Platform) {}
+      public navCtrl: NavController, 
+      public configService: ConfigService,
+      public userService: UserService, 
+      public loadingCtrl: LoadingController,
+      public androidPermissions: AndroidPermissions, 
+      public platform: Platform,
+      private iab: InAppBrowser,
+      private svc: SafariViewController) {}
 
    ngOnInit(): void {
     this.platform.ready().then(() => {
@@ -38,7 +45,18 @@ export class CheckIn1 implements OnInit {
     
   }
 
-
+  isDebugUser(phone: number): boolean {
+  	// putting a healthy dose of test accounts here _just in case_
+  	return String(phone) in {
+  		"1234567890": true,
+  		"9987654321": true,
+  		"9999999999": true,
+  		"8888888888": true,
+  		"7777777777": true,
+  		"6666666666": true,
+  		"5555555555": true
+  	}
+  }
 
   checkLogin(phone: number, eventId: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
@@ -51,7 +69,7 @@ export class CheckIn1 implements OnInit {
       const loginForm = {
         'phone': phone,
         'eventId': eventId,
-        'debug': String(debugMode)
+        'debug': String(debugMode || this.isDebugUser(phone))
       }
       
       const formBody: string = this.configService.xwwwurlencode(loginForm);
@@ -66,7 +84,10 @@ export class CheckIn1 implements OnInit {
       })
 
       // convert the blob request and JSON parse it asynchronously
-      .then((blob) => blob.json())
+      .then((blob) => {
+        if(blob.ok) return blob.json()
+        throw "Invalid Response"
+      })
 
       .then((json) => {
         // the id provided is valid - set the current user of the app to use
@@ -83,16 +104,9 @@ export class CheckIn1 implements OnInit {
         resolve(true);
       })
       // handle HTTP errors
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
-        console.error('Try turning on CORS or switching DEV_MODE');
-
-        // if the response we get from the server is not valid json,
-        // our attempt to JSON parse it above throws a SyntaxError
-        // we always get invalid JSON when the ID is invalid
-        if (err.name === 'SyntaxError') {
-          this.errorMessage = 'Invalid Phone Number';
-        }
+        this.errorMessage = 'Invalid phone number, or you have already checked out of this event.';
         resolve(false);
       });
     });
@@ -100,9 +114,6 @@ export class CheckIn1 implements OnInit {
   }
 
   onSubmitClick() {
-    if(this.userService.getDebug()){
-
-    }
     let loader = this.loadingCtrl.create({
       spinner: 'crescent',
       content: 'Validating...'
@@ -118,5 +129,17 @@ export class CheckIn1 implements OnInit {
     });
   }
 
-  
+  onSignupClick() {
+    this.svc.isAvailable()
+      .then((available: boolean) => {
+        if (available) {
+          this.svc.show({
+            url: 'https://www.pmd.org/events.phtml'
+          });
+        } else {
+          this.iab.create('https://www.pmd.org/events.phtml', '_system', 'location=yes');
+        }
+      }
+    );
+  }
 }

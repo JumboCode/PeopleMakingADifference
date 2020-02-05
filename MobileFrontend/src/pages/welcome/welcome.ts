@@ -8,7 +8,7 @@ import {Platform} from 'ionic-angular';
 export class WelcomePage implements OnInit {
   constructor(public navCtrl: NavController, public userService: UserService, public platform: Platform) {}
   notAndroid: boolean = true;
-  debugSms: boolean = false;
+  debugSms: boolean = true;
   ngOnInit(): void {
     this.platform.ready().then(() => {
       this.notAndroid = !this.platform.is('android');

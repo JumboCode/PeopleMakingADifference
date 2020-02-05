@@ -50,7 +50,9 @@ export class CheckOutReminded {
         // this id
         
         this.feedback = text;
-        resolve(true);
+        this.userService.deleteUser().then(deleted => {
+          resolve(true);
+        })
       })
       // handle HTTP errors
       .catch((err) => {

@@ -16,31 +16,34 @@ export class CheckIn2 implements OnInit {
 
   constructor(
     public navCtrl: NavController, public userService: UserService, 
-    public configService: ConfigService, public loadingCtrl: LoadingController) {
+    public configService: ConfigService, public loadingCtrl: LoadingController,
+    public platform: Platform) {
     this.personName = userService.getUser().name;
   }
 
   ngOnInit(): void {
-    if(!this.userService.getDebug()){
-      let loader = this.loadingCtrl.create({
-        spinner: 'crescent',
-        content: 'Waiting for text message...'
-      });
-      loader.present();
-      let interval = setInterval(() => {
-        console.log('checking...')
-        if(this.userService.getUser().hasCode()){
-          console.log(`code: ${this.userService.getUser().getCode()}`);
-          this.verifyCode(this.userService.getUser().getCode())
-          .then(verified => {
-            loader.dismiss();
-            this.userService.saveUser();
-            this.navCtrl.push(MainPage);
-            clearInterval(interval);
-          });
-        }
-      }, 500);
-    }
+    this.platform.ready().then(()=>{
+      if(!this.userService.getDebug() && this.platform.is('android')){
+        let loader = this.loadingCtrl.create({
+          spinner: 'crescent',
+          content: 'Waiting for text message...'
+        });
+        loader.present();
+        let interval = setInterval(() => {
+          console.log('checking...')
+          if(this.userService.getUser().hasCode()){
+            console.log(`code: ${this.userService.getUser().getCode()}`);
+            this.verifyCode(this.userService.getUser().getCode())
+            .then(verified => {
+              loader.dismiss();
+              this.userService.saveUser();
+              this.navCtrl.push(MainPage);
+              clearInterval(interval);
+            });
+          }
+        }, 500);
+      }
+    });
   }
 
   onSubmitClick(): void {

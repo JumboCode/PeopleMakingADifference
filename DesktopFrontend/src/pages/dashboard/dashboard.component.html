@@ -1,5 +1,5 @@
 <nav>
-  <button (click)="goToCreateEvent()">Create Event</button>
+  <button class="pmd-button" (click)="goToCreateEvent()">Create Event</button>
 </nav>
 
 <div class="bowls">
@@ -8,76 +8,89 @@
     class="bowl"
     *ngFor="let bowl of bowls;"
   >
-    <h3>{{ bowl.name }}</h3>
-    <p>Current Message: {{ bowl.message }}</p>
-    <p>Event Id: {{ bowl.id }}</p>
-    <p>Exit Id: {{bowl.exit_id}}</p>
-    <button (click)="sendCheckoutReminder(bowl)">Send Checkout Reminder</button>
-    <p> 
-      <label class="Tahoma" for="message">Send a message to all volunteers:</label>
-      <input 
-        type="text" 
-        name="message" 
-        #message 
-        (keyup.enter)="postMessage(bowl)"
-        (keyup)="bowl.new_message = message.value"
-      />
-      <button (click)="postMessage(bowl)">Send</button>
-    </p>
-    
+    <div *ngIf="bowl.deleted!==true">
+      <div class="bowltitle">
+        <h3 class="bowlname">{{ bowl.name }}</h3>
+        <button *ngIf="bowl.deleting!==true" class="pmd-button-red" (click)="deleteBowl(bowl)">Delete Event</button>
+        <div *ngIf="bowl.deleting===true">
+          <p>Are you sure you want to delete the event "{{bowl.name}}"?</p>
+          <button class="pmd-button" (click)="confirmDelete(bowl)">Confirm</button>
+          <button class="pmd-button" (click)="cancelDelete(bowl)">Cancel</button>
+        </div>
+      </div>
+      <div class="bowlinfo">
+        <p>Current Message: {{ bowl.message }}</p>
+        <p>Event Id: {{ bowl.id }}</p>
+        <p>Exit Id: {{bowl.exit_id}}</p>
+      </div>
+      <button class="pmd-button" (click)="sendCheckoutReminder(bowl)">Send Checkout Reminder</button>
+      <p> 
+        <label class="Tahoma" for="message">Send a message to all volunteers:</label>
+        <input 
+          type="text" 
+          name="message" 
+          #message 
+          (keyup.enter)="postMessage(bowl)"
+          (keyup)="bowl.new_message = message.value"
+          class="pmd-message"
+        />
+        <button class="pmd-button" (click)="postMessage(bowl)">Send</button>
+      </p>
+      
 
-    <ul>
-      <table class="Avenir">
+      <ul>
+        <table class="Avenir">
 
-        <th> Name </th>
-        <th> Assignment </th>
-        <th> Location </th>
-        <th> Check In </th>
-        <th> Check out </th>
-        <th> Volunteering Time </th>
+          <th> Name </th>
+          <th> Assignment </th>
+          <th> Location </th>
+          <th> Check In </th>
+          <th> Check out </th>
+          <th> Volunteering Time </th>
 
-        <tr *ngFor="let volunteer of bowl.volunteers;">
-            <td> {{ volunteer.name }} </td>
+          <tr *ngFor="let volunteer of bowl.volunteers;">
+              <td> {{ volunteer.name }} </td>
 
-            <td *ngIf="volunteer.edit">
-              <input type="text" name="vAssign" #vassign 
+              <td *ngIf="volunteer.edit">
+                <input type="text" name="vAssign" #vassign 
+                  (keyup.enter)="saveEdits(volunteer)"
+                  (keyup)="volunteer.new_assignment = vassign.value"
+                  value="{{ volunteer.assignment }}">
+              </td>
+              <td *ngIf="volunteer.edit">
+                <input type="text" name="vLoc" #vloc 
                 (keyup.enter)="saveEdits(volunteer)"
-                (keyup)="volunteer.new_assignment = vassign.value"
-                value="{{ volunteer.assignment }}">
-            </td>
-            <td *ngIf="volunteer.edit">
-              <input type="text" name="vLoc" #vloc 
-              (keyup.enter)="saveEdits(volunteer)"
-              (keyup)="volunteer.new_location = vloc.value"
-              value="{{ volunteer.location }}">
-            </td>
-            
+                (keyup)="volunteer.new_location = vloc.value"
+                value="{{ volunteer.location }}">
+              </td>
+              
 
-            <td *ngIf="!volunteer.edit">
-              {{ volunteer.assignment }}
-            </td>
-            <td *ngIf="!volunteer.edit">
-              {{ volunteer.location }}
-            </td>
-            <td>
-              {{ volunteer.checkin | volunteerTime }}
-            </td>
-            <td>
-              {{ volunteer.checkout | volunteerTime }}
-            </td>
-            <td>
-              {{ volunteer.checkout - volunteer.checkin | volunteerDuration }}
-            </td>
-            <td *ngIf="!volunteer.edit">
-              <button (click)="enableEditing(volunteer)">Edit</button>
-            </td>
-            <td *ngIf="volunteer.edit">
-              <button (click)="saveEdits(volunteer)">Save</button>
-            </td>
-            
-        </tr>
-      </table>
-    </ul>
+              <td *ngIf="!volunteer.edit">
+                {{ volunteer.assignment }}
+              </td>
+              <td *ngIf="!volunteer.edit">
+                {{ volunteer.location }}
+              </td>
+              <td>
+                {{ volunteer.checkin | volunteerTime }}
+              </td>
+              <td>
+                {{ volunteer.checkout | volunteerTime }}
+              </td>
+              <td>
+                {{ volunteer.checkout - volunteer.checkin | volunteerDuration }}
+              </td>
+              <td *ngIf="!volunteer.edit">
+                <button class="pmd-button" (click)="enableEditing(volunteer)">Edit</button>
+              </td>
+              <td *ngIf="volunteer.edit">
+                <button class="pmd-button" (click)="saveEdits(volunteer)">Save</button>
+              </td>
+              
+          </tr>
+        </table>
+      </ul>
 
+    </div>
   </div>
 </div>

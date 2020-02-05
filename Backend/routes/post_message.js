@@ -12,7 +12,7 @@ module.exports = function(app, dbconn){
                 db.collection('bowls').update(
                     {
                         'id': req.body.eventId
-                    }, 
+                    },
                     {
                         $set: {
                             'message': msg
@@ -26,7 +26,8 @@ module.exports = function(app, dbconn){
                     const payload = {
                         notification: {
                             title: `PMD: ${items[0].name}`,
-                            body: `New message: ${msg}`
+                            body: `New message: ${msg}`,
+                            icon: `fcm_push_icon`,
                         }
                     }
                     messaging.messageAll(dbconn, req.body.eventId, payload)
