@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {NavController, LoadingController} from 'ionic-angular';
 import {Platform} from 'ionic-angular';
 
-import {AndroidPermissions} from '@ionic-native/android-permissions';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {SafariViewController} from '@ionic-native/safari-view-controller';
 
@@ -21,27 +20,26 @@ export class CheckIn1 implements OnInit {
       public configService: ConfigService,
       public userService: UserService, 
       public loadingCtrl: LoadingController,
-      public androidPermissions: AndroidPermissions, 
       public platform: Platform,
       private iab: InAppBrowser,
       private svc: SafariViewController) {}
 
    ngOnInit(): void {
-    this.platform.ready().then(() => {
-      if(this.platform.is('android')){
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_SMS)
-        .then(
-          success => {
-            console.log('Sms read permission granted')
-            this.userService.watchForVerificationText()
-          },
-          err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_SMS)
-        );
+    // this.platform.ready().then(() => {
+    //   if(this.platform.is('android')){
+    //     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_SMS)
+    //     .then(
+    //       success => {
+    //         console.log('Sms read permission granted')
+    //         this.userService.watchForVerificationText()
+    //       },
+    //       err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_SMS)
+    //     );
 
-        this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.READ_SMS]);
-      }
+    //     this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.READ_SMS]);
+    //   }
       
-    });
+    // });
     
   }
 
@@ -135,7 +133,7 @@ export class CheckIn1 implements OnInit {
         if (available) {
           this.svc.show({
             url: 'https://www.pmd.org/events.phtml'
-          });
+          }).subscribe((result: any) => {})
         } else {
           this.iab.create('https://www.pmd.org/events.phtml', '_system', 'location=yes');
         }

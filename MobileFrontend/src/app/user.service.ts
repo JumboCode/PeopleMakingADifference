@@ -2,9 +2,6 @@ import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {Platform} from 'ionic-angular';
 
-// this weird thing comes from a cordova plugin - don't worry about it
-declare var SMS: any;
-
 // Represents a user of the app, and contains all the info needed to fetch from
 // the server for this user
 export class User {
@@ -88,25 +85,25 @@ export class UserService {
     }); 
   }
 
-  watchForVerificationText(): Promise<boolean> {
-    return new Promise((resolve, reject)=>{
-      if(!this.debug){
-        resolve(false);
-      }
-      this.platform.ready().then(() => {
-        if(this.platform.is('android') && SMS){
-          SMS.startWatch(()=>{
-            document.addEventListener('onSMSArrive', this.handleIncomingSms);
-            resolve(true);
-          }, err => {
-            resolve(false);
-          });
-        } else {
-          resolve(false);
-        }
-      })
-    });
-  }
+  // watchForVerificationText(): Promise<boolean> {
+  //   return new Promise((resolve, reject)=>{
+  //     if(!this.debug){
+  //       resolve(false);
+  //     }
+  //     this.platform.ready().then(() => {
+  //       if(this.platform.is('android') && SMS){
+  //         SMS.startWatch(()=>{
+  //           document.addEventListener('onSMSArrive', this.handleIncomingSms);
+  //           resolve(true);
+  //         }, err => {
+  //           resolve(false);
+  //         });
+  //       } else {
+  //         resolve(false);
+  //       }
+  //     })
+  //   });
+  // }
 
   handleIncomingSms = (e: any): void => {
     let sms = e.data;
