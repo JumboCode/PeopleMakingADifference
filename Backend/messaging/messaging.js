@@ -1,5 +1,5 @@
 const admin = require("firebase-admin");
-const firebaseCreds = process.env.MONGODB_URI ? {
+const firebaseCreds = process.env.FIREBASE_PRIVATE_KEY_ID ? {
   type : "service_account",
   project_id: "people-making-a-difference",
   auth_uri: "https://accounts.google.com/o/oauth2/auth",
@@ -10,7 +10,7 @@ const firebaseCreds = process.env.MONGODB_URI ? {
   client_email: process.env.FIREBASE_CLIENT_EMAIL,
   client_id: process.env.FIREBASE_CLIENT_ID,
   client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
-} : process.env.TRAVIS_MODE ? {} : require('./demo-key.json');
+} : process.env.TRAVIS_MODE ? {} : require('./prod-key.json');
 
 if(process.env.TRAVIS_MODE === "True") {
   const serviceAccount = "nothing, there's no API KEY";

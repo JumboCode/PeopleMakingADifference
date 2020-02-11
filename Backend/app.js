@@ -1,6 +1,5 @@
 const mongodb = require('mongodb');
-// var uri = process.env.MONGODB_URI;
-const uri = 'mongodb://localhost:27017/pmd';
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/pmd';
 test = require('assert');
 
 const seedData = [
@@ -102,7 +101,13 @@ mongodb.MongoClient.connect(uri, function (err, db) {
 
     // do some work here with the database.
     var data = db.collection('bowls');
-    db.collection('bowls').insertMany(seedData, function(err, r){});
+    db.collection('bowls').insertMany(seedData, function(err, r){
+        if(err) {
+            console.log('Error inserting seed data. Error:', err)
+        } else {
+            console.log('Successful seed.', r)
+        }
+    });
 
     //Close connection
     db.close();

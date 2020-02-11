@@ -6,9 +6,6 @@ const bodyParser = require('body-parser'); // module used to parse POST paramete
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use('/dashboard', express.static('static')); // Static file virtual path (where the dashboard gets served)
-// app.get(/dashboard\/(dashboard|login|create-event)/, (req, res) => {
-//   res.sendFile(`${__dirname}/static/index.html`);
-// });
 
 // CORS! Yes, really! For real!
 app.use(function(req, res, next) {
