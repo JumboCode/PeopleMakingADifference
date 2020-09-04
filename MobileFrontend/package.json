@@ -38,7 +38,7 @@
     "cordova-plugin-android-permissions": "^1.0.0",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-fcm-with-dependecy-updated": "~4.1.0",
-    "cordova-plugin-inappbrowser": "^3.0.0",
+    "cordova-plugin-inappbrowser": "^3.1.0",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.19",
     "cordova-plugin-safariviewcontroller": "^1.6.0",
